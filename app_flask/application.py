@@ -141,7 +141,7 @@ def logout():
 @app.after_request
 def apply_cors_headers(response):
     # Allow specific origin or all origins by changing the value of 'Access-Control-Allow-Origin'
-    response.headers['Access-Control-Allow-Origin'] = 'http://example.com'
+    response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
