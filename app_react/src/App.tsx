@@ -1,7 +1,10 @@
 import React from "react";
+import {Routes, Route, redirect} from 'react-router-dom';
 import "./App.css";
+import Login from "./Login";
+import APITest from "./APITest";
 
-function App() {
+function App2() {
   return (
     <div className="App">
       <header className="App-header">
@@ -19,6 +22,16 @@ function App() {
       </header>
     </div>
   );
+}
+
+function App() {
+  return (
+  <Routes>
+    <Route path = "/" element={<APITest />} />
+    <Route path = "/login" element={<Login />} />
+  </Routes>
+  )
+
 }
 
 export default App;
