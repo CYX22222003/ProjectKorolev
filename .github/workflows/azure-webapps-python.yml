@@ -43,17 +43,16 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: 'pip'
-      
-      - name: Change to app directory
-        run: cd ./app_flask
 
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
+        working-directory: ./app_flask
 
       - name: Install dependencies
-        run: pip install -r requirements_py.txt
+        run: pip install -r requirements.txt
+        working-directory: ./app_flask
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
