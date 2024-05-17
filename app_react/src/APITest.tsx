@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
-// this is only a test template for reference
+// this is only a test template for reference.
+//ANOTHER COMMENT LINE FOR NEW CHANGES
 
 async function getTest(address : string | undefined, apiKey: string | undefined) {
     if (address === undefined ) {
