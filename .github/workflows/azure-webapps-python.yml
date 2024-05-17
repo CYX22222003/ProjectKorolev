@@ -26,6 +26,7 @@ env:
 on:
   push:
     branches: [ "main" ]
+    paths: 'app_flask/**'
   workflow_dispatch:
 
 permissions:
