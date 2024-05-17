@@ -2,7 +2,7 @@
   "name": "app_react",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://backend:5000",
+  "proxy": "https://cyxflaskapp1.azurewebsites.net",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

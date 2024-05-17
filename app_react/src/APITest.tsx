@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import { useState } from "react";
 
 async function getTest(address : string | undefined, apiKey: string | undefined) {
     if (address === undefined ) {
@@ -17,7 +16,7 @@ async function getTest(address : string | undefined, apiKey: string | undefined)
         credentials: 'include',
         headers: {
             "Content-Type" : "application/json",
-            "API-Key": "kishankaushik12353",
+            "API-Key": apiKey,
             "Accept": "*/*",
             "Accept-Encoding": "gzip, deflate, br",
             "Connection" : "keep-alive"
@@ -70,6 +69,7 @@ export default function APITest() : ReactElement {
     const apiKey : string | undefined = process.env.REACT_APP_API_KEY;
     const addressGet : string | undefined = process.env.REACT_APP_VIEW_ACCOUNT_URL;
     const addressLogin : string | undefined = process.env.REACT_APP_LOGIN_URL
+    const addressWelcome : string | undefined = process.env.REACT_APP_WELCOME_URL;
 
     return (
         <div>
@@ -97,7 +97,7 @@ export default function APITest() : ReactElement {
         }}>login</button>
         <br />
         <button onClick={() => {
-           getTest("http://localhost:5000/welcome", apiKey)
+           getTest(addressWelcome, apiKey)
             .then(
                 data => console.log(data)
             ).catch(
