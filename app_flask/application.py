@@ -39,8 +39,6 @@ def before_request():
 def hello_world():
     return 'Hello from Flask!'
 
-
-
 #session for simple username based verification
 @app.route('/session', methods = ["POST", "GET"])
 def session_test():
@@ -57,7 +55,6 @@ def session_test():
 
         return f"Logged in as {name}"
     return "Please logged in"
-
 
 #SQLAchemy ORM for basic CRUD execution + User registration
 @app.route("/users")
@@ -146,8 +143,6 @@ def apply_cors_headers(response):
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
     return response
-
-
 
 if __name__ == '__main__':
     app.run()
