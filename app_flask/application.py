@@ -10,10 +10,10 @@ load_dotenv()
 app = Flask(__name__)
 wsgi_app = app.wsgi_app
 app.config['SECRET_KEY'] = 'YOUR-SECRET'
-# app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db"
-# app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-# app.config['SESSION_COOKIE_SECURE'] = 'true'
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = 'true'
 CORS(app, supports_credentials=True, resources=r'/*')
 
 db.init_app(app)
