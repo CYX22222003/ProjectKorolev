@@ -58,6 +58,8 @@ jobs:
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Run tests
         run: python3 -m unittest discover tests
+        env: 
+          USER_KEY : ${{ secrets.USER_KEY }} 
         working-directory: ./app_flask
 
       - name: Upload artifact for deployment jobs
