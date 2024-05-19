@@ -29,6 +29,7 @@ function App() {
   <Routes>
     <Route path = "/" element={<APITest />} />
     <Route path = "/login" element={<Login />} />
+    <Route path = "/test" element={<App2 />}/>
   </Routes>
   )
 
