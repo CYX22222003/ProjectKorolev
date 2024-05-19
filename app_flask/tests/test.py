@@ -12,6 +12,7 @@ class FlaskTest(unittest.TestCase):
             "API-Key" : os.getenv("USER_KEY")
         }
 
+    #simple tests for status code
     def test_index(self): 
         response = self.app.get("/",headers = self.headers)
         self.assertEqual(response.status_code, 200)
