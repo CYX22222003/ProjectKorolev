@@ -39,23 +39,6 @@ def before_request():
 def hello_world():
     return 'Hello from Flask!'
 
-#session for simple username based verification
-@app.route('/session', methods = ["POST", "GET"])
-def session_test():
-    passDict = {}
-    if request.method == "POST":
-        request.get_data()
-        result = request.data.decode()
-        json_obj = json.loads(result)
-        session["address"] = json_obj["address"]
-        name = json_obj["address"]
-
-        if (passDict.get(name)):
-            return f"{name} looged in already"
-
-        return f"Logged in as {name}"
-    return "Please logged in"
-
 #SQLAchemy ORM for basic CRUD execution + User registration
 @app.route("/users")
 def user_list():
