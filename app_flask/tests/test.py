@@ -2,6 +2,7 @@ import unittest
 from application import app
 import os
 from dotenv import load_dotenv
+from src.models import database_test
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -17,6 +18,10 @@ class FlaskTest(unittest.TestCase):
     def test_index(self): 
         response = self.app.get("/",headers = self.headers)
         self.assertEqual(response.status_code, 200)
+
+    #simple db_test
+    def test_db(self):
+        self.assertEqual(database_test(), True)
 
 
 if __name__ == "__main__":

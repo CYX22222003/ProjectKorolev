@@ -35,6 +35,7 @@ def before_request():
         if not api_key or not authenticate_api_key(api_key):
             return jsonify({'error': 'Unauthorized'}), 401
 
+#default routes for testing
 @app.route('/')
 def hello_world():
     return 'Hello from Flask!'
@@ -120,7 +121,6 @@ def logout():
 
 @app.after_request
 def apply_cors_headers(response):
-    # Allow specific origin or all origins by changing the value of 'Access-Control-Allow-Origin'
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
