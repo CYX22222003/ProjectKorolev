@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export default function Login() {
+export default function LoginTest() {
   const [address, setEmail] = useState<string>("");
   const [response, setResponse] = useState<string>("");
   const postmail = (obj_sent: any) => {

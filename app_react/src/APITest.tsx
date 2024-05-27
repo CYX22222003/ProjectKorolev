@@ -52,7 +52,8 @@ async function postTest(data : any,
         },
         body: JSON.stringify(data)
     })
-
+    
+    //console.log("status code: " + res.status)
     return res.text();
 }
 
