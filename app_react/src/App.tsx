@@ -1,6 +1,5 @@
 import {Routes, Route, redirect} from 'react-router-dom';
 import "./App.css";
-import LoginTest from "./LoginTest";
 import APITest from "./APITest";
 import SignUp from './Login_and_SignUp/SignUp';
 
@@ -28,7 +27,6 @@ function App() {
   return (
   <Routes>
     <Route path = "/" element={<APITest />} />
-    <Route path = "/login" element={<LoginTest />} />
     <Route path = "/signup" element={<SignUp />} />
     <Route path = "/test" element={<App2 />}/>
   </Routes>
