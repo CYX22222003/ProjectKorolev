@@ -61,11 +61,11 @@ export default function APITest() : ReactElement {
     const data = {
         email : "Test1@test1.web",
         username : "cyx",
-        password : "singapore2018#"
+        password : process.env.REACT_APP_LOGIN_TEST_PASSWORD
     };
     const loginInfo = {
         username : "cyx",
-        passwd : "singapore2018#"
+        passwd : process.env.REACT_APP_LOGIN_TEST_PASSWORD
     }
 
     const addressPost : string | undefined = process.env.REACT_APP_CREATE_ACCOUNT_URL;
