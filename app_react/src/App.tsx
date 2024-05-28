@@ -3,7 +3,36 @@ import "./App.css";
 import APITest from "./APITest";
 import SignUp from './Login_and_SignUp/SignUp';
 
+async function getTest(address : string | undefined, apiKey: string | undefined) : Promise<string> {
+  if (address === undefined ) {
+      throw new Error("address is undefined");
+  }
+
+  if (apiKey === undefined ) {
+      throw new Error("apiKey is undefined");
+  }
+
+  const res : Response = await fetch(address, {
+      method: "GET",
+      mode: "cors",
+      redirect: "follow",
+      credentials: 'include',
+      headers: {
+          "Content-Type" : "application/json",
+          "API-Key": apiKey,
+          "Accept": "*/*",
+          "Accept-Encoding": "gzip, deflate, br",
+          "Connection" : "keep-alive"
+      }
+  })
+
+  return res.text();
+}
+
 function App2() {
+  const addressWelcome : string | undefined = process.env.REACT_APP_WELCOME_URL;
+  const apiKey : string | undefined = process.env.USER_KEY
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +46,15 @@ function App2() {
           rel="noopener noreferrer"
         >
           Learn React Test
-        </a>
+        </a> <br />
+        <button onClick={() => {
+           getTest(addressWelcome, apiKey)
+            .then(
+                data => console.log(data)
+            ).catch(
+                err => console.log(err)); 
+        }}>welcome test</button>
+        <br />
       </header>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 // this is only a test template for reference.
 //ANOTHER COMMENT LINE FOR NEW CHANGES
 
-async function getTest(address : string | undefined, apiKey: string | undefined) {
+async function getTest(address : string | undefined, apiKey: string | undefined) : Promise<string> {
     if (address === undefined ) {
         throw new Error("address is undefined");
     }
@@ -27,6 +27,7 @@ async function getTest(address : string | undefined, apiKey: string | undefined)
 
     return res.text();
 }
+
 
 async function postTest(data : any, 
     address : string | undefined, apiKey: string | undefined) 
@@ -58,14 +59,16 @@ async function postTest(data : any,
 }
 
 export default function APITest() : ReactElement {
+    const test_password : string = process.env.REACT_APP_LOGIN_TEST_PASSWORD ?? "";
+
     const data = {
         email : "Test1@test1.web",
         username : "cyx",
-        password : process.env.REACT_APP_LOGIN_TEST_PASSWORD
+        password : test_password
     };
     const loginInfo = {
         username : "cyx",
-        passwd : process.env.REACT_APP_LOGIN_TEST_PASSWORD
+        passwd : test_password
     }
 
     const addressPost : string | undefined = process.env.REACT_APP_CREATE_ACCOUNT_URL;
