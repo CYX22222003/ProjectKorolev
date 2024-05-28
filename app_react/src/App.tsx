@@ -31,7 +31,7 @@ async function getTest(address : string | undefined, apiKey: string | undefined)
 
 function App2() {
   const addressWelcome : string | undefined = process.env.REACT_APP_WELCOME_URL;
-  const apiKey : string | undefined = process.env.USER_KEY
+  const apiKey : string | undefined = process.env.REACT_APP_API_KEY;
 
   return (
     <div className="App">
