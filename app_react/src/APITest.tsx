@@ -59,7 +59,7 @@ async function postTest(data : any,
 }
 
 export default function APITest() : ReactElement {
-    const test_password : string = process.env.REACT_APP_LOGIN_TEST_PASSWORD ?? "";
+    const test_password : string | undefined = process.env.REACT_APP_LOGIN_TEST_PASSWORD;
 
     const data = {
         email : "Test1@test1.web",
