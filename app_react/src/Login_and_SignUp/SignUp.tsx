@@ -1,12 +1,6 @@
 import React, { ReactElement } from "react";
 import { useState } from "react";
-
-type SignUpForm = {
-    username:string,
-    email:string,
-    password:string,
-}
-
+import { SignUpForm } from "./constants"
 
 
 async function signupAction(data : SignUpForm, 

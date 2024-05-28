@@ -2,6 +2,7 @@ import {Routes, Route, redirect} from 'react-router-dom';
 import "./App.css";
 import APITest from "./APITest";
 import SignUp from './Login_and_SignUp/SignUp';
+import Login from "./Login_and_SignUp/Login";
 
 async function getTest(address : string | undefined, apiKey: string | undefined) : Promise<string> {
   if (address === undefined ) {
@@ -66,6 +67,7 @@ function App() {
     <Route path = "/" element={<APITest />} />
     <Route path = "/signup" element={<SignUp />} />
     <Route path = "/test" element={<App2 />}/>
+    <Route path = "/login" element={<Login />} />
   </Routes>
   )
 
