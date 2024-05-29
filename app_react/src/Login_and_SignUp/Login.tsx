@@ -1,34 +1,7 @@
 import React, {ReactElement, useState} from 'react';
 import { LoginInfo } from './constants';
 import Logout  from "./Logout"
-
-async function loginAction(data : LoginInfo, 
-    address : string | undefined, apiKey: string | undefined) 
-    : Promise<boolean> {
-    if (address === undefined ) {
-        throw new Error("address is undefined");
-    }
-
-    if (apiKey === undefined ) {
-        throw new Error("apiKey is undefined");
-    }
-    const res : Response = await fetch(address, {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        credentials: 'include',
-        headers: {
-            "Content-Type" : "application/json",
-            "API-Key" : apiKey,
-            "Accept-Encoding": "gzip, deflate, br",
-            "Connection" : "keep-alive"
-        },
-        body: JSON.stringify(data)
-    })
-    return res.status === 200;
-}
-
-
+import { loginAction } from "./utils"
 
 export default function Login() : ReactElement {
     const [username, setEmail] = useState<string>("");
@@ -43,8 +16,8 @@ export default function Login() : ReactElement {
             passwd: passwd
         }
         setLoginInfo(data);
-        const out : boolean = await loginAction(data, process.env.REACT_APP_LOGIN_URL, process.env.REACT_APP_API_KEY);
-        setStatusIn(true);
+        const out : boolean = await loginAction(data);
+        setStatusIn(out);
         return out;
     }
 
@@ -58,6 +31,6 @@ export default function Login() : ReactElement {
             <br />
         </form>
         <br /> <h1>{statusIn && ("Login Successfully")}</h1>
-        <br /> <Logout loginInfo={loginInfo} apiKey={process.env.REACT_APP_API_KEY} />
+        <br /> <Logout loginInfo={loginInfo} />
     </div>);
 }

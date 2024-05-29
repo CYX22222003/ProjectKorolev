@@ -1,35 +1,7 @@
 import React, { ReactElement } from "react";
 import { useState } from "react";
-import { SignUpForm } from "./constants"
-
-
-async function signupAction(data : SignUpForm, 
-    address : string | undefined, apiKey: string | undefined) 
-    : Promise<boolean> {
-    if (address === undefined ) {
-        throw new Error("address is undefined");
-    }
-
-    if (apiKey === undefined ) {
-        throw new Error("apiKey is undefined");
-    }
-    const res : Response = await fetch(address, {
-        method: "POST",
-        mode: "cors",
-        redirect: "follow",
-        credentials: 'include',
-        headers: {
-            "Content-Type" : "application/json",
-            "API-Key" : apiKey,
-            "Accept-Encoding": "gzip, deflate, br",
-            "Connection" : "keep-alive"
-        },
-        body: JSON.stringify(data)
-    })
-    return res.status === 200;
-}
-
-
+import { SignUpForm } from "./constants";
+import { signupAction } from "./utils";
 
 export default function SignUp() : ReactElement {
     const [username, setUsername] = useState<string>("");
@@ -45,7 +17,7 @@ export default function SignUp() : ReactElement {
             password: password
         }
 
-        const out : boolean = await signupAction(data, process.env.REACT_APP_CREATE_ACCOUNT_URL, process.env.REACT_APP_API_KEY);
+        const out : boolean = await signupAction(data);
         setSignupState(out);
     }
 
