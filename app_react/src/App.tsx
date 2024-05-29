@@ -1,4 +1,5 @@
 import {Routes, Route, redirect} from 'react-router-dom';
+import { useContext } from 'react';
 import "./App.css";
 import APITest from "./APITest";
 import SignUp from './Login_and_SignUp/SignUp';
