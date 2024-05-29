@@ -55,6 +55,7 @@
     "@babel/plugin-transform-numeric-separator": "^7.24.1",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "test-jest": "^1.0.1"
   }
 }
