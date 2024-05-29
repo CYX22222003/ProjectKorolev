@@ -1,6 +1,7 @@
 //This folder is to create utility functions for login and signup features
 import { LoginInfo, SignUpForm } from "./constants";
 import { postTest } from "../utils/APIInteractionManager";
+import { SHA256 } from "crypto-js";
 
 export async function loginAction(data : LoginInfo) 
     : Promise<boolean> {
@@ -24,5 +25,5 @@ export async function logoutAction(data : LoginInfo) : Promise<boolean> {
 }
 
 export function hashPassword(passwd : string) : string {
-    return passwd;
+    return SHA256(passwd).toString();
 }
