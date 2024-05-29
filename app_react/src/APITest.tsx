@@ -1,4 +1,6 @@
 import React, { ReactElement } from "react";
+import Logout from "./Login_and_SignUp/Logout";
+import { LoginInfo } from "./Login_and_SignUp/constants";
 // this is only a test template for reference.
 //ANOTHER COMMENT LINE FOR NEW CHANGES
 
@@ -66,7 +68,7 @@ export default function APITest() : ReactElement {
         username : "cyx",
         password : test_password
     };
-    const loginInfo = {
+    const loginInfo : LoginInfo = {
         username : "cyx",
         passwd : test_password
     }
@@ -110,11 +112,7 @@ export default function APITest() : ReactElement {
                 err => console.log(err)); 
         }}>welcome test</button>
         <br />
-        <button onClick={() => {
-            postTest(loginInfo, process.env.REACT_APP_LOGOUT_URL, apiKey)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
-        }}>logout</button>
+        {<Logout loginInfo={loginInfo}/>}
         </div> 
     )
 }

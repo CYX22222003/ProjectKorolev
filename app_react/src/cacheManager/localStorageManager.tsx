@@ -1,4 +1,4 @@
-export function setLocalStorage(key : string, value : string) : void {
+export function setLocalStorage(key : string, value : any) : void {
     try {
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
@@ -6,7 +6,7 @@ export function setLocalStorage(key : string, value : string) : void {
     }
   }
   
-export function getLocalStorage(key : string, initialValue : string) : string {
+export function getLocalStorage(key : string, initialValue : any) : any {
     try {
       const value = window.localStorage.getItem(key);
       return value ? JSON.parse(value) : initialValue;

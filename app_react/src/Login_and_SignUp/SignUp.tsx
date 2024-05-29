@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { useState } from "react";
 import { SignUpForm } from "./constants";
 import { signupAction } from "./utils";
+import { hashPassword } from "./utils";
 
 export default function SignUp() : ReactElement {
     const [username, setUsername] = useState<string>("");
@@ -11,10 +12,11 @@ export default function SignUp() : ReactElement {
     
     async function handleSignUp(e : React.FormEvent<HTMLFormElement>) : Promise<void> {
         e.preventDefault();
+        console.log(hashPassword(password));
         const data : SignUpForm = {
             username : username,
             email : email,
-            password: password
+            password: hashPassword(password)
         }
 
         const out : boolean = await signupAction(data);

@@ -11,9 +11,11 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.90",
+    "@types/password-hash": "^1.2.24",
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
     "g": "^2.0.1",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
@@ -55,6 +57,7 @@
     "@babel/plugin-transform-numeric-separator": "^7.24.1",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
+    "@types/bcrypt": "^5.0.2",
     "jest": "^27.5.1",
     "test-jest": "^1.0.1"
   }

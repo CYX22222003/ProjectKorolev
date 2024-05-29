@@ -23,3 +23,6 @@ export async function logoutAction(data : LoginInfo) : Promise<boolean> {
     return res.status === 200;
 }
 
+export function hashPassword(passwd : string) : string {
+    return passwd;
+}

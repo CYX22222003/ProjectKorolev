@@ -1,23 +1,35 @@
-import React, {ReactElement, useState} from 'react';
+import React, {ReactElement, useState, useContext} from 'react';
 import { LoginInfo } from './constants';
 import Logout  from "./Logout"
 import { loginAction } from "./utils"
+import { AuthenContext } from '../App';
+import { setLocalStorage } from '../cacheManager/localStorageManager';
+import { hashPassword } from './utils';
 
 export default function Login() : ReactElement {
+    const {AuthoState, setState} = useContext(AuthenContext);
+    
     const [username, setEmail] = useState<string>("");
     const [passwd, setPasswd] = useState<string>("");
-    const [statusIn, setStatusIn] = useState<boolean>(false);
+    const [statusIn, setStatusIn] = useState<boolean>(AuthoState);
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({username : "", passwd : ""});
 
     async function handleLogin(e : React.FormEvent<HTMLFormElement>) : Promise<boolean> {
         e.preventDefault();
+        console.log(hashPassword(passwd));
         const data : LoginInfo = {
             username : username,
-            passwd: passwd
+            passwd: hashPassword(passwd)
         }
         setLoginInfo(data);
         const out : boolean = await loginAction(data);
         setStatusIn(out);
+        
+        setTimeout(() => {}, 500);
+        
+        setState(out);
+        setLocalStorage("loginState", out);
+
         return out;
     }
 
