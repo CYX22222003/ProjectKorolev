@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from flask_restful import Resource, reqparse
 
 class Base(DeclarativeBase):
     pass
@@ -39,9 +40,11 @@ class User(db.Model):
     
     def verify_password(self, password_in):
         return password_in == self.password
+    
+    def show_id(self):
+        return self.id
         
 
-    
 class Patient(db.Model):
     __tablename__ = "patient_table"
 
@@ -53,6 +56,12 @@ class Patient(db.Model):
     def __init__(self, name, user_id):
         self.name = name
         self.user_id = user_id
+    
+    def serialize(self):
+        return {
+            'patient_id' : self.id,
+            'name' : self.name,
+        }
 
 
 class Session(db.Model):
