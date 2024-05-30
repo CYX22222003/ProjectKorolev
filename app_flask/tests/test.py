@@ -11,7 +11,7 @@ class FlaskTest(unittest.TestCase):
         self.app.testing = True
         load_dotenv()
         self.headers = headers = {
-            "API-Key" : os.getenv("USER_KEY")
+            "Authorization" : os.getenv("USER_KEY")
         }
 
     #simple tests for status code
