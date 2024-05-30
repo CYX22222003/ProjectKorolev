@@ -19,9 +19,11 @@ function App() {
 
   useEffect(() : void => {
     welcomeTest().then((state : boolean) => {
-      console.log("status welcome test: " + state);
       setLocalStorage("loginState", state);
       setState(state);
+    }).catch(err => {
+      setLocalStorage("loginState", false);
+      setState(false);
     });
   },[])
   

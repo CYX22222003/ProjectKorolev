@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "./Login_and_SignUp/Logout";
 import { LoginInfo } from "./Login_and_SignUp/constants";
+import Upload from "./DocumentUpload/Upload";
 // this is only a test template for reference.
 //ANOTHER COMMENT LINE FOR NEW CHANGES
 
@@ -111,6 +112,7 @@ export default function APITest(): ReactElement {
       <p>{welcome_info}</p>
       <br />
       {<Logout loginInfo={loginInfo} />}
+      <br />{<Upload />}
     </div>
   );
 }
