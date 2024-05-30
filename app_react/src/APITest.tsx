@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import Logout from "./Login_and_SignUp/Logout";
 import { LoginInfo } from "./Login_and_SignUp/constants";
 // this is only a test template for reference.
@@ -85,9 +85,10 @@ export default function APITest(): ReactElement {
   const addressLogin: string | undefined = process.env.REACT_APP_LOGIN_URL;
   const addressWelcome: string | undefined = process.env.REACT_APP_WELCOME_URL;
 
+  const [welcome_info, setWelcome] = useState<string>("");
   return (
     <div>
-      <h1>API_test</h1>
+      <h1>Welcome !</h1>
       <button
         onClick={() => {
           getTest(addressGet, apiKey)
@@ -100,33 +101,14 @@ export default function APITest(): ReactElement {
       <br />
       <button
         onClick={() => {
-          postTest(data, addressPost, apiKey)
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
-        }}
-      >
-        post test
-      </button>
-      <br />
-      <button
-        onClick={() => {
-          postTest(loginInfo, addressLogin, apiKey)
-            .then((res) => console.log(res))
-            .catch((err) => console.log(err));
-        }}
-      >
-        login
-      </button>
-      <br />
-      <button
-        onClick={() => {
           getTest(addressWelcome, apiKey)
-            .then((data) => console.log(data))
+            .then((data) => {console.log(data); setWelcome(data);})
             .catch((err) => console.log(err));
         }}
       >
         welcome test
       </button>
+      <p>{welcome_info}</p>
       <br />
       {<Logout loginInfo={loginInfo} />}
     </div>

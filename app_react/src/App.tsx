@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import "./App.css";
 import APITest from "./APITest";
 import SignUp from "./Login_and_SignUp/SignUp";
 import Login from "./Login_and_SignUp/Login";
 import App2 from "./tests/AppTest";
 import { AuthoType } from "./Login_and_SignUp/constants";
-import { getLocalStorage } from "./cacheManager/localStorageManager";
+import { getLocalStorage, setLocalStorage } from "./cacheManager/localStorageManager";
+import { welcomeTest } from "./Login_and_SignUp/utils";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -14,10 +15,16 @@ export const AuthenContext = createContext<AuthoType>({
 });
 
 function App() {
-  const [AuthoState, setState] = useState<boolean>(
-    getLocalStorage("loginState", false),
-  );
+  const [AuthoState, setState] = useState<boolean>(false);
 
+  useEffect(() : void => {
+    welcomeTest().then((state : boolean) => {
+      console.log("status welcome test: " + state);
+      setLocalStorage("loginState", state);
+      setState(state);
+    });
+  },[])
+  
   return AuthoState ? (
     <AuthenContext.Provider value={{ AuthoState, setState }}>
       <Routes>

@@ -1,6 +1,6 @@
 //This folder is to create utility functions for login and signup features
 import { LoginInfo, SignUpForm } from "./constants";
-import { postTest } from "../utils/APIInteractionManager";
+import { postTest, getTest } from "../utils/APIInteractionManager";
 import { SHA256 } from "crypto-js";
 
 /**
@@ -10,9 +10,16 @@ import { SHA256 } from "crypto-js";
 */
 export async function loginAction(data : LoginInfo) 
     : Promise<boolean> {
-    const res : Response = await postTest(data, 
+    let statusCheck : boolean = false;
+    const out : boolean = await postTest(data, 
         process.env.REACT_APP_LOGIN_URL, process.env.REACT_APP_API_KEY)
-    return res.status === 200;
+        .then((res : Response) => {
+            statusCheck = res.status === 200;
+            return res.text();
+        }).then((message:string) => {
+            return message === data.username + " logged in";
+        }).catch(e => false);
+    return statusCheck && out;
 }
 
 /**
@@ -22,9 +29,12 @@ export async function loginAction(data : LoginInfo)
 */
 export async function signupAction(data : SignUpForm) 
     : Promise<boolean> {
-    const res : Response = await postTest(data, 
-        process.env.REACT_APP_CREATE_ACCOUNT_URL, process.env.REACT_APP_API_KEY);
-    return res.status === 200;
+    
+    const out : boolean = await postTest(data, 
+        process.env.REACT_APP_CREATE_ACCOUNT_URL, process.env.REACT_APP_API_KEY)
+        .then((res : Response) => res.status === 200)
+        .catch(e => false);
+    return out;
 }
 
 /**
@@ -33,10 +43,12 @@ export async function signupAction(data : SignUpForm)
  * 
 */
 export async function logoutAction(data : LoginInfo) : Promise<boolean> {
-    const res : Response = await postTest(data, 
+    const out : boolean = await postTest(data, 
         process.env.REACT_APP_LOGOUT_URL, process.env.REACT_APP_API_KEY
-    );
-    return res.status === 200;
+    ).then((res : Response) => res.status === 200)
+    .catch((err) => false);
+    
+    return out;
 }
 
 
@@ -47,4 +59,14 @@ export async function logoutAction(data : LoginInfo) : Promise<boolean> {
 */
 export function hashPassword(password : string) : string {
     return SHA256(password).toString();
+}
+
+export async function welcomeTest() : Promise<boolean> {
+    const out : boolean = await getTest(process.env.REACT_APP_WELCOME_URL, 
+        process.env.REACT_APP_API_KEY)
+        .then((res:Response) => {
+            return res.status === 200
+        }).catch((e) => false);
+    
+    return out;
 }

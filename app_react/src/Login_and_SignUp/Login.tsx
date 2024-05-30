@@ -21,7 +21,6 @@ export default function Login(): ReactElement {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<boolean> {
     e.preventDefault();
-    console.log(hashPassword(passwd));
     const data: LoginInfo = {
       username: username,
       passwd: hashPassword(passwd),
@@ -61,7 +60,6 @@ export default function Login(): ReactElement {
         <br />
       </form>
       <br /> <h1>{statusIn && "Login Successfully"}</h1>
-      <br /> <Logout loginInfo={loginInfo} />
     </div>
   );
 }

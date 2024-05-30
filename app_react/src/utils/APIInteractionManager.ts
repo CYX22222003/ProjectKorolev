@@ -27,7 +27,7 @@ export async function postTest(data : any,
 }
 
 export async function getTest(address : string | undefined, 
-    apiKey: string | undefined) : Promise<string> {
+    apiKey: string | undefined) : Promise<Response> {
   if (address === undefined ) {
       throw new Error("address is undefined");
   }
@@ -50,5 +50,5 @@ export async function getTest(address : string | undefined,
       }
   })
 
-  return res.text();
+  return res;
 }
