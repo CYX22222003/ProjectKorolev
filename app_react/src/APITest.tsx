@@ -4,66 +4,7 @@ import { LoginInfo } from "./Login_and_SignUp/constants";
 import Upload from "./DocumentUpload/Upload";
 // this is only a test template for reference.
 //ANOTHER COMMENT LINE FOR NEW CHANGES
-
-async function getTest(
-  address: string | undefined,
-  apiKey: string | undefined,
-): Promise<string> {
-  if (address === undefined) {
-    throw new Error("address is undefined");
-  }
-
-  if (apiKey === undefined) {
-    throw new Error("apiKey is undefined");
-  }
-
-  const res: Response = await fetch(address, {
-    method: "GET",
-    mode: "cors",
-    redirect: "follow",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      "API-Key": apiKey,
-      Accept: "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      Connection: "keep-alive",
-    },
-  });
-
-  return res.text();
-}
-
-async function postTest(
-  data: any,
-  address: string | undefined,
-  apiKey: string | undefined,
-): Promise<any> {
-  if (address === undefined) {
-    throw new Error("address is undefined");
-  }
-
-  if (apiKey === undefined) {
-    throw new Error("apiKey is undefined");
-  }
-
-  const res: Response = await fetch(address, {
-    method: "POST",
-    mode: "cors",
-    redirect: "follow",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      "API-Key": apiKey,
-      "Accept-Encoding": "gzip, deflate, br",
-      Connection: "keep-alive",
-    },
-    body: JSON.stringify(data),
-  });
-
-  //console.log("status code: " + res.status)
-  return res.text();
-}
+import {getTest, postTest} from "./utils/APIInteractionManager"
 
 export default function APITest(): ReactElement {
   const test_password: string | undefined =
@@ -103,7 +44,8 @@ export default function APITest(): ReactElement {
       <button
         onClick={() => {
           getTest(addressWelcome, apiKey)
-            .then((data) => {console.log(data); setWelcome(data);})
+            .then((data : Response) => {console.log(data); return data.text()})
+            .then((text : string) => setWelcome(text) )
             .catch((err) => console.log(err));
         }}
       >
