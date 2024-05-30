@@ -31,7 +31,7 @@ def authenticate_api_key(api_key):
 def before_request():
     if request.method != "OPTIONS":
         request.get_data()
-        api_key = request.headers.get('API-Key')
+        api_key = request.headers.get('Authorization')
         if not api_key or not authenticate_api_key(api_key):
             return jsonify({'error': 'Unauthorized'}), 401
 
