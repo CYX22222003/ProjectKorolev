@@ -1,74 +1,51 @@
-import {Routes, Route, redirect} from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import { useState, createContext, useEffect } from "react";
 import "./App.css";
 import APITest from "./APITest";
-import SignUp from './Login_and_SignUp/SignUp';
+import SignUp from "./Login_and_SignUp/SignUp";
+import Login from "./Login_and_SignUp/Login";
+import App2 from "./tests/AppTest";
+import { AuthoType } from "./Login_and_SignUp/constants";
+import { getLocalStorage, setLocalStorage } from "./cacheManager/localStorageManager";
+import { welcomeTest } from "./Login_and_SignUp/utils";
 
-async function getTest(address : string | undefined, apiKey: string | undefined) : Promise<string> {
-  if (address === undefined ) {
-      throw new Error("address is undefined");
-  }
-
-  if (apiKey === undefined ) {
-      throw new Error("apiKey is undefined");
-  }
-
-  const res : Response = await fetch(address, {
-      method: "GET",
-      mode: "cors",
-      redirect: "follow",
-      credentials: 'include',
-      headers: {
-          "Content-Type" : "application/json",
-          "API-Key": apiKey,
-          "Accept": "*/*",
-          "Accept-Encoding": "gzip, deflate, br",
-          "Connection" : "keep-alive"
-      }
-  })
-
-  return res.text();
-}
-
-function App2() {
-  const addressWelcome : string | undefined = process.env.REACT_APP_WELCOME_URL;
-  const apiKey : string | undefined = process.env.REACT_APP_API_KEY;
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React Test
-        </a> <br />
-        <button onClick={() => {
-           getTest(addressWelcome, apiKey)
-            .then(
-                data => console.log(data)
-            ).catch(
-                err => console.log(err)); 
-        }}>welcome test</button>
-        <br />
-      </header>
-    </div>
-  );
-}
+export const AuthenContext = createContext<AuthoType>({
+  AuthoState: true,
+  setState: () => {},
+});
 
 function App() {
-  return (
-  <Routes>
-    <Route path = "/" element={<APITest />} />
-    <Route path = "/signup" element={<SignUp />} />
-    <Route path = "/test" element={<App2 />}/>
-  </Routes>
-  )
+  const [AuthoState, setState] = useState<boolean>(false);
 
+  useEffect(() : void => {
+    welcomeTest().then((state : boolean) => {
+      setLocalStorage("loginState", state);
+      setState(state);
+    }).catch(err => {
+      setLocalStorage("loginState", false);
+      setState(false);
+    });
+  },[])
+  
+  return AuthoState ? (
+    <AuthenContext.Provider value={{ AuthoState, setState }}>
+      <Routes>
+        <Route path="/" element={<APITest />} />
+        <Route path="/signup" element={<APITest />} />
+        <Route path="/test" element={<App2 />} />
+        <Route path="/login" element={<APITest />} />
+      </Routes>
+    </AuthenContext.Provider>
+  ) : (
+    <AuthenContext.Provider value={{ AuthoState, setState }}>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/test" element={<APITest />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </AuthenContext.Provider>
+  );
 }
 
 export default App;
