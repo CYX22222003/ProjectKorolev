@@ -16,7 +16,7 @@ export async function postTest(data : any,
         credentials: 'include',
         headers: {
             "Content-Type" : "application/json",
-            "API-Key" : apiKey,
+            "Authorization" : apiKey,
             "Accept-Encoding": "gzip, deflate, br",
             "Connection" : "keep-alive"
         },
@@ -43,7 +43,7 @@ export async function getTest(address : string | undefined,
       credentials: 'include',
       headers: {
           "Content-Type" : "application/json",
-          "API-Key": apiKey,
+          "Authorization": apiKey,
           "Accept": "*/*",
           "Accept-Encoding": "gzip, deflate, br",
           "Connection" : "keep-alive"
