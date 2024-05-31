@@ -17,9 +17,8 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './Navbar';
-import WelcomeHelp from "./WelcomeHelp"
-import Upload from '../Document_Upload/Upload';
+import { mainListItems, secondaryListItems } from './NavbarTemplate';
+import Welcome from "../components/Welcome"
 
 function Copyright(props: any) {
   return (
@@ -87,7 +86,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Welcome() {
+export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -176,11 +175,11 @@ export default function Welcome() {
                     height: 240,
                   }}
                 >
-                    <WelcomeHelp />
+                    <Welcome />
                 </Paper>
               </Grid>
               {/* Empty Grid */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -189,7 +188,6 @@ export default function Welcome() {
                     height: 240,
                   }}
                 >
-                    <Upload />
                 </Paper>
               </Grid>
               {/* Empty Grid */}
