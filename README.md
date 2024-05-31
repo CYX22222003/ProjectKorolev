@@ -45,6 +45,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 ## User stories  
 ### use case diagram  
+<img width="512" alt="image" src="https://github.com/CYX22222003/ProjectKorolev/assets/138369841/9cd02207-4b57-4f42-9d51-a6875237ad50">
+
 [[https://drive.google.com/file/d/1YbV8956kTXDRPWvnO7kUX2nNh9XZP4C3/view?usp=sharing]]  
 
 ### 1. New Patient Onboarding
@@ -173,6 +175,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **AI Model**: Use OpenAI/Gemini GenAI API **OR** deployed fine-tuned model on Azure Cloud services
 
 ### Software architecture diagram
+<img width="587" alt="image" src="https://github.com/CYX22222003/ProjectKorolev/assets/138369841/4fc469ac-769e-4440-92f5-cf7689c75c15">
+
 [[https://app.diagrams.net/#G1CDOVNB7qP17IsVIbR9OD8dyzQALozsng#%7B%22pageId%22%3A%22rPmJ95wfWXq4vIkdD8LA%22%7D]]
 
 ## Development Plan
