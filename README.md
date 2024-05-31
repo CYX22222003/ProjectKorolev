@@ -1,4 +1,10 @@
 # Project Korolev
+## Team
+Team Korolev
+
+## Proposed Level 
+Apollo 11
+
 ## Motivation and Vision:
 
 Mental Health Practitioners are overwhelmed by the number of patients/customers they have to track.
@@ -182,6 +188,26 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ## Development Plan
 
 ## Proof of Concept
-Link to the website: 
+**Link to the website**: 
 [[https://personaiweb.vercel.app/]]
 
+**Test on local machine with `docker`**:
+- Pre-requisite: 
+    * install docker on local machine and sign up to docker hub
+    * Login to the docker hub account
+    * Create `.env` file to set up local environment variables based on the `environment.example`
+    * Copy the file into `app_react` and `app_flask` directory
+- 1. Clone the repo to local machine
+- 2. Under the root directory, run ```docker-compose up```
+- 3. The frontend webpage will run on port `http://localhost:3000`
+- 4. The backend webpage is run on port `http://localhost:3000`
+
+**Test on local machine without `docker`**:
+- Pre-requisite:
+    * install `python >= 3.10` and `node >= 20.11`
+    * Create `.env` file to set up local environment variables based on the `environment.example`
+    * Copy the file into `app_react` and `app_flask` directory 
+
+- 1. Clone the repo to the machine
+- 2. Run backend: ```python3 app_flask/application.py```
+- 3. Run frontend: ```npm run start```
