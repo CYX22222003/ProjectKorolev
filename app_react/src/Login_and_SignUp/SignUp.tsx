@@ -3,19 +3,17 @@ import { useState } from "react";
 import { SignUpForm } from "./constants";
 import { signupAction } from "./utils";
 import { hashPassword } from "./utils";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
@@ -47,18 +45,23 @@ export default function SignUp(): ReactElement {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSignUp} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSignUp}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -69,7 +72,7 @@ export default function SignUp(): ReactElement {
                   id="username"
                   label="username"
                   autoFocus
-                  onChange={(event : React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setUsername(event.target.value);
                   }}
                 />
@@ -82,7 +85,7 @@ export default function SignUp(): ReactElement {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={(event : React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setEmail(event.target.value);
                   }}
                 />
@@ -96,7 +99,7 @@ export default function SignUp(): ReactElement {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={(event : React.ChangeEvent<HTMLInputElement>) => {
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setPasswd(event.target.value);
                   }}
                 />

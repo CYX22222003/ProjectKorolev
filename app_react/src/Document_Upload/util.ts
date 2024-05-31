@@ -31,5 +31,4 @@ export async function uploadAction(file : Blob, fileName : string): Promise<void
     
     // Specify data transfer options   
     await blockBlobClient.uploadData(file);
-    //await blockBlobClient.uploadFile(add);
 }

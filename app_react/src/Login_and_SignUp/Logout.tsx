@@ -2,7 +2,7 @@ import { ReactElement, useContext } from "react";
 import { LoginInfo } from "./constants";
 import { logoutAction } from "./utils";
 import { AuthenContext } from "../App";
-import { setLocalStorage } from "../cacheManager/localStorageManager";
+import { setLocalStorage } from "../utils/localStorageManager";
 
 type LogoutProps = {
   loginInfo: LoginInfo;

@@ -1,10 +1,10 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "./Login_and_SignUp/Logout";
 import { LoginInfo } from "./Login_and_SignUp/constants";
-import Upload from "./DocumentUpload/Upload";
+import Upload from "./Document_Upload/Upload";
 // this is only a test template for reference.
 //ANOTHER COMMENT LINE FOR NEW CHANGES
-import {getTest, postTest} from "./utils/APIInteractionManager"
+import { getTest, postTest } from "./utils/APIInteractionManager";
 
 export default function APITest(): ReactElement {
   const test_password: string | undefined =
@@ -44,8 +44,11 @@ export default function APITest(): ReactElement {
       <button
         onClick={() => {
           getTest(addressWelcome, apiKey)
-            .then((data : Response) => {console.log(data); return data.text()})
-            .then((text : string) => setWelcome(text) )
+            .then((data: Response) => {
+              console.log(data);
+              return data.text();
+            })
+            .then((text: string) => setWelcome(text))
             .catch((err) => console.log(err));
         }}
       >
@@ -54,7 +57,8 @@ export default function APITest(): ReactElement {
       <p>{welcome_info}</p>
       <br />
       {<Logout loginInfo={loginInfo} />}
-      <br />{<Upload />}
+      <br />
+      {<Upload />}
     </div>
   );
 }
