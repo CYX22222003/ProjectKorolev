@@ -8,6 +8,7 @@ import App2 from "./tests/AppTest";
 import { AuthoType } from "./Login_and_SignUp/constants";
 import { getLocalStorage, setLocalStorage } from "./utils/localStorageManager";
 import { welcomeTest } from "./Login_and_SignUp/utils";
+import Footer from "./components/Footer"
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -16,20 +17,29 @@ export const AuthenContext = createContext<AuthoType>({
 
 function App() {
   const [AuthoState, setState] = useState<boolean>(false);
-
+  const [wait, setWait] = useState<boolean>(true);
+  
   useEffect((): void => {
     welcomeTest()
       .then((state: boolean) => {
         setLocalStorage("loginState", state);
         setState(state);
+        setWait(false);
       })
       .catch((err) => {
         setLocalStorage("loginState", false);
         setState(false);
+        setWait(false);
       });
   }, []);
 
-  return AuthoState ? (
+  return wait ?  (    
+  <AuthenContext.Provider value={{ AuthoState, setState }}>
+      <Routes>
+        <Route path="/" element={<Footer />} />
+      </Routes>
+    </AuthenContext.Provider>)
+  : AuthoState ? (
     <AuthenContext.Provider value={{ AuthoState, setState }}>
       <Routes>
         <Route path="/" element={<Welcome />} />

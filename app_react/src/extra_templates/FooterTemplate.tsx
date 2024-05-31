@@ -1,3 +1,4 @@
+import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -10,7 +11,7 @@ function Copyright() {
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        PersonAI
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -18,8 +19,10 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
-  const defaultTheme = createTheme();
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
+
+export default function StickyFooter() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box
@@ -32,12 +35,13 @@ export default function Footer() {
         <CssBaseline />
         <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
           <Typography variant="h2" component="h1" gutterBottom>
-            PersonAI
+            Sticky footer
           </Typography>
           <Typography variant="h5" component="h2" gutterBottom>
-            {'The webpage is loading'}
+            {'Pin a footer to the bottom of the viewport.'}
+            {'The footer will move as the main element of the page grows.'}
           </Typography>
-          <Typography variant="body1">Please Wait...</Typography>
+          <Typography variant="body1">Sticky footer placeholder.</Typography>
         </Container>
         <Box
           component="footer"
@@ -52,6 +56,9 @@ export default function Footer() {
           }}
         >
           <Container maxWidth="sm">
+            <Typography variant="body1">
+              My sticky footer can be found here.
+            </Typography>
             <Copyright />
           </Container>
         </Box>
