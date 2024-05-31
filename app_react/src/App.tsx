@@ -52,7 +52,6 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/test" element={<Welcome />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
     </AuthenContext.Provider>
   );
