@@ -164,13 +164,20 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 ### Database
 - **SQL Database**: Use SQLite SQL database to store user authentication data 
-- **Cloud Storage**: Google Drive to store patient information, session data, and AI context parameters.
+- **Cloud Storage**: Azure Cloud Storage to store patient information, session data, and AI context parameters.
 
 ### Deployment
 
 - **Frontend**: Host on services like Netlify or Vercel for static site hosting.
 - **Backend**: Deploy Flask app on Azure cloud services.
-- **AI Model**: Use OpenAI/Gemini GenAI API **OR** deployed fine-tuned model on AWS Azure Cloud services
+- **AI Model**: Use OpenAI/Gemini GenAI API **OR** deployed fine-tuned model on Azure Cloud services
 
 ### Software architecture diagram
 [[https://app.diagrams.net/#G1CDOVNB7qP17IsVIbR9OD8dyzQALozsng#%7B%22pageId%22%3A%22rPmJ95wfWXq4vIkdD8LA%22%7D]]
+
+## Development Plan
+
+## Proof of Concept
+Link to the website: 
+[[https://personaiweb.vercel.app/]]
+
