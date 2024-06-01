@@ -1,5 +1,5 @@
 // Azure Storage dependency
-import { BlobServiceClient, ContainerClient, BlockBlobClient, ContainerCreateOptions, BlobUploadCommonResponse} from '@azure/storage-blob';
+import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse} from '@azure/storage-blob';
 
 function createStorageServiceClient(containerName : string | null) : BlobServiceClient {
     // SAS token must have LIST permissions on container that haven't expired

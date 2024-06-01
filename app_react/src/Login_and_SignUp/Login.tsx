@@ -24,10 +24,6 @@ export default function Login(): ReactElement {
   const [username, setUsername] = useState<string>("");
   const [passwd, setPasswd] = useState<string>("");
   const [statusIn, setStatusIn] = useState<boolean>(AuthoState);
-  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
-    username: "",
-    passwd: "",
-  });
 
   async function handleLogin(
     e: React.FormEvent<HTMLFormElement>,
@@ -37,7 +33,7 @@ export default function Login(): ReactElement {
       username: username,
       passwd: hashPassword(passwd),
     };
-    setLoginInfo(data);
+
     const out: boolean = await loginAction(data)
       .then((res: boolean) => {
         if (!res) {
@@ -51,6 +47,7 @@ export default function Login(): ReactElement {
       });
 
     setStatusIn(out);
+    console.log(statusIn);
     setTimeout(() => {}, 500);
 
     setState(out);
