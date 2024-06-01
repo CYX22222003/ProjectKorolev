@@ -49,7 +49,16 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment, including potential therapy adjustments.
 - **Session Preparation**: Generate summaries and key points for the practitioner before each session to ensure they are fully informed of the patient’s history and current state.
 
-## User stories  
+## User stories 
+- As a Mental Health Practitioner, I want to add new patients to the system to manage their profiles and initial assessments efficiently.
+- As a Mental Health Practitioner, I want to upload session documentation and get AI-generated summaries to quickly review key insights from the sessions.
+- As a Mental Health Practitioner, I want to review a patient's progress over time to make informed decisions about their treatment plan.
+- As a Mental Health Practitioner, I want to review a patient's history and recent sessions before an appointment to prepare effectively.
+- As a Mental Health Practitioner, I want to receive alerts about potential risk factors in patient data to intervene promptly and adjust treatment plans.
+- As a Mental Health Practitioner, I want to ensure that sensitive patient data is secure and access is restricted based on user roles and permissions to comply with privacy regulations.
+
+
+## Use cases
 ### use case diagram  
 <img width="512" alt="image" src="https://github.com/CYX22222003/ProjectKorolev/assets/138369841/9cd02207-4b57-4f42-9d51-a6875237ad50">
 
@@ -171,13 +180,12 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **SQLAlchemy**: For database interactions.
 
 ### Database
-- **SQL Database**: Use SQLite SQL database to store user authentication data 
-- **Cloud Storage**: Azure Cloud Storage to store patient information, session data, and AI context parameters.
+- **SQL Database**: Use **SQLite SQL** database to store user authentication data 
+- **Cloud Storage**: **Azure Blob Storage** to store patient information, session data, and AI context parameters.
 
 ### Deployment
-
-- **Frontend**: Host on services like Netlify or Vercel for static site hosting.
-- **Backend**: Deploy Flask app on Azure cloud services.
+- **Frontend**: Host on **Vercel** for static site hosting.
+- **Backend**: Deploy Flask app on **Azure cloud services**.
 - **AI Model**: Use OpenAI/Gemini GenAI API **OR** deployed fine-tuned model on Azure Cloud services
 
 ### Software architecture diagram
@@ -191,23 +199,25 @@ Therefore, we decide to design a web App providing a seamless experience for use
 **Link to the website**: 
 [[https://personaiweb.vercel.app/]]
 
+## User guide for testing
+
+**Test on the website**
+- Test the website by accessing the URL in the `Proof of concept`
+
 **Test on local machine with `docker`**:
-- Pre-requisite: 
-    * install docker on local machine and sign up to docker hub
-    * Login to the docker hub account
-    * Create `.env` file to set up local environment variables based on the `environment.example`
-    * Copy the file into `app_react` and `app_flask` directory
-- 1. Clone the repo to local machine
-- 2. Under the root directory, run ```docker-compose up```
-- 3. The frontend webpage will run on port `http://localhost:3000`
-- 4. The backend webpage is run on port `http://localhost:3000`
+- install `docker` on local machine and create an account on docker hub
+- Pull the docker image: `docker image pull e1155533/orbital_test:milestone1`
+- Create and run a container: `docker run -p 3000:3000 e1155533/orbital_test:milestone1`
+- Access the web app at `http://localhost:3000`
 
-**Test on local machine without `docker`**:
-- Pre-requisite:
-    * install `python >= 3.10` and `node >= 20.11`
-    * Create `.env` file to set up local environment variables based on the `environment.example`
-    * Copy the file into `app_react` and `app_flask` directory 
+## Project Management and SWE practices
+Our team manages projects using GitHub Issues, pull requests, and GitHub Projects, closely following Scrum Agile principles. We've also set up CI/CD automated pipelines with GitHub Actions to streamline both application development and deployment. Additionally, we organize our work into sprints within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
 
-- 1. Clone the repo to the machine
-- 2. Run backend: ```python3 app_flask/application.py```
-- 3. Run frontend: ```npm run start```
+1. **GitHub Issues and Pull Requests**: We utilize GitHub Issues to track tasks, bugs, and feature requests. Pull requests are used for code reviews and merging changes, ensuring quality and collaboration.
+
+2. **GitHub Projects**: Our Kanban board in GitHub Projects visualizes our workflow. We organize our tasks into sprints, with columns typically labeled as "To Do", "In Progress", and "Done." This sprint-based approach helps us manage our workload in manageable iterations, ensuring we meet our goals efficiently.
+
+3. **CI/CD Pipelines**: Using GitHub Actions, we've automated our continuous integration and continuous deployment (CI/CD) processes. This automation handles everything from running tests to deploying the application, ensuring a smooth and efficient development cycle.
+
+## Project Log
+[[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
