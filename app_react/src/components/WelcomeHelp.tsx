@@ -4,6 +4,7 @@ import { LoginInfo } from "../Login_and_SignUp/constants";
 import Upload from "../Document_Upload/Upload";
 // this is only a test template for reference.
 import { getTest, postTest } from "../utils/APIInteractionManager";
+import { Button } from "@mui/material";
 
 export default function WelcomeHelp(): ReactElement {
   const test_password: string | undefined =
@@ -20,28 +21,30 @@ export default function WelcomeHelp(): ReactElement {
   };
 
 
-  const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
-  const addressGet: string | undefined = process.env.REACT_APP_VIEW_ACCOUNT_URL;
+  const apiKey: string | undefined = process.env.REACT_APP_API_KEY
   const addressWelcome: string | undefined = process.env.REACT_APP_WELCOME_URL;
 
   const [welcome_info, setWelcome] = useState<string>("");
   return (
     <div>
       <h1>Welcome !</h1>
-      <button
-        onClick={() => {
+      <Button onClick={() => {
           getTest(addressWelcome, apiKey)
             .then((data: Response) => {
               console.log(data);
               return data.text();
             })
-            .then((text: string) => setWelcome(text))
-            .catch((err) => console.log(err));
+            .then((text: string) => {
+              setWelcome(text);
+              alert(text);
+            })
+            .catch((err) => {console.log(err);alert("Welcome information is not loaded")});
         }}
+        variant="outlined"
       >
         welcome test
-      </button>
-      <p>{welcome_info}</p>
+      </Button>
+      <p>Click to receive the welcome message</p>
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />

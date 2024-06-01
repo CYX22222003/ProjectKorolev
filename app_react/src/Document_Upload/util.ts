@@ -1,5 +1,5 @@
 // Azure Storage dependency
-import { BlobServiceClient, ContainerClient, BlockBlobClient, ContainerCreateOptions} from '@azure/storage-blob';
+import { BlobServiceClient, ContainerClient, BlockBlobClient, ContainerCreateOptions, BlobUploadCommonResponse} from '@azure/storage-blob';
 
 function createStorageServiceClient(containerName : string | null) : BlobServiceClient {
     // SAS token must have LIST permissions on container that haven't expired
@@ -27,7 +27,7 @@ async function createContainer(storageClient : BlobServiceClient, containerName 
 }
 
 
-export async function uploadAction(file : Blob, fileName : string, containerName : string): Promise<void> {
+export async function uploadAction(file : Blob, fileName : string, containerName : string): Promise<BlobUploadCommonResponse> {
     const blobServiceClient = createStorageServiceClient(null);
 
     const containerClient : ContainerClient = await createContainer(blobServiceClient, containerName)
@@ -37,5 +37,6 @@ export async function uploadAction(file : Blob, fileName : string, containerName
 
     
     // Specify data transfer options   
-    await blockBlobClient.uploadData(file);
+    const res : BlobUploadCommonResponse = await blockBlobClient.uploadData(file);
+    return res;
 }

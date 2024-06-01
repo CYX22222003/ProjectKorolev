@@ -3,7 +3,7 @@ import { LoginInfo } from "./constants";
 import { logoutAction } from "./utils";
 import { AuthenContext } from "../App";
 import { setLocalStorage } from "../utils/localStorageManager";
-
+import { Button } from "@mui/material";
 type LogoutProps = {
   loginInfo: LoginInfo;
 };
@@ -13,7 +13,7 @@ export default function Logout({ loginInfo }: LogoutProps): ReactElement {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           logoutAction(loginInfo);
           setState(false);
@@ -21,7 +21,7 @@ export default function Logout({ loginInfo }: LogoutProps): ReactElement {
         }}
       >
         logout
-      </button>
+      </Button>
     </div>
   );
 }

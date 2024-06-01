@@ -34,8 +34,13 @@ export default function SignUp(): ReactElement {
       password: hashPassword(password),
     };
 
-    const out: boolean = await signupAction(data);
+    const out: boolean = await signupAction(data).catch(err => {
+      return false;
+    });
     setSignupState(out);
+    if (!signupState) {
+      alert("Sign up fails. Account already exists")
+    }
   }
 
   return (

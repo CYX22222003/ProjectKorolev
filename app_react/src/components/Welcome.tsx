@@ -173,20 +173,20 @@ export default function Welcome() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    height: 300,
                   }}
                 >
                     <WelcomeHelp />
                 </Paper>
               </Grid>
-              {/* Empty Grid */}
+              {/* Upload Test */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    height: 350,
                   }}
                 >
                     <Upload />
