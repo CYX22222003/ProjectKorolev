@@ -3,5 +3,5 @@ import Background from "../Components/Background";
 import WelcomeHelp from "./WelcomeHelp";
 
 export default function Welcome() {
-  return <Background element={<WelcomeHelp />} />;
+  return <Background element={<WelcomeHelp />} header="Home"/>;
 }

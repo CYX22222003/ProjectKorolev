@@ -19,9 +19,10 @@ import { Copyright, Drawer, AppBar } from "./MiscellElements";
 
 type BackgroundProps = {
   element: ReactElement;
+  header : string
 };
 
-export default function Background({ element }: BackgroundProps): ReactElement {
+export default function Background({ element, header }: BackgroundProps): ReactElement {
   const defaultTheme = createTheme();
 
   const [open, setOpen] = React.useState(true);
@@ -58,7 +59,7 @@ export default function Background({ element }: BackgroundProps): ReactElement {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Home
+              {header}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
