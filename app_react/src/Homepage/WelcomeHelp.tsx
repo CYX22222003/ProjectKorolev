@@ -1,11 +1,14 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "../Login_and_SignUp/Logout";
 import { LoginInfo } from "../Login_and_SignUp/constants";
-// this is only a test template for reference.
 import { getTest } from "../utils/APIInteractionManager";
 import { Button } from "@mui/material";
+import { Warning } from "../Components/Warning";
 
 export default function WelcomeHelp(): ReactElement {
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+
   const test_password: string | undefined =
     process.env.REACT_APP_LOGIN_TEST_PASSWORD;
 
@@ -24,7 +27,8 @@ export default function WelcomeHelp(): ReactElement {
       <Button
         onClick={() => {
           if (welcome_info !== "") {
-            alert(welcome_info);
+            setOpen(true);
+            setMessage(welcome_info);
           } else {
             getTest(addressWelcome, apiKey)
               .then((data: Response) => {
@@ -33,11 +37,13 @@ export default function WelcomeHelp(): ReactElement {
               })
               .then((text: string) => {
                 setWelcome(text);
-                alert(text);
+                setOpen(true);
+                setMessage(text);
               })
               .catch((err) => {
                 console.log(err);
-                alert("Welcome information is not loaded");
+                setOpen(true);
+                setMessage("Welcome information is not loaded");
               });
           }
         }}
@@ -49,6 +55,7 @@ export default function WelcomeHelp(): ReactElement {
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />
+      <Warning open={open} setOpen={setOpen} text={message} />
     </div>
   );
 }

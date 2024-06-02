@@ -14,9 +14,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Warning } from "../Components/Warning";
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
+  const [open, setOpen] = useState<boolean>(false);
+  const [promptMessage, setPrompt] = useState<string>("");
 
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -39,7 +42,11 @@ export default function SignUp(): ReactElement {
     });
     setSignupState(out);
     if (!signupState) {
-      alert("Sign up fails. Account already exists");
+      setPrompt("Sign up fails. Account already exists");
+      setOpen(true);
+    } else {
+      setPrompt("New account is created");
+      setOpen(true);
     }
   }
 
@@ -128,6 +135,7 @@ export default function SignUp(): ReactElement {
           </Box>
         </Box>
       </Container>
+      <Warning open={open} setOpen={setOpen} text={promptMessage} />
     </ThemeProvider>
   );
 }

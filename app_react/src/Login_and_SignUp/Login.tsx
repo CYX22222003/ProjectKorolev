@@ -17,9 +17,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Warning } from "../Components/Warning";
 
 export default function Login(): ReactElement {
   const { AuthoState, setState } = useContext(AuthenContext);
+  const [open, setOpen] = useState<boolean>(false);
+  const [promptMessage, setPrompt] = useState<string>("");
 
   const [username, setUsername] = useState<string>("");
   const [passwd, setPasswd] = useState<string>("");
@@ -37,12 +40,14 @@ export default function Login(): ReactElement {
     const out: boolean = await loginAction(data)
       .then((res: boolean) => {
         if (!res) {
-          alert("Fail to login");
+          setOpen(true);
+          setPrompt("Fail to login");
         }
         return res;
       })
       .catch((e) => {
-        alert("error caught");
+        setOpen(true);
+        setPrompt("error caught");
         return false;
       });
 
@@ -134,6 +139,7 @@ export default function Login(): ReactElement {
           </Box>
         </Box>
       </Container>
+      <Warning open={open} setOpen={setOpen} text={promptMessage} />
     </ThemeProvider>
   );
 }

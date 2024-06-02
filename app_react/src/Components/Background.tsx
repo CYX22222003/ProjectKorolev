@@ -19,10 +19,13 @@ import { Copyright, Drawer, AppBar } from "./MiscellElements";
 
 type BackgroundProps = {
   element: ReactElement;
-  header : string
+  header: string;
 };
 
-export default function Background({ element, header }: BackgroundProps): ReactElement {
+export default function Background({
+  element,
+  header,
+}: BackgroundProps): ReactElement {
   const defaultTheme = createTheme();
 
   const [open, setOpen] = React.useState(true);
