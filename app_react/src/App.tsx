@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, createContext, useEffect } from "react";
 import "./App.css";
-import Welcome from "./components/Welcome";
+import Welcome from "./Homepage/Welcome";
 import SignUp from "./Login_and_SignUp/SignUp";
 import Login from "./Login_and_SignUp/Login";
-import App2 from "./tests/AppTest";
 import { AuthoType } from "./Login_and_SignUp/constants";
 import { setLocalStorage } from "./utils/localStorageManager";
 import { welcomeTest } from "./Login_and_SignUp/utils";
-import Footer from "./components/Footer";
+import Footer from "./Components/Footer";
+import CreatePatient from "./Document_Upload/CreatePatient";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -43,7 +43,7 @@ function App() {
     <AuthenContext.Provider value={{ AuthoState, setState }}>
       <Routes>
         <Route path="/" element={<Welcome />} />
-        <Route path="/test" element={<App2 />} />
+        <Route path="/test" element={<CreatePatient />} />
       </Routes>
     </AuthenContext.Provider>
   ) : (

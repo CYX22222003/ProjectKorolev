@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./NavbarTemplate";
-import Welcome from "../components/Welcome";
+import Welcome from "../Homepage/Welcome";
 
 function Copyright(props: any) {
   return (
