@@ -206,7 +206,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 **Test on local machine with `docker`**:
 - install `docker` on local machine and create an account on docker hub
-- Pull the docker image: `docker image pull e1155533/orbital_test:milestone1`
+- Pull the docker image: `docker image pull e1155533/orbital_test:milestone1_submission`
 - Create and run a container: `docker run -p 3000:3000 e1155533/orbital_test:milestone1`
 - Access the web app at `http://localhost:3000`
 
