@@ -3,5 +3,5 @@ import Background from "../Components/Background";
 import Upload from "./Upload";
 
 export default function CreatePatient(): ReactElement {
-  return <Background element={<Upload />} header="Create Patient" />;
+  return <Background elements={[<Upload />]} header="Create Patient" />;
 }

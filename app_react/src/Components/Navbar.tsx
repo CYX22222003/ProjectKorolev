@@ -12,13 +12,13 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 
 export const mainListItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton href="/">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="My Account" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton href="/patients">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>

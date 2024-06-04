@@ -42,6 +42,8 @@ export default function Login(): ReactElement {
         if (!res) {
           setOpen(true);
           setPrompt("Fail to login");
+        } else {
+          setLocalStorage("PersonAIUsername", username);
         }
         return res;
       })

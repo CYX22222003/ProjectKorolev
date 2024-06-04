@@ -16,6 +16,7 @@ export default function Logout({ loginInfo }: LogoutProps): ReactElement {
       <Button
         onClick={() => {
           logoutAction(loginInfo);
+          setLocalStorage("PersonAIUsername", "");
           setState(false);
           setLocalStorage("loginState", AuthoState);
         }}

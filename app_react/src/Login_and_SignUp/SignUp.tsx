@@ -24,7 +24,6 @@ export default function SignUp(): ReactElement {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPasswd] = useState<string>("");
-  const [signupState, setSignupState] = useState<boolean>(false);
 
   async function handleSignUp(
     e: React.FormEvent<HTMLFormElement>,
@@ -40,8 +39,7 @@ export default function SignUp(): ReactElement {
     const out: boolean = await signupAction(data).catch((err) => {
       return false;
     });
-    setSignupState(out);
-    if (!signupState) {
+    if (!out) {
       setPrompt("Sign up fails. Account already exists");
       setOpen(true);
     } else {
