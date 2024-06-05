@@ -199,6 +199,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 [[https://app.diagrams.net/#G1CDOVNB7qP17IsVIbR9OD8dyzQALozsng#%7B%22pageId%22%3A%22rPmJ95wfWXq4vIkdD8LA%22%7D]]
 
 ## Development Plan
+**Link to the schedule**:
+[[https://lh0jvpcfxg-bunch.plaky.com/spaces/72420/boards/77883/views/131689]]
 
 ## Proof of Concept
 **Link to the website**: 
