@@ -28,26 +28,31 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ### Features
 
 #### 1. Authentication
-- **Registration and log in**: Practitioners can create new account and log in to manage the patient records. 
+- **Registration and log in**: Practitioners can create new account and log in to manage the patient records.
+- *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication.
 
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
+- *current progress*: We have set up the cloud storage and test the connection between the web application and the cloud storage with mockup functions. The actual feature is still under development 
 
 #### 3. Summarization
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
+    - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
 
 #### 4. Insight Generation
 - **Trend Analysis**: Track progress over time by identifying patterns in the patient’s condition and response to treatment.
     - **Visual Dashboards**: Create visual dashboards to show trends, progress, and key metrics (e.g., mood scores, medication changes).
 - **Predictive Insights**: Use machine learning to predict potential issues or improvements based on historical data.
     - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
+    - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
 
 #### 5. Actionable Recommendations
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment, including potential therapy adjustments.
 - **Session Preparation**: Generate summaries and key points for the practitioner before each session to ensure they are fully informed of the patient’s history and current state.
+- *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
 
 ## User stories 
 - As a Mental Health Practitioner, I want to add new patients to the system to manage their profiles and initial assessments efficiently.
@@ -194,7 +199,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 [[https://app.diagrams.net/#G1CDOVNB7qP17IsVIbR9OD8dyzQALozsng#%7B%22pageId%22%3A%22rPmJ95wfWXq4vIkdD8LA%22%7D]]
 
 ## Development Plan
-**Link to the plan schedule**:
+**Link to the schedule**:
 [[https://lh0jvpcfxg-bunch.plaky.com/spaces/72420/boards/77883/views/131689]]
 
 ## Proof of Concept
