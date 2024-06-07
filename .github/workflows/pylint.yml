@@ -1,9 +1,6 @@
 name: Pylint
 
 on: 
-  push:
-    branches:
-      - main
   pull_request:
 
 jobs:
@@ -23,8 +20,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
     - name: Analysing the backend code with pylint
-      run: |
-        pylint application.py
-        pylint src
-        pylint tests
+      run: pylint application.py src tests
       working-directory: ./app_flask
