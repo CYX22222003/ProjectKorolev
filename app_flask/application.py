@@ -66,6 +66,7 @@ def user_list():
     )
 
 
+# sign up function
 @app.route("/user/create", methods=["GET", "POST"])
 def user_create():
     if request.method == "POST":
@@ -85,18 +86,18 @@ def user_create():
         )
 
 
-@app.route("/user/<int:id>")
-def user_detail(id):
-    user = db.get_or_404(User, id)
+@app.route("/user/<int:user_id>")
+def user_detail(user_id):
+    user = db.get_or_404(User, user_id)
     return Response(
         f"username: {user.username}, email: {user.email}, id: {user.id}",
         content_type="text/plain",
     )
 
 
-@app.route("/user/<int:id>/delete", methods=["GET", "POST", "DELETE"])
-def user_delete(id):
-    user = db.get_or_404(User, id)
+@app.route("/user/<int:user_id>/delete", methods=["GET", "POST", "DELETE"])
+def user_delete(user_id):
+    user = db.get_or_404(User, user_id)
 
     if request.method == "DELETE":
         db.session.delete(user)
@@ -127,7 +128,7 @@ def login_test():
             db.select(User).filter_by(username=username)
         ).scalar_one()
 
-        if user == None:
+        if user is None:
             return "unable to login"
 
         if not user.is_active:
@@ -169,8 +170,8 @@ def update_account():
             current_user.email = email
             db.session.commit()
             return "update successfully"
-        else:
-            return "Please key in the correct password"
+        return "Please key in the correct password"
+    return "Fail to update"
 
 
 # patient management
@@ -201,28 +202,32 @@ def create_new_patient():
         db.session.add(patient)
         db.session.commit()
         return "patient is successfully created"
+    return "Fail to create"
 
 
 @app.route("/patient/<int:patient_id>/delete", methods=["DELETE"])
 @login_required
 def delete_patient(patient_id):
     patient = db.get_or_404(Patient, patient_id)
-    if request.method == "DELETE":
+    if request.method == "DELETE" and patient.user_id == current_user.show_id():
         db.session.delete(patient)
         db.session.commit()
         return "successful delete"
+    return "fail to delete"
 
 
 @app.route("/patient/<int:patient_id>/update", methods=["PUT"])
 @login_required
 def update_patient(patient_id):
-    old_patient = db.get_or_404(patient_id)
-    if request.method == "PUT":
+    old_patient = db.get_or_404(Patient, patient_id)
+    if request.method == "PUT" and old_patient.user_id == current_user.show_id():
         request.get_data()
         result = json.loads(request.data.decode())
         new_name = result["patient_name"]
         old_patient.name = new_name
+        db.session.commit()
         return "Update successfully"
+    return "fail to update"
 
 
 # session management
@@ -240,6 +245,7 @@ def create_new_session():
         db.session.add(new_session)
         db.session.commit()
         return "session is successfully created"
+    return "Fail to create session"
 
 
 @app.route("/sessions", methods=["GET"])
@@ -267,22 +273,25 @@ def show_sessions():
 @app.route("/session/<int:sesssion_id>/delete", methods=["DELETE"])
 def delete_sessions(session_id):
     deleted_session = db.get_or_404(Session, session_id)
-    if request == "DELETE":
+    if request == "DELETE" and deleted_session.user_id == current_user.show_id():
         db.session.delete(deleted_session)
-        db.commit()
+        db.session.commit()
         return "session is successfully deleted"
+    return "Fail to delete"
 
 
 @app.route("/session/<int:session_id>/update", methods=["PUT"])
 @login_required
-def update_patient(session_id):
-    old_session = db.get_or_404(session_id)
-    if request.method == "PUT":
+def update_session(session_id):
+    old_session = db.get_or_404(Session, session_id)
+    if request.method == "PUT" and old_session.user_id == current_user.show_id():
         request.get_data()
         result = json.loads(request.data.decode())
         new_name = result["session_name"]
-        old_session.name = new_name
+        old_session.session_name = new_name
+        db.session.commit()
         return "Update successfully"
+    return "Fail to update"
 
 
 @app.after_request

@@ -11,7 +11,7 @@ class FlaskTest(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
         load_dotenv()
-        self.headers = headers = {"Authorization": os.getenv("USER_KEY")}
+        self.headers = {"Authorization": os.getenv("USER_KEY")}
 
     # simple tests for status code
     def test_index(self):
