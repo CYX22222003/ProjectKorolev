@@ -1,4 +1,4 @@
-name: Pylint
+name: Pull requests tests
 
 on: 
   pull_request:
@@ -22,4 +22,7 @@ jobs:
       working-directory: ./app_flask
     - name: Analysing the backend code with pylint
       run: pylint application.py src tests
+      working-directory: ./app_flask
+    - name: Unit testing by Pytest
+      run: python3 -m unittest discover tests
       working-directory: ./app_flask
