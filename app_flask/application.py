@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, session, redirect, url_for, Response
+from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from src.models import db, User, Patient, Session
 import json
@@ -153,14 +153,42 @@ def logout():
     return "logged out successfully"
 
 
+@app.route("/user/update", methods=["PUT"])
+@login_required
+def update_account():
+    if request.method == "PUT":
+        request.get_data()
+        result = json.loads(request.data.decode())
+
+        new_password = result["new_password"]
+        old_password = result["old_password"]
+        email = result["email"]
+
+        if current_user.verify_password(old_password):
+            current_user.password = new_password
+            current_user.email = email
+            db.session.commit()
+            return "update successfully"
+        else:
+            return "Please key in the correct password"
+
+
 # patient management
 @app.route("/patients", methods=["GET"])
 @login_required
 def show_all_patients():
     order = db.select(Patient).filter_by(user_id=current_user.show_id())
     patients = db.session.execute(order).scalars()
-    iter = list(patients.fetchall())
-    return jsonify({"list": list(map(lambda x: (x.name, x.patient_id), iter))})
+    return jsonify(
+        {
+            "list": list(
+                map(
+                    lambda x: {"patient_name": x.name, "patient_id": x.patient_id},
+                    list(patients.fetchall()),
+                )
+            )
+        }
+    )
 
 
 @app.route("/patient/create", methods=["POST"])
@@ -183,6 +211,18 @@ def delete_patient(patient_id):
         db.session.delete(patient)
         db.session.commit()
         return "successful delete"
+
+
+@app.route("/patient/<int:patient_id>/update", methods=["PUT"])
+@login_required
+def update_patient(patient_id):
+    old_patient = db.get_or_404(patient_id)
+    if request.method == "PUT":
+        request.get_data()
+        result = json.loads(request.data.decode())
+        new_name = result["patient_name"]
+        old_patient.name = new_name
+        return "Update successfully"
 
 
 # session management
@@ -211,12 +251,38 @@ def show_sessions():
         {
             "collections": list(
                 map(
-                    lambda x: [x.session_name, x.patient_id, x.user_id],
+                    lambda x: {
+                        "session_name": x.session_name,
+                        "patient_id": x.patient_id,
+                        "user_id": x.user_id,
+                        "session_id": x.session_id,
+                    },
                     list(sessions.fetchall()),
                 )
             )
         }
     )
+
+
+@app.route("/session/<int:sesssion_id>/delete", methods=["DELETE"])
+def delete_sessions(session_id):
+    deleted_session = db.get_or_404(Session, session_id)
+    if request == "DELETE":
+        db.session.delete(deleted_session)
+        db.commit()
+        return "session is successfully deleted"
+
+
+@app.route("/session/<int:session_id>/update", methods=["PUT"])
+@login_required
+def update_patient(session_id):
+    old_session = db.get_or_404(session_id)
+    if request.method == "PUT":
+        request.get_data()
+        result = json.loads(request.data.decode())
+        new_name = result["session_name"]
+        old_session.name = new_name
+        return "Update successfully"
 
 
 @app.after_request
