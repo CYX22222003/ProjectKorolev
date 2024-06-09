@@ -8,7 +8,7 @@ import { AuthoType } from "./Login_and_SignUp/constants";
 import { setLocalStorage } from "./utils/localStorageManager";
 import { welcomeTest } from "./Login_and_SignUp/utils";
 import Footer from "./Components/Footer";
-import CreatePatient from "./Document_Upload/CreatePatientTest";
+import CreatePatient from "./utils/Document_Upload/CreatePatientTest";
 import PatinetManagementMain from "./Patient_Management/PatientManagementMain";
 
 export const AuthenContext = createContext<AuthoType>({

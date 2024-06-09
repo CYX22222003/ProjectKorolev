@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -8,8 +7,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@mui/material";
-import { PatientCreationFormProps, PatientData } from "./utils";
-import { getLocalStorage } from "../utils/localStorageManager";
+import { createPatient, PatientCreationFormProps } from "./utils";
 
 /**
  * Patient creation form model
@@ -21,17 +19,13 @@ export default function PatientCreationForm({
 }: PatientCreationFormProps) {
   const defaultTheme = createTheme();
   const [patientName, setPatientName] = useState<string>("");
-  const [contactNumber, setContactNumber] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const newData: PatientData = {
-        patient_name: patientName,
-        documentDirectory: `${getLocalStorage("PersonAIUsername", "")}/${patientName}/`,
-        contactNumber: contactNumber,
-      };
-      setRow([...rows, newData]);
+      await createPatient({ patient_name: patientName }).then((res: Response) =>
+        console.log(res.status),
+      );
     } catch (err: any) {
       throw new Error("fail to add patient");
     }
@@ -69,19 +63,6 @@ export default function PatientCreationForm({
                   autoFocus
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setPatientName(e.currentTarget.value);
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="contact"
-                  label="contact"
-                  name="contact"
-                  autoComplete="contact"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setContactNumber(e.currentTarget.value);
                   }}
                 />
               </Grid>

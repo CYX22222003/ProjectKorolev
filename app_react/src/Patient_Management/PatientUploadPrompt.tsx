@@ -3,21 +3,27 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import Upload from "../Document_Upload/Upload";
+import Upload from "../utils/Document_Upload/Upload";
+import { getLocalStorage } from "../utils/localStorageManager";
 
 type FormProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   text: string;
+  patientName: string;
+  setPatientName: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export function InitializationForm({
   open,
   setOpen,
   text,
+  patientName,
+  setPatientName,
 }: FormProps): ReactElement {
   const handleClose = () => {
     setOpen(false);
+    setPatientName("");
   };
 
   return (
@@ -31,7 +37,9 @@ export function InitializationForm({
         fullWidth={true}
       >
         <DialogContent>
-          <Upload />
+          <Upload
+            containerName={`${getLocalStorage("PersonAIUsername", "")}/${patientName}`}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} autoFocus>

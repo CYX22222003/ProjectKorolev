@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createListPatients } from "../Document_Upload/util";
+import { createListPatients } from "../utils/Document_Upload/util";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

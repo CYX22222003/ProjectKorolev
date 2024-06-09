@@ -2,11 +2,16 @@ import React, { ReactElement, useEffect, useState } from "react";
 import PatientCreationForm from "./PatientCreationForm";
 import PatientList from "./PatientList";
 import Background from "../Components/Background";
-import { PatientData } from "./utils";
-import { createListPatients } from "../Document_Upload/util";
+import { PatientData, getPatientList } from "./utils";
 
 export default function PatinetManagementMain(): ReactElement {
   const [patients, setPatients] = useState<PatientData[]>([]);
+
+  useEffect(() => {
+    getPatientList().then((patients: PatientData[]) => {
+      setPatients(patients);
+    });
+  }, []);
   return (
     <Background
       elements={[

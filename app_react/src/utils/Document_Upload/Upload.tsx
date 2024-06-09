@@ -1,12 +1,11 @@
 import React, { ReactElement, useState } from "react";
-import { uploadAction } from "./util";
+import { UploadProps, uploadAction } from "./util";
 import { TextField, Button } from "@mui/material";
-import { Warning } from "../Components/Warning";
+import { Warning } from "../../Components/Warning";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function Upload(): ReactElement {
+export default function Upload({ containerName }: UploadProps): ReactElement {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [containerName, setContainerName] = useState<string>("");
   const [showWarning, setWarningState] = useState<boolean>(false);
   const [warningMessage, setWarningMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,15 +50,6 @@ export default function Upload(): ReactElement {
   return (
     <div>
       <h1>Add Patient Feature Test</h1>
-      <form>
-        <TextField
-          type="text"
-          label="directory"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setContainerName(e.target.value);
-          }}
-        />
-      </form>
       <form onSubmit={handleSubmit}>
         <TextField type="file" onChange={handleFileChange} /> <br />
         <br />

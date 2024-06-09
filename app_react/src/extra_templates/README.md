@@ -1,0 +1,1 @@
+The code in this folder is extracted from the free React template library provided in the MUI official website [[https://mui.com/material-ui/getting-started/templates/]]. The templates have been modified an used in the different UI components of the web application in the Components directory.

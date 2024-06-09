@@ -1,7 +1,11 @@
 // Azure Storage dependency
 import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse} from '@azure/storage-blob';
-import { displayToday } from '../utils/timeManagement';
-import { getLocalStorage } from '../utils/localStorageManager';
+import { displayToday } from '../timeManagement';
+import { getLocalStorage } from '../localStorageManager';
+
+export type UploadProps = {
+  containerName : string
+}
 
 export function createStorageServiceClient() : BlobServiceClient {
     // SAS token must have LIST permissions on container that haven't expired

@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  lint_backend:
+  backend_test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,3 +28,25 @@ jobs:
         USER_KEY : ${{ secrets.USER_KEY }} 
       run: python3 -m unittest discover tests
       working-directory: ./app_flask
+
+  frontend_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["20.x"]
+    steps:
+    - uses: actions/checkout@v4
+    - name:  Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Initialize frontend app
+      run: npm install
+      working-directory: ./app_react
+    - name: Run frontend unittest
+      run: npm run test
+      working-directory: ./app_react
+    - name: Linting frontend
+      run: npm run lint
+      working-directory: ./app_react
+
