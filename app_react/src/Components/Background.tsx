@@ -115,7 +115,7 @@ export default function Background({
                         p: 2,
                         display: "flex",
                         flexDirection: "column",
-                        height: 300,
+                        width: 1000,
                       }}
                     >
                       {ele}

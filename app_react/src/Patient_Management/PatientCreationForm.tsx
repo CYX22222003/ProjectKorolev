@@ -8,7 +8,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 import { createPatient, PatientCreationFormProps } from "./utils";
-
+import { getPatientList, PatientData } from "./utils";
 /**
  * Patient creation form model
  *
@@ -26,6 +26,9 @@ export default function PatientCreationForm({
       await createPatient({ patient_name: patientName }).then((res: Response) =>
         console.log(res.status),
       );
+      await getPatientList().then((patients: PatientData[]) => {
+        setRow(patients);
+      });
     } catch (err: any) {
       throw new Error("fail to add patient");
     }

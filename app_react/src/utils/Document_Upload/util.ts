@@ -1,7 +1,6 @@
 // Azure Storage dependency
 import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse} from '@azure/storage-blob';
-import { displayToday } from '../timeManagement';
-import { getLocalStorage } from '../localStorageManager';
+//import { getLocalStorage } from '../localStorageManager';
 
 export type UploadProps = {
   containerName : string
@@ -49,12 +48,10 @@ export async function uploadAction(file : Blob, fileName : string, containerName
  * Display list of patients
  * 
 */
-export async function createListPatients() : Promise<string[]> {
+export async function createListBlobs(containerName : string) : Promise<string[]> {
   const out : string[] = []
-  const userName : string = getLocalStorage("PersonAIUsername", "");
   const blobServiceClient : BlobServiceClient = createStorageServiceClient();
-  const containerClient : ContainerClient = blobServiceClient.getContainerClient(userName);
-  console.log("create")
+  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName);
   for await (const blob of containerClient.listBlobsFlat()) {
      out.push(blob.name);
   }
@@ -72,21 +69,3 @@ export async function createNewUserContainer(userName: string) {
   await createInnerContainer(storageService, `${userName}`);
 }
 
-/**
- * Create container and Upload Initial documents to the patients OR
- * Upload file to existing container
- */
-
-export async function uploadSessionDocument(
-  file: Blob,
-  fileName: string,
-  username: string,
-  patientName: string,
-): Promise<BlobUploadCommonResponse> {
-  const res: BlobUploadCommonResponse = await uploadAction(
-    file,
-    fileName,
-    `${username}/${patientName}/${patientName}_${displayToday()}`,
-  );
-  return res;
-}

@@ -10,6 +10,7 @@ import { welcomeTest } from "./Login_and_SignUp/utils";
 import Footer from "./Components/Footer";
 import CreatePatient from "./utils/Document_Upload/CreatePatientTest";
 import PatinetManagementMain from "./Patient_Management/PatientManagementMain";
+import SessionManagementMain from "./Session_Management/SessionManagementMain";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -45,6 +46,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/patients" element={<PatinetManagementMain />} />
+        <Route path="/sessions" element={<SessionManagementMain />} />
         <Route path="/test" element={<CreatePatient />} />
       </Routes>
     </AuthenContext.Provider>

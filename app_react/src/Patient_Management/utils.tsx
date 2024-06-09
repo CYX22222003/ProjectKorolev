@@ -29,7 +29,7 @@ export async function createPatient(data: PatientDataSent): Promise<Response> {
 
 export async function getPatientList(): Promise<PatientData[]> {
   const res: PatientData[] = await getTest(
-    process.env.REACT_APP_VIEW_ALL_SESSIONS,
+    process.env.REACT_APP_VIEW_ALL_PATIENTS,
     process.env.REACT_APP_API_KEY,
   )
     .then((res: Response) => {
