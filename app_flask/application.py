@@ -262,6 +262,33 @@ def show_sessions():
                         "patient_id": x.patient_id,
                         "user_id": x.user_id,
                         "session_id": x.session_id,
+                        "patient_name": db.get_or_404(Patient, x.patient_id).name,
+                    },
+                    list(sessions.fetchall()),
+                )
+            )
+        }
+    )
+
+
+@app.route("/session/<int:patient_id>/get", methods=["GET"])
+@login_required
+def show_session_patient(patient_id):
+    order = db.select(Session).filter_by(
+        user_id=current_user.show_id(), patient_id=patient_id
+    )
+    sessions = db.session.execute(order).scalars()
+    patient_name = db.get_or_404(Patient, patient_id).name
+    return jsonify(
+        {
+            "collections": list(
+                map(
+                    lambda x: {
+                        "session_name": x.session_name,
+                        "patient_id": x.patient_id,
+                        "user_id": x.user_id,
+                        "session_id": x.session_id,
+                        "patient_name": patient_name,
                     },
                     list(sessions.fetchall()),
                 )

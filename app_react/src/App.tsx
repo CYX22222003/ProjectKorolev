@@ -46,7 +46,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/patients" element={<PatinetManagementMain />} />
-        <Route path="/sessions" element={<SessionManagementMain />} />
+        <Route
+          path="/sessions/:patient_id/:patient_name"
+          element={<SessionManagementMain />}
+        />
         <Route path="/test" element={<CreatePatient />} />
       </Routes>
     </AuthenContext.Provider>
