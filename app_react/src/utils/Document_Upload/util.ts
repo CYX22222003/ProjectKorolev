@@ -3,6 +3,7 @@ import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonRe
 //import { getLocalStorage } from '../localStorageManager';
 
 export type UploadProps = {
+  title : string
   containerName : string
 }
 
@@ -48,12 +49,17 @@ export async function uploadAction(file : Blob, fileName : string, containerName
  * Display list of patients
  * 
 */
-export async function createListBlobs(containerName : string) : Promise<string[]> {
-  const out : string[] = []
+export async function createListBlobs(containerName : string, directory : string, key : string) : Promise<string[]> {
+  const out : string[] = [];
+
+  const regx : RegExp = new RegExp(key, "i");
+
   const blobServiceClient : BlobServiceClient = createStorageServiceClient();
   const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName);
-  for await (const blob of containerClient.listBlobsFlat()) {
+  for await (const blob of containerClient.listBlobsByHierarchy(directory)) {
+    if (regx.test(blob.name)) {
      out.push(blob.name);
+    }
   }
   return out;
 }

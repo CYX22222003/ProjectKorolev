@@ -4,6 +4,10 @@ import { displayToday } from "../utils/timeManagement";
 import { uploadAction } from "../utils/Document_Upload/util";
 import React from "react";
 
+export type SessionFileListFragProps = {
+  fileList: string[];
+};
+
 export type SessionUIProps = {
   patient_id: number;
   patient_name: string;

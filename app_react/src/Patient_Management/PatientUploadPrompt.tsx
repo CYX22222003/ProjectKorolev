@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import Upload from "../utils/Document_Upload/Upload";
+import Upload from "../Components/Upload";
 import { getLocalStorage } from "../utils/localStorageManager";
 
 type FormProps = {
@@ -38,6 +38,7 @@ export function InitializationForm({
       >
         <DialogContent>
           <Upload
+            title={`Upload ${patientName}'s Initial document`}
             containerName={`${getLocalStorage("PersonAIUsername", "")}/${patientName}`}
           />
         </DialogContent>

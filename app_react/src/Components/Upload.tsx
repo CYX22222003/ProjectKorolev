@@ -1,10 +1,13 @@
 import React, { ReactElement, useState } from "react";
-import { UploadProps, uploadAction } from "./util";
+import { UploadProps, uploadAction } from "../utils/Document_Upload/util";
 import { TextField, Button } from "@mui/material";
-import { Warning } from "../../Components/Warning";
+import { Warning } from "./Warning";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export default function Upload({ containerName }: UploadProps): ReactElement {
+export default function Upload({
+  title,
+  containerName,
+}: UploadProps): ReactElement {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [showWarning, setWarningState] = useState<boolean>(false);
   const [warningMessage, setWarningMessage] = useState<string>("");
@@ -49,7 +52,7 @@ export default function Upload({ containerName }: UploadProps): ReactElement {
 
   return (
     <div>
-      <h1>Add Patient Feature Test</h1>
+      <h1>{title}</h1>
       <form onSubmit={handleSubmit}>
         <TextField type="file" onChange={handleFileChange} /> <br />
         <br />

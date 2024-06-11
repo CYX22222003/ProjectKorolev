@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import Upload from "../utils/Document_Upload/Upload";
+import Upload from "../Components/Upload";
 import { getLocalStorage } from "../utils/localStorageManager";
 
 type SessionDocumentUploadFormProps = {
@@ -37,11 +37,10 @@ export function SessionUploadForm({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         maxWidth="md"
-        fullWidth={true}
-        fullScreen={true}
       >
         <DialogContent>
           <Upload
+            title={`Upload documents for session ${sessionName}`}
             containerName={`${getLocalStorage("PersonAIUsername", "")}/${patientName}/${sessionName}`}
           />
         </DialogContent>

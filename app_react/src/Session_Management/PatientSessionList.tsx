@@ -7,9 +7,11 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Title from "../Components/Title";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
 import { SessionListProps } from "./utils";
 import { SessionUploadForm } from "./SessionUploadPrompt";
+import { createListBlobs } from "../utils/Document_Upload/util";
+import { getLocalStorage } from "../utils/localStorageManager";
+import SessionFileList from "./SessionFileList";
 
 export default function PatientSessionList({
   rows,
@@ -17,6 +19,9 @@ export default function PatientSessionList({
   const [open, setOpen] = useState<boolean>(false);
   const [patientName, setPatientName] = useState<string>("");
   const [sessionName, setSessionName] = useState<string>("");
+
+  const [openFileList, setOpenFileList] = useState<boolean>(false);
+  const [fileList, setFileList] = useState<string[]>([]);
 
   return (
     <React.Fragment>
@@ -48,7 +53,24 @@ export default function PatientSessionList({
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Link variant="body2">view uploaded documents</Link>
+                  <Button
+                    onClick={async () => {
+                      await createListBlobs(
+                        getLocalStorage("PersonAIUsername", ""),
+                        `/${row.patient_name}/${row.session_name}`,
+                        row.session_name,
+                      )
+                        .then((res: string[]) => {
+                          setFileList(res);
+                          setOpenFileList(true);
+                        })
+                        .catch((err) => {
+                          throw new Error("Fail to load session file list");
+                        });
+                    }}
+                  >
+                    view uploaded documents
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -62,6 +84,12 @@ export default function PatientSessionList({
         setPatientName={setPatientName}
         sessionName={sessionName}
         setSessionName={setSessionName}
+      />
+
+      <SessionFileList
+        open={openFileList}
+        setOpen={setOpenFileList}
+        fileList={fileList}
       />
     </React.Fragment>
   );
