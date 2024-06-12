@@ -25,7 +25,7 @@ export default function PatientSessionList({
 
   return (
     <React.Fragment>
-      <Title>New Patient List</Title>
+      <Title>Session List</Title>
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>

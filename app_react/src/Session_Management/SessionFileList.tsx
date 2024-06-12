@@ -1,4 +1,4 @@
-import React, { ReactElement, SetStateAction } from "react";
+import React, { ReactElement, SetStateAction, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,6 +12,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
+import { TriggerAIAction } from "../GenAI_Management/utils";
+import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 
 type SessionFileListProps = {
   open: boolean;
@@ -49,6 +51,11 @@ export default function SessionFileList({
 function SessionFileListFrag({
   fileList,
 }: SessionFileListFragProps): ReactElement {
+  const [aiFilename, setAIFilename] = useState<string>("");
+  const [aiQuestion, setAIQuestion] = useState<string>("");
+  const [aiResponse, setAIResponse] = useState<string>("");
+  const [displayAIMessage, setDisplayAIMessage] = useState<boolean>(false);
+
   return (
     <React.Fragment>
       <Title>Session file List</Title>
@@ -69,7 +76,26 @@ function SessionFileListFrag({
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{fileName}</TableCell>
                   <TableCell>
-                    <Link>AI insights</Link>
+                    <Button
+                      onClick={async () => {
+                        await TriggerAIAction({
+                          dest: fileName,
+                          type: "docx",
+                          prompt: "Summarize the text below",
+                        })
+                          .then((res: string) => {
+                            setDisplayAIMessage(true);
+                            setAIQuestion("summarize the text below");
+                            setAIFilename(fileName);
+                            setAIResponse(res);
+                          })
+                          .catch((err: Error) => {
+                            console.log(err);
+                          });
+                      }}
+                    >
+                      AI insights
+                    </Button>
                   </TableCell>
                   <TableCell>
                     <Link>Download</Link>
@@ -80,6 +106,14 @@ function SessionFileListFrag({
           </TableBody>
         </Table>
       </TableContainer>
+      <br />
+      {displayAIMessage && (
+        <AIMessageDisplay
+          fileName={aiFilename}
+          question={aiQuestion}
+          aiResponse={aiResponse}
+        />
+      )}
     </React.Fragment>
   );
 }

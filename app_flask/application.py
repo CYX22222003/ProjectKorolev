@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify, Response
 from flask_cors import CORS
 from src.models import db, User, Patient, Session
+from src.file_manager import FileManager
+from src.genai_manager import GenAIManager
 import json
 import os
 from dotenv import load_dotenv
@@ -319,6 +321,32 @@ def update_session(session_id):
         db.session.commit()
         return "Update successfully"
     return "Fail to update"
+
+
+# GenAI actions
+@app.route("/ai/action", methods=["POST"])
+@login_required
+def call_ai_actions():
+
+    if request.method == "POST":
+        file_manager = FileManager(current_user.get_id())
+
+        container_name = current_user.get_id()
+
+        request.get_data()
+        result = json.loads(request.data.decode())
+
+        file_name = result["dest"]
+        doc_type = result["type"]
+        prompt = result["prompt"]
+        file_manager.dowload_file(container_name, file_name, doc_type)
+        original_doc = file_manager.handle_docx_file()
+
+        genai_manager = GenAIManager(original_doc, prompt)
+
+        return jsonify({"AIresponse": genai_manager.get_ai_response()})
+
+    return "Wrong method"
 
 
 @app.after_request
