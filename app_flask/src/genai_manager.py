@@ -12,7 +12,7 @@ class GenAIManager:
         genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = genai.GenerativeModel("gemini-1.5-pro")
 
-    def get_AI_response(self):
+    def get_ai_response(self):
         response = self.model.generate_content(f"{self.task}\n{self.text}")
         return response.text
 
@@ -23,4 +23,4 @@ if __name__ == "__main__":
         "Is the statement correct?",
     )
 
-    print(manager.get_AI_response())
+    print(manager.get_ai_response())
