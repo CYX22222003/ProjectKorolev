@@ -8,7 +8,9 @@ import { AuthoType } from "./Login_and_SignUp/constants";
 import { setLocalStorage } from "./utils/localStorageManager";
 import { welcomeTest } from "./Login_and_SignUp/utils";
 import Footer from "./Components/Footer";
-import CreatePatient from "./Document_Upload/CreatePatient";
+import CreatePatient from "./utils/Document_Upload/CreatePatientTest";
+import PatinetManagementMain from "./Patient_Management/PatientManagementMain";
+import SessionManagementMain from "./Session_Management/SessionManagementMain";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -43,6 +45,11 @@ function App() {
     <AuthenContext.Provider value={{ AuthoState, setState }}>
       <Routes>
         <Route path="/" element={<Welcome />} />
+        <Route path="/patients" element={<PatinetManagementMain />} />
+        <Route
+          path="/sessions/:patient_id/:patient_name"
+          element={<SessionManagementMain />}
+        />
         <Route path="/test" element={<CreatePatient />} />
       </Routes>
     </AuthenContext.Provider>

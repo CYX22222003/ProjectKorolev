@@ -4,6 +4,7 @@ import { LoginInfo } from "../Login_and_SignUp/constants";
 import { getTest } from "../utils/APIInteractionManager";
 import { Button } from "@mui/material";
 import { Warning } from "../Components/Warning";
+import { getLocalStorage } from "../utils/localStorageManager";
 
 export default function WelcomeHelp(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
@@ -51,7 +52,10 @@ export default function WelcomeHelp(): ReactElement {
       >
         welcome test
       </Button>
-      <p>Click to receive the welcome message</p>
+      <p>
+        Hello {getLocalStorage("PersonAIUsername", "")}! Click to receive the
+        welcome message to test backend connectivity
+      </p>
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />

@@ -2,6 +2,7 @@
   "name": "app_react",
   "version": "0.1.0",
   "private": true,
+  "proxy" : "http://localhost:5000",
   "dependencies": {
     "@azure/storage-blob": "^12.18.0",
     "@emotion/react": "^11.11.4",

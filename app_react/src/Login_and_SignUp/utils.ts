@@ -2,6 +2,7 @@
 import { LoginInfo, SignUpForm } from "./constants";
 import { postTest, getTest } from "../utils/APIInteractionManager";
 import { SHA256 } from "crypto-js";
+import { createNewUserContainer } from "../utils/Document_Upload/util";
 
 /**
  * Handle the login action by sending the users input to the backend for verification 
@@ -32,8 +33,18 @@ export async function signupAction(data : SignUpForm)
     
     const out : boolean = await postTest(data, 
         process.env.REACT_APP_CREATE_ACCOUNT_URL, process.env.REACT_APP_API_KEY)
-        .then((res : Response) => res.status === 200)
+        .then((res : Response) => {return res.status === 200})
+        .then(async (out : boolean) => {
+            if(out) {
+                await createNewUserContainer(data.username)
+                    .catch(err => {
+                       throw new Error("Fail to create account") 
+                    });
+            }
+            return out;
+        })
         .catch(e => false);
+    
     return out;
 }
 

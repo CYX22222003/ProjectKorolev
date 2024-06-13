@@ -18,12 +18,12 @@ import { mainListItems, secondaryListItems } from "./Navbar";
 import { Copyright, Drawer, AppBar } from "./MiscellElements";
 
 type BackgroundProps = {
-  element: ReactElement;
+  elements: ReactElement[];
   header: string;
 };
 
 export default function Background({
-  element,
+  elements,
   header,
 }: BackgroundProps): ReactElement {
   const defaultTheme = createTheme();
@@ -40,7 +40,7 @@ export default function Background({
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "24px",
             }}
           >
             <IconButton
@@ -107,37 +107,22 @@ export default function Background({
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Welcome Test */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 300,
-                  }}
-                >
-                  {element}
-                </Paper>
-              </Grid>
-              {/* Empty Grid */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 350,
-                  }}
-                >
-                  {/*<Upload />*/}
-                </Paper>
-              </Grid>
-              {/* Empty Grid */}
-              <Grid item xs={12}>
-                <Paper
-                  sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                ></Paper>
-              </Grid>
+              {elements.map((ele) => {
+                return (
+                  <Grid item xs={12} md={8} lg={9}>
+                    <Paper
+                      sx={{
+                        p: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        width: 1000,
+                      }}
+                    >
+                      {ele}
+                    </Paper>
+                  </Grid>
+                );
+              })}
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
