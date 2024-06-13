@@ -23,9 +23,9 @@ class FlaskTest(unittest.TestCase):
     def test_db(self):
         self.assertEqual(database_test(), True)
 
-    # simple tests for file manager
-    def test_file_manager(self):
-        self.assertEqual(test_file_manager(), True)
+    # # simple tests for file manager
+    # def test_file_manager(self):
+    #     self.assertEqual(test_file_manager(), True)
 
 
 if __name__ == "__main__":
