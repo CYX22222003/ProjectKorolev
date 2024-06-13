@@ -3,6 +3,7 @@ from application import app
 import os
 from dotenv import load_dotenv
 from src.models import database_test
+from src.file_manager import test_file_manager
 
 
 class FlaskTest(unittest.TestCase):
@@ -21,6 +22,10 @@ class FlaskTest(unittest.TestCase):
     # simple db_test
     def test_db(self):
         self.assertEqual(database_test(), True)
+
+    # simple tests for file manager
+    def test_file_manager(self):
+        self.assertEqual(test_file_manager(), True)
 
 
 if __name__ == "__main__":

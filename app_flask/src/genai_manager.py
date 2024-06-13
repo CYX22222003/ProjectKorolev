@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import os
 
+
 class GenAIManager:
     def __init__(self, text, task):
         self.text = text

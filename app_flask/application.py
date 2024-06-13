@@ -337,10 +337,17 @@ def call_ai_actions():
         result = json.loads(request.data.decode())
 
         file_name = result["dest"]
-        doc_type = result["type"]
         prompt = result["prompt"]
-        file_manager.dowload_file(container_name, file_name, doc_type)
-        original_doc = file_manager.handle_docx_file()
+        file_manager.download_file(container_name, file_name)
+        try:
+            if file_manager.find_doctype(file_name) == ".docx":
+                original_doc = file_manager.handle_docx_file()
+                file_manager.remove_file(file_manager.dest + ".docx")
+            else:
+                original_doc = file_manager.handle_txt_file()
+                file_manager.remove_file(file_manager.dest + ".txt")
+        except Exception as exc:
+            raise Exception("fail to handle the downloaded file") from exc
 
         genai_manager = GenAIManager(original_doc, prompt)
 

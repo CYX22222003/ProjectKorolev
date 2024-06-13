@@ -14,6 +14,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import { TriggerAIAction } from "../GenAI_Management/utils";
 import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type SessionFileListProps = {
   open: boolean;
@@ -33,7 +34,7 @@ export default function SessionFileList({
         onClose={() => setOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        maxWidth="md"
+        fullScreen
       >
         <DialogContent>
           <SessionFileListFrag fileList={fileList} />
@@ -55,6 +56,7 @@ function SessionFileListFrag({
   const [aiQuestion, setAIQuestion] = useState<string>("");
   const [aiResponse, setAIResponse] = useState<string>("");
   const [displayAIMessage, setDisplayAIMessage] = useState<boolean>(false);
+  const [startCalling, setStartCalling] = useState<boolean>(false);
 
   return (
     <React.Fragment>
@@ -78,6 +80,7 @@ function SessionFileListFrag({
                   <TableCell>
                     <Button
                       onClick={async () => {
+                        setStartCalling(true);
                         await TriggerAIAction({
                           dest: fileName,
                           type: "docx",
@@ -107,6 +110,7 @@ function SessionFileListFrag({
         </Table>
       </TableContainer>
       <br />
+      {startCalling && !displayAIMessage && <CircularProgress />}
       {displayAIMessage && (
         <AIMessageDisplay
           fileName={aiFilename}
