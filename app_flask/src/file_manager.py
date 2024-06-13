@@ -73,7 +73,7 @@ def test_file_manager():
         file_manager.download_file(
             "user-test2", "patient1/patient1_01-02-2003/sample_reddit_blog.txt"
         )
-        print(file_manager.handle_txt_file())
+        file_manager.handle_txt_file()
         file_manager.remove_file("downloads/test.txt")
         return True
     except Exception as exc:
