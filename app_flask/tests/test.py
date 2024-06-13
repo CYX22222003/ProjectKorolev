@@ -3,7 +3,7 @@ from application import app
 import os
 from dotenv import load_dotenv
 from src.models import database_test
-from src.file_manager import test_file_manager
+
 
 
 class FlaskTest(unittest.TestCase):
