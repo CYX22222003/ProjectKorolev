@@ -211,12 +211,6 @@ Therefore, we decide to design a web App providing a seamless experience for use
 **Test on the website**
 - Test the website by accessing the URL in the `Proof of concept`
 
-**Test on local machine with `docker`**:
-- install `docker` on local machine and create an account on docker hub
-- Pull the docker image: `docker image pull e1155533/orbital_test:milestone1_submission`
-- Create and run a container: `docker run -p 3000:3000 e1155533/orbital_test:milestone1`
-- Access the web app at `http://localhost:3000`
-
 ## Project Management and SWE practices
 Our team manages projects using GitHub Issues, pull requests, and GitHub Projects, closely following Scrum Agile principles. We've also set up CI/CD automated pipelines with GitHub Actions to streamline both application development and deployment. Additionally, we organize our work into sprints within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
 
