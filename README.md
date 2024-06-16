@@ -212,13 +212,13 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - Test the website by accessing the URL in the `Proof of concept`
 
 ## Project Management and SWE practices
-Our team manages projects using GitHub Issues, pull requests, and GitHub Projects, closely following Scrum Agile principles. We've also set up CI/CD automated pipelines with GitHub Actions to streamline both application development and deployment. Additionally, we organize our work into sprints within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
+Our team manages projects using GitHub Issues, pull requests, and GitHub Projects. We adopt the Scrum Agile principles in our project management. In addition, We haveve also set up CI/CD automated pipelines with GitHub Actions to streamline the development, integration and deployment of the application. Additionally, we organize our work by allocating tasks into sprints iteration within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
 
 1. **GitHub Issues and Pull Requests**: We utilize GitHub Issues to track tasks, bugs, and feature requests. Pull requests are used for code reviews and merging changes, ensuring quality and collaboration.
 
-2. **GitHub Projects**: Our Kanban board in GitHub Projects visualizes our workflow. We organize our tasks into sprints, with columns typically labeled as "To Do", "In Progress", and "Done." This sprint-based approach helps us manage our workload in manageable iterations, ensuring we meet our goals efficiently.
+2. **GitHub Projects**: Our Kanban board in GitHub Projects visualizes our workflow. We allocate tasks into a two-week sprints iteration, with columns typically labeled as "To Do", "In Progress", and "Done." This sprint-based approach helps us manage our workload, ensuring we meet our goals efficiently.
 
-3. **CI/CD Pipelines**: Using GitHub Actions, we've automated our continuous integration and continuous deployment (CI/CD) processes. This automation handles everything from running tests to deploying the application, ensuring a smooth and efficient development cycle.
+3. **CI/CD Pipelines**: Using GitHub Actions, we have automated our continuous integration and continuous deployment (CI/CD) processes. This automation handles basic unit testing on integration and the deployment of the application. This ensures a smooth and efficient development cycle.
 
 ## Project Log
 [[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
