@@ -11,7 +11,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
-import { TriggerAIAction } from "../GenAI_Management/utils";
 import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 import CircularProgress from "@mui/material/CircularProgress";
 import { downLoadDocument } from "../utils/Document_Upload/util";
