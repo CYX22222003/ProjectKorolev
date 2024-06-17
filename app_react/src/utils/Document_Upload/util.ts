@@ -1,5 +1,5 @@
 // Azure Storage dependency
-import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse} from '@azure/storage-blob';
+import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse, BlobClient} from '@azure/storage-blob';
 //import { getLocalStorage } from '../localStorageManager';
 
 export type UploadProps = {
@@ -28,6 +28,46 @@ export async function createInnerContainer(storageClient : BlobServiceClient, co
                 .then(res => res.containerClient);
 
     return containerClient;
+}
+
+export async function downLoadDocument(containerName: string, blobname: string) : Promise<void> {
+  const blobServiceClient : BlobServiceClient = createStorageServiceClient();
+  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName)
+
+  const blobClient : BlobClient = await containerClient.getBlobClient(blobname);
+  await blobClient.download().
+  then(res => res.blobBody)
+  .then(data => {
+    if(data === undefined) {
+      throw new Error("Fail to download");
+    } else {
+      return data;
+    }
+  }).then((blob : Blob) => {
+    const url = window.URL.createObjectURL(
+      new Blob([blob]),
+    );
+    const link = document.createElement('a');
+    link.href = url;
+     link.setAttribute(
+      'download',
+      "Downloads" + blob.type
+    );
+    // Append to html link element page
+    document.body.appendChild(link);
+
+    // Start download
+    link.click();
+
+    // Clean up and remove the link
+    if(link.parentNode !== null) {
+      link.parentNode.removeChild(link);
+    }
+  })
+  .catch(err => {
+    console.log("Fail to download");
+    throw new Error("Fail to download");
+  });
 }
 
 

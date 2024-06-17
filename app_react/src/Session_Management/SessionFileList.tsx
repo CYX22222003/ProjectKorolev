@@ -15,6 +15,8 @@ import Button from "@mui/material/Button";
 import { TriggerAIAction } from "../GenAI_Management/utils";
 import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 import CircularProgress from "@mui/material/CircularProgress";
+import { downLoadDocument } from "../utils/Document_Upload/util";
+import { getLocalStorage } from "../utils/localStorageManager";
 
 type SessionFileListProps = {
   open: boolean;
@@ -101,7 +103,9 @@ function SessionFileListFrag({
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Link>Download</Link>
+                    <Button onClick={async () => {
+                      await downLoadDocument(getLocalStorage("PersonAIUsername", ""), fileName)
+                    }}>Download</Button>
                   </TableCell>
                 </TableRow>
               );
