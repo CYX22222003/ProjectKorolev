@@ -16,6 +16,7 @@ import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 import CircularProgress from "@mui/material/CircularProgress";
 import { downLoadDocument } from "../utils/Document_Upload/util";
 import { getLocalStorage } from "../utils/localStorageManager";
+import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
 
 type SessionFileListProps = {
   open: boolean;
@@ -53,8 +54,8 @@ export default function SessionFileList({
 function SessionFileListFrag({
   fileList,
 }: SessionFileListFragProps): ReactElement {
-  const [aiFilename, setAIFilename] = useState<string>("");
-  const [aiQuestion, setAIQuestion] = useState<string>("");
+  const [aiTargetFile, setAITargetFile] = useState<string>("");
+  const [startPrompt, setStartPrompt] = useState<boolean>(false);
   const [aiResponse, setAIResponse] = useState<string>("");
   const [displayAIMessage, setDisplayAIMessage] = useState<boolean>(false);
   const [startCalling, setStartCalling] = useState<boolean>(false);
@@ -80,22 +81,9 @@ function SessionFileListFrag({
                   <TableCell>{fileName}</TableCell>
                   <TableCell>
                     <Button
-                      onClick={async () => {
-                        setStartCalling(true);
-                        await TriggerAIAction({
-                          dest: fileName,
-                          type: "docx",
-                          prompt: "Summarize the text below",
-                        })
-                          .then((res: string) => {
-                            setDisplayAIMessage(true);
-                            setAIQuestion("summarize the text below");
-                            setAIFilename(fileName);
-                            setAIResponse(res);
-                          })
-                          .catch((err: Error) => {
-                            console.log(err);
-                          });
+                      onClick={() => {
+                        setAITargetFile(fileName);
+                        setStartPrompt(true);
                       }}
                     >
                       AI insights
@@ -120,11 +108,10 @@ function SessionFileListFrag({
         </Table>
       </TableContainer>
       <br />
+      {startPrompt && <AIPromptForm fileName={aiTargetFile} type="docx" setStartCalling={setStartCalling} setDisplayAIMessage={setDisplayAIMessage} setAIResponse={setAIResponse}/>}
       {startCalling && !displayAIMessage && <CircularProgress />}
       {displayAIMessage && (
-        <AIMessageDisplay
-          fileName={aiFilename}
-          question={aiQuestion}
+        <AIMessageDisplay 
           aiResponse={aiResponse}
         />
       )}

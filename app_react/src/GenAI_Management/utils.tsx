@@ -1,3 +1,4 @@
+import React from "react";
 import { postTest } from "../utils/APIInteractionManager";
 
 export type TriggerAIRequest = {
@@ -7,9 +8,15 @@ export type TriggerAIRequest = {
 };
 
 export type AIMessageDisplayProps = {
-  fileName: string;
-  question: string;
   aiResponse: string;
+};
+
+export type AIPromptFormProps = {
+  fileName: string;
+  type: string;
+  setStartCalling: React.Dispatch<React.SetStateAction<boolean>>;
+  setDisplayAIMessage: React.Dispatch<React.SetStateAction<boolean>>;
+  setAIResponse: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export async function TriggerAIAction(data: TriggerAIRequest): Promise<string> {
