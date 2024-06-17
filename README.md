@@ -9,9 +9,9 @@ Apollo 11
 
 Mental Health Practitioners are overwhelmed by the number of patients/customers they have to track.
 
-Right now most of psychological/therapy/case work is recorded by hand and kept in patient files/books. This is very manual and is terrible in terms of figuring out how well the patient is doing over their entire patient history over all sessions. (The practitioner can’t possible read it all, and get full context of the patient’s current state)  
+Right now most of psychological/therapy/case work is recorded by hand and kept in patient files/books. This is very manual and time consuming. It is terrible in terms of figuring out how well the patient is doing over their entire patient history over all sessions. (The practitioner can’t possibly read it and catch all the potential symptoms. It is impossible to get full context of the patient’s current state)  
 
-The Generative AI solution can potentially help practitioners to summarize and draw insights, to improve and speed up reviewing patient history.
+The Generative AI solution can potentially help practitioners to summarize and draw insights during sessions which also improves and speeds up reviewing patient history.
 
 Therefore, we decide to design a web App providing a seamless experience for users to:
 
