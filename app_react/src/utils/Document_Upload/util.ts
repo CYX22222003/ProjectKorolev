@@ -35,8 +35,8 @@ export async function downLoadDocument(containerName: string, blobname: string) 
   const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName)
 
   const blobClient : BlobClient = await containerClient.getBlobClient(blobname);
-  await blobClient.download().
-  then(res => res.blobBody)
+  await blobClient.download()
+  .then(res => res.blobBody)
   .then(data => {
     if(data === undefined) {
       throw new Error("Fail to download");

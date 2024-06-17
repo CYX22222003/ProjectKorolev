@@ -7,7 +7,6 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Title from "../Components/Title";
 import { SessionFileListFragProps } from "./utils";
-import Link from "@mui/material/Link";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -103,9 +102,16 @@ function SessionFileListFrag({
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Button onClick={async () => {
-                      await downLoadDocument(getLocalStorage("PersonAIUsername", ""), fileName)
-                    }}>Download</Button>
+                    <Button
+                      onClick={async () => {
+                        await downLoadDocument(
+                          getLocalStorage("PersonAIUsername", ""),
+                          fileName,
+                        );
+                      }}
+                    >
+                      Download
+                    </Button>
                   </TableCell>
                 </TableRow>
               );
