@@ -11,6 +11,8 @@ import Footer from "./Components/Footer";
 import CreatePatient from "./utils/Document_Upload/CreatePatientTest";
 import PatinetManagementMain from "./Patient_Management/PatientManagementMain";
 import SessionManagementMain from "./Session_Management/SessionManagementMain";
+import React from "react"
+import { Component } from "react";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
