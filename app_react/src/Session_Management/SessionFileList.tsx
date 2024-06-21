@@ -41,7 +41,12 @@ export default function SessionFileList({
           <SessionFileListFrag fileList={fileList} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} autoFocus>
+          <Button
+            onClick={() => setOpen(false)}
+            variant="contained"
+            color="info"
+            autoFocus
+          >
             Close
           </Button>
         </DialogActions>
@@ -80,6 +85,8 @@ function SessionFileListFrag({
                   <TableCell>{fileName}</TableCell>
                   <TableCell>
                     <Button
+                      variant="contained"
+                      color="info"
                       onClick={() => {
                         setAITargetFile(fileName);
                         setStartPrompt(true);

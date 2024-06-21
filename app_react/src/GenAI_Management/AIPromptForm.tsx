@@ -51,7 +51,7 @@ export function AIPromptForm({
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <FormControl sx={{ m: 1, minWidth: 500 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
                 AI Prompt
               </InputLabel>
@@ -74,7 +74,13 @@ export function AIPromptForm({
                 </MenuItem>
               </Select>
             </FormControl>
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="info"
+              sx={{ mt: 3, mb: 2 }}
+              disabled={prompt === ""}
+            >
               Ask Gemini AI
             </Button>
           </Grid>

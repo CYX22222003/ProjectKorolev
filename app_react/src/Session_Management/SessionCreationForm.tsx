@@ -75,6 +75,7 @@ export default function SessionCreationForm({
               type="submit"
               fullWidth
               variant="contained"
+              color="info"
               sx={{ mt: 3, mb: 2 }}
             >
               Create session

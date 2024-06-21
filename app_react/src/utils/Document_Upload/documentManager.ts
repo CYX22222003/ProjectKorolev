@@ -30,21 +30,8 @@ export async function createInnerContainer(storageClient : BlobServiceClient, co
     return containerClient;
 }
 
-export async function downLoadDocument(containerName: string, blobname: string) : Promise<void> {
-  const blobServiceClient : BlobServiceClient = createStorageServiceClient();
-  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName)
-
-  const blobClient : BlobClient = await containerClient.getBlobClient(blobname);
-  await blobClient.download()
-  .then(res => res.blobBody)
-  .then(data => {
-    if(data === undefined) {
-      throw new Error("Fail to download");
-    } else {
-      return data;
-    }
-  }).then((blob : Blob) => {
-    const url = window.URL.createObjectURL(
+export function downloadFileFromBrowser(blob : Blob) {
+   const url = window.URL.createObjectURL(
       new Blob([blob]),
     );
     const link = document.createElement('a');
@@ -63,6 +50,23 @@ export async function downLoadDocument(containerName: string, blobname: string) 
     if(link.parentNode !== null) {
       link.parentNode.removeChild(link);
     }
+}
+
+export async function downLoadDocument(containerName: string, blobname: string) : Promise<void> {
+  const blobServiceClient : BlobServiceClient = createStorageServiceClient();
+  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName)
+
+  const blobClient : BlobClient = await containerClient.getBlobClient(blobname);
+  await blobClient.download()
+  .then(res => res.blobBody)
+  .then(data => {
+    if(data === undefined) {
+      throw new Error("Fail to download");
+    } else {
+      return data;
+    }
+  }).then((blob : Blob) => {
+    downloadFileFromBrowser(blob);
   })
   .catch(err => {
     console.log("Fail to download");
