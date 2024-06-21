@@ -1,24 +1,23 @@
 import Typography from "@mui/material/Typography";
 import React from "react";
-import { AIMessageDisplayProps } from "./utils";
-import Container from "@mui/material/Container";
+import { AIMessageDisplayProps, downloadAIResponse } from "./utils";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import { Button } from "@mui/material";
 
 export default function AIMessageDisplay({
-  fileName,
-  question,
   aiResponse,
 }: AIMessageDisplayProps) {
   return (
     <React.Fragment>
-      <Container sx={{ maxHeight: 500 }}>
-        <Typography variant="h6">AI Summary</Typography> <br />
-        <Typography variant="h6">source: </Typography>
-        <Typography variant="caption">{fileName}</Typography> <br />
-        <Typography variant="h6">question: </Typography>
-        <Typography variant="body2">{question}</Typography> <br />
-        <Typography variant="h6">response: </Typography>
-        <Typography variant="body1">{aiResponse}</Typography> <br />
-      </Container>
+      <Box component="form" noValidate sx={{ maxHeight: 500, minWidth: 300 }}>
+        <Paper elevation={1}>
+          <Typography variant="body1">{aiResponse}</Typography> <br />
+        </Paper>
+      </Box>
+      <Button onClick={() => downloadAIResponse(aiResponse)}>
+        Download AI response
+      </Button>
     </React.Fragment>
   );
 }

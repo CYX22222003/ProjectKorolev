@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import MyDatePicker from "../Components/DatePicker";
 
 import {
   createSession,
@@ -67,24 +68,14 @@ export default function SessionCreationForm({
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="date"
-                  required
-                  fullWidth
-                  id="date"
-                  label="date (DD-MM-YYYY)"
-                  autoFocus
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setDate(e.target.value);
-                  }}
-                />
+                <MyDatePicker setVal={setDate} />
               </Grid>
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              color="info"
               sx={{ mt: 3, mb: 2 }}
             >
               Create session

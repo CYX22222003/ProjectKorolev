@@ -9,7 +9,7 @@ import Title from "../Components/Title";
 import Button from "@mui/material/Button";
 import { SessionListProps } from "./utils";
 import { SessionUploadForm } from "./SessionUploadPrompt";
-import { createListBlobs } from "../utils/Document_Upload/util";
+import { createListBlobs } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import SessionFileList from "./SessionFileList";
 

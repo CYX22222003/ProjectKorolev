@@ -7,14 +7,15 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Title from "../Components/Title";
 import { SessionFileListFragProps } from "./utils";
-import Link from "@mui/material/Link";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
-import { TriggerAIAction } from "../GenAI_Management/utils";
 import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 import CircularProgress from "@mui/material/CircularProgress";
+import { downLoadDocument } from "../utils/Document_Upload/documentManager";
+import { getLocalStorage } from "../utils/localStorageManager";
+import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
 
 type SessionFileListProps = {
   open: boolean;
@@ -40,7 +41,12 @@ export default function SessionFileList({
           <SessionFileListFrag fileList={fileList} />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} autoFocus>
+          <Button
+            onClick={() => setOpen(false)}
+            variant="contained"
+            color="info"
+            autoFocus
+          >
             Close
           </Button>
         </DialogActions>
@@ -52,8 +58,8 @@ export default function SessionFileList({
 function SessionFileListFrag({
   fileList,
 }: SessionFileListFragProps): ReactElement {
-  const [aiFilename, setAIFilename] = useState<string>("");
-  const [aiQuestion, setAIQuestion] = useState<string>("");
+  const [aiTargetFile, setAITargetFile] = useState<string>("");
+  const [startPrompt, setStartPrompt] = useState<boolean>(false);
   const [aiResponse, setAIResponse] = useState<string>("");
   const [displayAIMessage, setDisplayAIMessage] = useState<boolean>(false);
   const [startCalling, setStartCalling] = useState<boolean>(false);
@@ -79,45 +85,46 @@ function SessionFileListFrag({
                   <TableCell>{fileName}</TableCell>
                   <TableCell>
                     <Button
-                      onClick={async () => {
-                        setStartCalling(true);
-                        await TriggerAIAction({
-                          dest: fileName,
-                          type: "docx",
-                          prompt: "Summarize the text below",
-                        })
-                          .then((res: string) => {
-                            setDisplayAIMessage(true);
-                            setAIQuestion("summarize the text below");
-                            setAIFilename(fileName);
-                            setAIResponse(res);
-                          })
-                          .catch((err: Error) => {
-                            console.log(err);
-                          });
+                      variant="contained"
+                      color="info"
+                      onClick={() => {
+                        setAITargetFile(fileName);
+                        setStartPrompt(true);
                       }}
                     >
                       AI insights
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <Link>Download</Link>
+                    <Button
+                      onClick={async () => {
+                        await downLoadDocument(
+                          getLocalStorage("PersonAIUsername", ""),
+                          fileName,
+                        );
+                      }}
+                    >
+                      Download
+                    </Button>
                   </TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
+        {startPrompt && (
+          <AIPromptForm
+            fileName={aiTargetFile}
+            type="docx"
+            setStartCalling={setStartCalling}
+            setDisplayAIMessage={setDisplayAIMessage}
+            setAIResponse={setAIResponse}
+          />
+        )}{" "}
+        <br />
+        {startCalling && <CircularProgress />}
+        {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
       </TableContainer>
-      <br />
-      {startCalling && !displayAIMessage && <CircularProgress />}
-      {displayAIMessage && (
-        <AIMessageDisplay
-          fileName={aiFilename}
-          question={aiQuestion}
-          aiResponse={aiResponse}
-        />
-      )}
     </React.Fragment>
   );
 }
