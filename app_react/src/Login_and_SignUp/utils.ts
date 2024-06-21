@@ -2,7 +2,7 @@
 import { LoginInfo, SignUpForm } from "./constants";
 import { postTest, getTest } from "../utils/APIInteractionManager";
 import { SHA256 } from "crypto-js";
-import { createNewUserContainer } from "../utils/Document_Upload/util";
+import { createNewUserContainer } from "../utils/Document_Upload/documentManager";
 
 /**
  * Handle the login action by sending the users input to the backend for verification 

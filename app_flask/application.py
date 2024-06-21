@@ -327,7 +327,8 @@ def update_session(session_id):
 @app.route("/ai/action", methods=["POST"])
 @login_required
 def call_ai_actions():
-
+    context = "Imagine you are a mental health practitioner."
+    reply_format = "Reply in plain text only, don't display in Markdown."
     if request.method == "POST":
         file_manager = FileManager(current_user.get_id())
 
@@ -349,7 +350,7 @@ def call_ai_actions():
         except Exception as exc:
             raise Exception("fail to handle the downloaded file") from exc
 
-        genai_manager = GenAIManager(original_doc, prompt)
+        genai_manager = GenAIManager(original_doc, prompt + context + reply_format)
 
         return jsonify({"AIresponse": genai_manager.get_ai_response()})
 

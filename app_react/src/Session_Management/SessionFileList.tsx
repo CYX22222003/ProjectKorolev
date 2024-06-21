@@ -13,7 +13,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Button from "@mui/material/Button";
 import AIMessageDisplay from "../GenAI_Management/AIMessageDisplay";
 import CircularProgress from "@mui/material/CircularProgress";
-import { downLoadDocument } from "../utils/Document_Upload/util";
+import { downLoadDocument } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
 
@@ -105,15 +105,18 @@ function SessionFileListFrag({
             })}
           </TableBody>
         </Table>
+        {startPrompt && (
+          <AIPromptForm
+            fileName={aiTargetFile}
+            type="docx"
+            setStartCalling={setStartCalling}
+            setDisplayAIMessage={setDisplayAIMessage}
+            setAIResponse={setAIResponse}
+          />
+        )} <br />
+        {(startCalling) && <CircularProgress />}
+        {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
       </TableContainer>
-      <br />
-      {startPrompt && <AIPromptForm fileName={aiTargetFile} type="docx" setStartCalling={setStartCalling} setDisplayAIMessage={setDisplayAIMessage} setAIResponse={setAIResponse}/>}
-      {startCalling && !displayAIMessage && <CircularProgress />}
-      {displayAIMessage && (
-        <AIMessageDisplay 
-          aiResponse={aiResponse}
-        />
-      )}
     </React.Fragment>
   );
 }

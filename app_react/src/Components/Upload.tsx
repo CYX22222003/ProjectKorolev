@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from "react";
-import { UploadProps, uploadAction } from "../utils/Document_Upload/util";
+import { UploadProps, uploadAction } from "../utils/Document_Upload/documentManager";
 import { TextField, Button } from "@mui/material";
 import { Warning } from "./Warning";
 import CircularProgress from "@mui/material/CircularProgress";
