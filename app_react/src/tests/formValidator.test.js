@@ -2,7 +2,7 @@ import { passwordValidator, usernameValidator } from "./formatValidator";
 
 test("Username validator test:",
     () => {
-        expect(usernameValidator("user_123")).toEqual(true);
+        expect(usernameValidator("user-123")).toEqual(true);
         expect(usernameValidator("_123_a")).toEqual(false);
         expect(usernameValidator("ABC")).toEqual(false);
         expect(usernameValidator("abc-12#")).toEqual(false);
