@@ -104,6 +104,23 @@ export async function createListBlobs(containerName : string, directory : string
   return out;
 }
 
+/**
+ * Display list of initial input
+ * 
+*/
+
+export async function createListContextBlobs(containerName : string, directory : string, key : string) : Promise<string[]> {
+  const out : string[] = [];
+
+  const blobServiceClient : BlobServiceClient = createStorageServiceClient();
+  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName);
+  for await (const blob of containerClient.listBlobsByHierarchy(directory)) {
+    if (blob.name !== key) {
+     out.push(blob.name);
+    }
+  }
+  return out;
+}
 
 
 /**

@@ -1,8 +1,11 @@
 import React, { ReactElement, useState } from "react";
-import { UploadProps, uploadAction } from "../utils/Document_Upload/documentManager";
+import {
+  UploadProps,
+  uploadAction,
+} from "../utils/Document_Upload/documentManager";
 import { TextField, Button } from "@mui/material";
-import { Warning } from "./Warning";
 import CircularProgress from "@mui/material/CircularProgress";
+import MySnackbar from "./SnackBar";
 
 export default function Upload({
   title,
@@ -60,10 +63,10 @@ export default function Upload({
           Upload
         </Button>
       </form>
-      <Warning
+      <MySnackbar
         open={showWarning}
         setOpen={setWarningState}
-        text={warningMessage}
+        message={warningMessage}
       />{" "}
       <br />
       {loading && <CircularProgress />}

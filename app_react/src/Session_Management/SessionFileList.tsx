@@ -113,8 +113,9 @@ function SessionFileListFrag({
             setDisplayAIMessage={setDisplayAIMessage}
             setAIResponse={setAIResponse}
           />
-        )} <br />
-        {(startCalling) && <CircularProgress />}
+        )}{" "}
+        <br />
+        {startCalling && <CircularProgress />}
         {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
       </TableContainer>
     </React.Fragment>

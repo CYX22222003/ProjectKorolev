@@ -11,7 +11,7 @@ export default function AIMessageDisplay({
     <React.Fragment>
       <Box component="form" noValidate sx={{ maxHeight: 500, minWidth: 300 }}>
         <Paper elevation={1}>
-        <Typography variant="body1">{aiResponse}</Typography> <br />
+          <Typography variant="body1">{aiResponse}</Typography> <br />
         </Paper>
       </Box>
     </React.Fragment>
