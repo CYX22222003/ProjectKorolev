@@ -80,7 +80,7 @@ export default function SignUp(): ReactElement {
                   required
                   fullWidth
                   id="username"
-                  label="username"
+                  label="Username(Only lower case letters, numbers and hyphen allowed)"
                   autoFocus
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setUsername(event.target.value);
