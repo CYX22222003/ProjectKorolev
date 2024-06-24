@@ -300,6 +300,7 @@ def show_session_patient(patient_id):
 
 
 @app.route("/session/<int:sesssion_id>/delete", methods=["DELETE"])
+@login_required
 def delete_sessions(session_id):
     deleted_session = db.get_or_404(Session, session_id)
     if request == "DELETE" and deleted_session.user_id == current_user.show_id():
