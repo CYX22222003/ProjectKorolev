@@ -102,7 +102,7 @@ def user_detail(user_id):
 def user_delete(user_id):
     user = db.get_or_404(User, user_id)
 
-    if request.method == "DELETE":
+    if request.method in ('DELETE', 'POST'):
         db.session.delete(user)
         db.session.commit()
         return f"{user.username} is deleted"

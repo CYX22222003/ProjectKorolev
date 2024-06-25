@@ -3,5 +3,5 @@ export function displayToday(): string {
   const dd: string = String(today.getDate()).padStart(2, "0");
   const mm: string = String(today.getMonth() + 1).padStart(2, "0");
   const yyyy: string = String(today.getFullYear());
-  return `${yyyy}-${mm}_${dd}`;
+  return `${dd}-${mm}-${yyyy}`;
 }
