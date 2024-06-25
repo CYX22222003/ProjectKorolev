@@ -1,6 +1,5 @@
 import { useTheme } from "@mui/material";
 import {
-  MenuButtonAddTable,
   MenuButtonBlockquote,
   MenuButtonBold,
   MenuButtonBulletedList,
