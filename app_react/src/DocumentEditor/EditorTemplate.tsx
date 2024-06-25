@@ -1,9 +1,9 @@
 import { StarterKit } from "@tiptap/starter-kit";
-import { RichTextEditor, RichTextField, RichTextEditorRef } from "mui-tiptap";
+import { RichTextEditor, RichTextEditorRef } from "mui-tiptap";
 import EditorMenuControls from "./EditorMenu";
 import Button from "@mui/material/Button";
 import React, { useRef, useState } from "react";
-import { EditorTemplateProps, detectMutableRef } from "./util";
+import { EditorTemplateProps} from "./util";
 import { uploadAction } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 

@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import { CssBaseline, Box } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { EditorPatientSelect, EditorSessionSelect } from "./EditorPromptHelp";
 import { getPatientList, PatientData } from "../Patient_Management/utils";
 import { SessionData } from "../Session_Management/utils";
