@@ -86,6 +86,7 @@ def user_create():
             f"username: {user.username}, email: {user.email}, id: {user.id}",
             content_type="text/plain",
         )
+    return "Fail to create"
 
 
 @app.route("/user/<int:user_id>")
