@@ -10,11 +10,12 @@ import { displayToday } from "../utils/timeManagement";
 //modified from sample elements in https://mui.com/x/react-date-pickers/
 
 type DatePickerProps = {
+  value : string
   setVal: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function MyDatePicker({ setVal }: DatePickerProps) {
-  const [value, setValue] = useState<Dayjs | null>(dayjs(displayToday()));
+export default function MyDatePicker({ value, setVal }: DatePickerProps) {
+  const [localValue, setValue] = useState<Dayjs | null>(dayjs(displayToday()));
 
   return (
     <React.Fragment>
@@ -22,10 +23,10 @@ export default function MyDatePicker({ setVal }: DatePickerProps) {
         <DemoContainer components={["DatePicker"]}>
           <DatePicker
             label="Choose the date of the session"
-            value={value}
+            value={localValue}
             onChange={(newValue: Dayjs | null) => {
               setValue(newValue);
-              setVal(value ? value.format("DD[-]MM[-]YYYY") : "");
+              setVal(newValue ? newValue.format("DD[-]MM[-]YYYY") : "");
             }}
             views={["day", "month", "year"]}
           />

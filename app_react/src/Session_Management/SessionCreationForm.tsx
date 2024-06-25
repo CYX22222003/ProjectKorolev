@@ -68,7 +68,7 @@ export default function SessionCreationForm({
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <MyDatePicker setVal={setDate} />
+                <MyDatePicker value={date} setVal={setDate} />
               </Grid>
             </Grid>
             <Button
