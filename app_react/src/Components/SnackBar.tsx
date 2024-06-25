@@ -41,7 +41,7 @@ export default function MySnackbar({ open, setOpen, message }: ToastProps) {
     <div>
       <Snackbar
         open={open}
-        autoHideDuration={7000}
+        autoHideDuration={3000}
         onClose={handleClose}
         message={message}
         action={action}

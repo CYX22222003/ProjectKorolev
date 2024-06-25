@@ -21,12 +21,14 @@ import { FileDeleteButton } from "./SessionFileDelete";
 type SessionFileListProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  setFileList: React.Dispatch<SetStateAction<string[]>>;
   fileList: string[];
 };
 
 export default function SessionFileList({
   open,
   setOpen,
+  setFileList,
   fileList,
 }: SessionFileListProps) {
   return (
@@ -39,7 +41,7 @@ export default function SessionFileList({
         fullScreen
       >
         <DialogContent>
-          <SessionFileListFrag fileList={fileList} />
+          <SessionFileListFrag setFileList={setFileList} fileList={fileList} />
         </DialogContent>
         <DialogActions>
           <Button
@@ -57,6 +59,7 @@ export default function SessionFileList({
 }
 
 function SessionFileListFrag({
+  setFileList,
   fileList,
 }: SessionFileListFragProps): ReactElement {
   const [aiTargetFile, setAITargetFile] = useState<string>("");
@@ -110,7 +113,11 @@ function SessionFileListFrag({
                     </Button>
                   </TableCell>
                   <TableCell>
-                    <FileDeleteButton fileName={fileName}/>
+                    <FileDeleteButton
+                      setFileList={setFileList}
+                      fileList={fileList}
+                      fileName={fileName}
+                    />
                   </TableCell>
                 </TableRow>
               );

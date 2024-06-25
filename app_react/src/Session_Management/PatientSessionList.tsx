@@ -90,6 +90,7 @@ export default function PatientSessionList({
       <SessionFileList
         open={openFileList}
         setOpen={setOpenFileList}
+        setFileList={setFileList}
         fileList={fileList}
       />
     </React.Fragment>

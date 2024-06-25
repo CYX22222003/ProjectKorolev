@@ -2,9 +2,10 @@ import { getTest, postTest } from "../utils/APIInteractionManager";
 import { BlobUploadCommonResponse } from "@azure/storage-blob";
 import { displayToday } from "../utils/timeManagement";
 import { uploadAction } from "../utils/Document_Upload/documentManager";
-import React from "react";
+import React, { SetStateAction } from "react";
 
 export type SessionFileListFragProps = {
+  setFileList : React.Dispatch<SetStateAction<string[]>>
   fileList: string[];
 };
 
