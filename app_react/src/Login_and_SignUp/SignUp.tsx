@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Warning } from "../Components/Warning";
+import { usernameValidator } from "../utils/formatValidator";
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
@@ -24,6 +25,10 @@ export default function SignUp(): ReactElement {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPasswd] = useState<string>("");
+
+  const [usernameError, setUsernameError] = useState<string>("");
+  const [formValid, setFormValid] = useState<boolean>(false);
+
 
   async function handleSignUp(
     e: React.FormEvent<HTMLFormElement>,
@@ -48,6 +53,24 @@ export default function SignUp(): ReactElement {
     }
   }
 
+ const handleUsernameNew = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const value = event.target.value;
+    setUsername(value);
+
+    // Validate username against the validator function
+    if (!usernameValidator(value)) {
+      setUsernameError(
+        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number."
+      );
+      setFormValid(false); // Disable form submission
+    } else {
+      setUsernameError("");
+      setFormValid(true); // Enable form submission
+    }
+  };
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -82,9 +105,9 @@ export default function SignUp(): ReactElement {
                   id="username"
                   label="username"
                   autoFocus
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setUsername(event.target.value);
-                  }}
+                  error={!!usernameError}
+                  helperText={usernameError}
+                  onChange={handleUsernameNew}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -120,6 +143,7 @@ export default function SignUp(): ReactElement {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={!formValid}
             >
               Sign Up
             </Button>
