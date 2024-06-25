@@ -7,7 +7,7 @@ import React from "react";
 export default function EditorElement() {
   const editor = useEditor({
     extensions: [StarterKit],
-    content: "<p>Hello <b>world</b>!</p>",
+    content: "",
   });
   return (
     <React.Fragment>

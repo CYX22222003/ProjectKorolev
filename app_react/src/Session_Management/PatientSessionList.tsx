@@ -12,6 +12,7 @@ import { SessionUploadForm } from "./SessionUploadPrompt";
 import { createListBlobs } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import SessionFileList from "./SessionFileList";
+import { FileDeleteButton } from "./SessionFileDelete";
 
 export default function PatientSessionList({
   rows,

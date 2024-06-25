@@ -22,19 +22,19 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Manage Patients" />
+      <ListItemText primary="Patient Management" />
     </ListItemButton>
-    <ListItemButton href="/patients">
+    {/* <ListItemButton href="/patients">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Manage sessions" />
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton> */}
+    <ListItemButton href="/editor">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="AI insights" />
+      <ListItemText primary="Create Documents" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
@@ -56,12 +56,12 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Tutorial" />
     </ListItemButton>
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Resources" />
-    </ListItemButton>
+    </ListItemButton> */}
     <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
