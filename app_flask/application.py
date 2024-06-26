@@ -86,6 +86,7 @@ def user_create():
             f"username: {user.username}, email: {user.email}, id: {user.id}",
             content_type="text/plain",
         )
+    return Response("Fail to create", status=500)
 
 
 @app.route("/user/<int:user_id>")
@@ -106,7 +107,7 @@ def user_delete(user_id):
         db.session.commit()
         return f"{user.username} is deleted"
 
-    return "unable to delete the content"
+    return Response("unable to delete the content", status=500)
 
 
 # user login and registration in Flask
@@ -140,7 +141,7 @@ def login_test():
 
         login_user(user)
         return f"{current_user.get_id()} logged in"
-    return "errors occured"
+    return Response("errors occured", status=500)
 
 
 @app.route("/welcome", methods=["GET"])
@@ -153,7 +154,7 @@ def welcome():
 @login_required
 def logout():
     logout_user()
-    return "logged out successfully"
+    return Response("logged out successfully", status=500)
 
 
 @app.route("/user/update", methods=["PUT"])
@@ -173,7 +174,7 @@ def update_account():
             db.session.commit()
             return "update successfully"
         return "Please key in the correct password"
-    return "Fail to update"
+    return Response("Fail to update", status=500)
 
 
 # patient management
@@ -204,7 +205,7 @@ def create_new_patient():
         db.session.add(patient)
         db.session.commit()
         return "patient is successfully created"
-    return "Fail to create"
+    return Response("Fail to create", status=500)
 
 
 @app.route("/patient/<int:patient_id>/delete", methods=["DELETE"])
@@ -215,7 +216,7 @@ def delete_patient(patient_id):
         db.session.delete(patient)
         db.session.commit()
         return "successful delete"
-    return "fail to delete"
+    return Response("fail to delete", status=500)
 
 
 @app.route("/patient/<int:patient_id>/update", methods=["PUT"])
@@ -229,7 +230,7 @@ def update_patient(patient_id):
         old_patient.name = new_name
         db.session.commit()
         return "Update successfully"
-    return "fail to update"
+    return Response("fail to update", status=500)
 
 
 # session management
@@ -247,7 +248,7 @@ def create_new_session():
         db.session.add(new_session)
         db.session.commit()
         return "session is successfully created"
-    return "Fail to create session"
+    return Response("Fail to create session", status=500)
 
 
 @app.route("/sessions", methods=["GET"])
@@ -299,14 +300,15 @@ def show_session_patient(patient_id):
     )
 
 
-@app.route("/session/<int:sesssion_id>/delete", methods=["DELETE"])
+@app.route("/session/<int:session_id>/delete", methods=["DELETE"])
+@login_required
 def delete_sessions(session_id):
     deleted_session = db.get_or_404(Session, session_id)
-    if request == "DELETE" and deleted_session.user_id == current_user.show_id():
+    if request.method == "DELETE" and deleted_session.user_id == current_user.show_id():
         db.session.delete(deleted_session)
         db.session.commit()
         return "session is successfully deleted"
-    return "Fail to delete"
+    return Response("Fail to delete", status=500)
 
 
 @app.route("/session/<int:session_id>/update", methods=["PUT"])
@@ -320,7 +322,7 @@ def update_session(session_id):
         old_session.session_name = new_name
         db.session.commit()
         return "Update successfully"
-    return "Fail to update"
+    return Response("Fail to update", status=500)
 
 
 # GenAI actions
@@ -354,7 +356,7 @@ def call_ai_actions():
 
         return jsonify({"AIresponse": genai_manager.get_ai_response()})
 
-    return "Wrong method"
+    return Response("Wrong method", status=500)
 
 
 @app.after_request

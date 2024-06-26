@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useContext } from "react";
+import React, { ReactElement, useState, useContext, useEffect } from "react";
 import { LoginInfo } from "./constants";
 import { loginAction } from "./utils";
 import { AuthenContext } from "../App";
@@ -27,6 +27,26 @@ export default function Login(): ReactElement {
   const [username, setUsername] = useState<string>("");
   const [passwd, setPasswd] = useState<string>("");
   const [statusIn, setStatusIn] = useState<boolean>(AuthoState);
+
+  const [formValid, setFormValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFormValid(username.trim().length > 0 && passwd.trim().length > 0);
+  }, [username, passwd]);
+
+  const handleUsernameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const value = event.target.value;
+    setUsername(value);
+  };
+
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const value = event.target.value;
+    setPasswd(value);
+  };
 
   async function handleLogin(
     e: React.FormEvent<HTMLFormElement>,
@@ -97,9 +117,7 @@ export default function Login(): ReactElement {
               name="username"
               autoComplete="username"
               autoFocus
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setUsername(event.target.value);
-              }}
+              onChange={handleUsernameChange}
             />
             <TextField
               margin="normal"
@@ -110,9 +128,7 @@ export default function Login(): ReactElement {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setPasswd(event.target.value);
-              }}
+              onChange={handlePasswordChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -123,6 +139,7 @@ export default function Login(): ReactElement {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={!formValid}
             >
               Sign In
             </Button>

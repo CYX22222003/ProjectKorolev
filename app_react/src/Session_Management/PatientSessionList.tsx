@@ -7,13 +7,15 @@ import TableRow from "@mui/material/TableRow";
 import TableContainer from "@mui/material/TableContainer";
 import Title from "../Components/Title";
 import Button from "@mui/material/Button";
-import { SessionListProps } from "./utils";
+import { SessionData, SessionListProps, deleteSession } from "./utils";
 import { SessionUploadForm } from "./SessionUploadPrompt";
 import { createListBlobs } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import SessionFileList from "./SessionFileList";
+import MySnackbar from "../Components/SnackBar";
 
 export default function PatientSessionList({
+  setRows,
   rows,
 }: SessionListProps): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
@@ -22,6 +24,7 @@ export default function PatientSessionList({
 
   const [openFileList, setOpenFileList] = useState<boolean>(false);
   const [fileList, setFileList] = useState<string[]>([]);
+  const [nonEmptyWarning, setNonEmptyWaring] = useState<boolean>(false);
 
   return (
     <React.Fragment>
@@ -34,6 +37,7 @@ export default function PatientSessionList({
               <TableCell>Name</TableCell>
               <TableCell>Document Management</TableCell>
               <TableCell>details</TableCell>
+              <TableCell>delete session</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,6 +76,53 @@ export default function PatientSessionList({
                     view uploaded documents
                   </Button>
                 </TableCell>
+                <TableCell>
+                  <Button
+                    onClick={async () => {
+                      const canDelete: boolean = await createListBlobs(
+                        getLocalStorage("PersonAIUsername", ""),
+                        `/${row.patient_name}/${row.session_name}`,
+                        row.session_name,
+                      )
+                        .then((res: string[]) => {
+                          if (res.length !== 0) {
+                            return false;
+                          } else {
+                            return true;
+                          }
+                        })
+                        .catch((err) => {
+                          throw new Error(
+                            "Fail to load session file list." + err,
+                          );
+                        });
+
+                      if (canDelete) {
+                        await deleteSession(row.session_id)
+                          .then((res: boolean) => {
+                            if (res) {
+                              console.log("successful delete");
+                              const newRows: SessionData[] = rows.filter(
+                                (data: SessionData) =>
+                                  data.session_id !== row.session_id,
+                              );
+                              setRows(newRows);
+                            } else {
+                              console.log("fail to delete");
+                            }
+                          })
+                          .catch((err: any) => {
+                            console.log(err);
+                          });
+                      } else {
+                        setNonEmptyWaring(true);
+                      }
+                    }}
+                    color="warning"
+                  >
+                    delete session
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -89,7 +140,13 @@ export default function PatientSessionList({
       <SessionFileList
         open={openFileList}
         setOpen={setOpenFileList}
+        setFileList={setFileList}
         fileList={fileList}
+      />
+      <MySnackbar
+        open={nonEmptyWarning}
+        setOpen={setNonEmptyWaring}
+        message="Only empty session can be deleted"
       />
     </React.Fragment>
   );

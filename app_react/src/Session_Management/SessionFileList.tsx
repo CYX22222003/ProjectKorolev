@@ -16,16 +16,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { downLoadDocument } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
+import { FileDeleteButton } from "./SessionFileDelete";
+import { Box, Typography } from "@mui/material";
 
 type SessionFileListProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  setFileList: React.Dispatch<SetStateAction<string[]>>;
   fileList: string[];
 };
 
 export default function SessionFileList({
   open,
   setOpen,
+  setFileList,
   fileList,
 }: SessionFileListProps) {
   return (
@@ -38,7 +42,7 @@ export default function SessionFileList({
         fullScreen
       >
         <DialogContent>
-          <SessionFileListFrag fileList={fileList} />
+          <SessionFileListFrag setFileList={setFileList} fileList={fileList} />
         </DialogContent>
         <DialogActions>
           <Button
@@ -56,6 +60,7 @@ export default function SessionFileList({
 }
 
 function SessionFileListFrag({
+  setFileList,
   fileList,
 }: SessionFileListFragProps): ReactElement {
   const [aiTargetFile, setAITargetFile] = useState<string>("");
@@ -75,6 +80,7 @@ function SessionFileListFrag({
               <TableCell>file name</TableCell>
               <TableCell>view AI summary</TableCell>
               <TableCell>download</TableCell>
+              <TableCell>delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,11 +113,24 @@ function SessionFileListFrag({
                       Download
                     </Button>
                   </TableCell>
+                  <TableCell>
+                    <FileDeleteButton
+                      setFileList={setFileList}
+                      fileList={fileList}
+                      fileName={fileName}
+                    />
+                  </TableCell>
                 </TableRow>
               );
             })}
           </TableBody>
         </Table>
+      </TableContainer>
+      <Box sx={{ alignItems: "center" }}>
+        <Typography mt={4} variant="h5">
+          Selected File: {aiTargetFile}
+        </Typography>
+        <br />
         {startPrompt && (
           <AIPromptForm
             fileName={aiTargetFile}
@@ -124,7 +143,7 @@ function SessionFileListFrag({
         <br />
         {startCalling && <CircularProgress />}
         {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
-      </TableContainer>
+      </Box>
     </React.Fragment>
   );
 }

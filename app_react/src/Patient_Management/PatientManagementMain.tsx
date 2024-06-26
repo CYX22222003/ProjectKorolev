@@ -16,7 +16,7 @@ export default function PatinetManagementMain(): ReactElement {
     <Background
       elements={[
         <PatientCreationForm rows={patients} setRow={setPatients} />,
-        <PatientList rows={patients} />,
+        <PatientList setRows={setPatients} rows={patients} />,
       ]}
       header="Patient Management"
     />

@@ -23,9 +23,11 @@ export default function PatientCreationForm({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await createPatient({ patient_name: patientName }).then((res: Response) =>
-        console.log(res.status),
-      );
+      await createPatient({ patient_name: patientName })
+        .then((res: Response) => console.log(res.status))
+        .catch((err: any) => {
+          alert("Fail to create user due to: " + err);
+        });
       await getPatientList().then((patients: PatientData[]) => {
         setRow(patients);
       });

@@ -13,6 +13,7 @@ import PatinetManagementMain from "./Patient_Management/PatientManagementMain";
 import SessionManagementMain from "./Session_Management/SessionManagementMain";
 import React from "react";
 import { Component } from "react";
+import Editor from "./DocumentEditor/EditorMain";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -53,6 +54,7 @@ function App() {
           element={<SessionManagementMain />}
         />
         <Route path="/test" element={<CreatePatient />} />
+        <Route path="/editor" element={<Editor />} />
       </Routes>
     </AuthenContext.Provider>
   ) : (
@@ -61,6 +63,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/test" element={<Welcome />} />
+        <Route path="/editor" element={<Editor />} />
       </Routes>
     </AuthenContext.Provider>
   );

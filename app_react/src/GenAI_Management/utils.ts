@@ -1,6 +1,6 @@
 import React from "react";
 import { postTest } from "../utils/APIInteractionManager";
-import { downLoadDocument, downloadFileFromBrowser } from "../utils/Document_Upload/documentManager";
+import { downloadFileFromBrowser } from "../utils/Document_Upload/documentManager";
 
 export type TriggerAIRequest = {
   dest: string;

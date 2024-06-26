@@ -4,7 +4,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+//import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
@@ -22,23 +22,23 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Manage Patients" />
+      <ListItemText primary="Patient Management" />
     </ListItemButton>
-    <ListItemButton href="/patients">
+    {/* <ListItemButton href="/patients">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Manage sessions" />
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton> */}
+    <ListItemButton href="/editor">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="AI insights" />
+      <ListItemText primary="Create Documents" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="AI suggestions" />
     </ListItemButton>
@@ -56,12 +56,12 @@ export const secondaryListItems = (
       </ListItemIcon>
       <ListItemText primary="Tutorial" />
     </ListItemButton>
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Resources" />
-    </ListItemButton>
+    </ListItemButton> */}
     <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />

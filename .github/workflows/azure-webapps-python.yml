@@ -60,6 +60,9 @@ jobs:
         run: python3 -m unittest discover tests
         env: 
           USER_KEY : ${{ secrets.USER_KEY }} 
+          GEMINI_API_KEY : ${{ secrets.GEMINI_API_KEY }}
+          REACT_APP_AZURE_STORAGE_ACCOUNT : ${{ secrets.REACT_APP_AZURE_STORAGE_ACCOUNT }}
+          REACT_APP_AZURE_STORAGE_SAS_TOKEN : ${{ secrets.REACT_APP_AZURE_STORAGE_SAS_TOKEN }}
         working-directory: ./app_flask
 
       - name: Upload artifact for deployment jobs

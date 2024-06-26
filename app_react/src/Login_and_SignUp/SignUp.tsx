@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useState } from "react";
 import { SignUpForm } from "./constants";
 import { signupAction } from "./utils";
@@ -27,8 +27,35 @@ export default function SignUp(): ReactElement {
   const [password, setPasswd] = useState<string>("");
 
   const [usernameError, setUsernameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
   const [formValid, setFormValid] = useState<boolean>(false);
 
+  const validateUsername = (value: string): boolean => {
+    return usernameValidator(value);
+  };
+
+  const validateEmail = (value: string): boolean => {
+    return value.includes("@");
+  };
+
+  const validatePassword = (value: string): boolean => {
+    return value.length > 0;
+  };
+
+  useEffect(() => {
+    const isUsernameValid = validateUsername(username);
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+
+    setFormValid(
+      isUsernameValid &&
+        isEmailValid &&
+        isPasswordValid &&
+        username.trim().length > 0 &&
+        email.trim().length > 0 &&
+        password.trim().length > 0,
+    );
+  }, [username, email, password]);
 
   async function handleSignUp(
     e: React.FormEvent<HTMLFormElement>,
@@ -53,24 +80,45 @@ export default function SignUp(): ReactElement {
     }
   }
 
- const handleUsernameNew = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const handleUsernameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setUsername(value);
 
-    // Validate username against the validator function
     if (!usernameValidator(value)) {
       setUsernameError(
-        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number."
+        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number.",
       );
       setFormValid(false); // Disable form submission
     } else {
       setUsernameError("");
-      setFormValid(true); // Enable form submission
     }
   };
-  
+
+  const handleEmailChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const value = event.target.value;
+    setEmail(value);
+
+    if (!validateEmail(value)) {
+      setEmailError("Invalid email address.");
+      setFormValid(false);
+    } else {
+      setEmailError("");
+      //validateForm();
+    }
+  };
+
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    const value = event.target.value;
+    setPasswd(value);
+    //validateForm();
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -107,7 +155,7 @@ export default function SignUp(): ReactElement {
                   autoFocus
                   error={!!usernameError}
                   helperText={usernameError}
-                  onChange={handleUsernameNew}
+                  onChange={handleUsernameChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -118,9 +166,9 @@ export default function SignUp(): ReactElement {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setEmail(event.target.value);
-                  }}
+                  error={!!emailError}
+                  helperText={emailError}
+                  onChange={handleEmailChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -132,9 +180,7 @@ export default function SignUp(): ReactElement {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setPasswd(event.target.value);
-                  }}
+                  onChange={handlePasswordChange}
                 />
               </Grid>
             </Grid>
