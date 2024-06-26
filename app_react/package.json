@@ -37,6 +37,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
+    "react-test-renderer": "^18.3.1",
     "typescript": "^3.2.1",
     "web-vitals": "^2.1.4"
   },
@@ -71,6 +72,8 @@
     "@babel/plugin-transform-numeric-separator": "^7.24.1",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
+    "@babel/preset-typescript": "^7.24.7",
+    "@jest/globals": "^29.7.0",
     "@testing-library/react": "^16.0.0",
     "@types/bcrypt": "^5.0.2",
     "@types/crypto-js": "^4.2.2",

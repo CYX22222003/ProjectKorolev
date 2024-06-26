@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 //modified from sample elements in https://mui.com/material-ui/react-snackbar/
 
-type ToastProps = {
+export type ToastProps = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   message: string;
