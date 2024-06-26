@@ -5,9 +5,10 @@ import { EditorPatientSelect, EditorSessionSelect } from "./EditorPromptHelp";
 import { getPatientList, PatientData } from "../Patient_Management/utils";
 import { SessionData } from "../Session_Management/utils";
 import { getPatientSessionList } from "../Session_Management/utils";
-import { EditorPromptProps } from "./util";
+import { BoxConfigProps, EditorPromptProps } from "./util";
 
 export default function EditorPrompt({
+  filenameRef,
   patientNameRef,
   sessionNameRef,
 }: EditorPromptProps) {
@@ -33,25 +34,21 @@ export default function EditorPrompt({
   }, [patientID]);
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main">
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 2,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      ></Box>
-      <EditorPatientSelect
-        patientList={patientList}
-        setPatientID={setPatientID}
-        patientNameRef={patientNameRef}
-      />
-      <EditorSessionSelect
-        sessionList={sessionList}
-        sessionNameRef={sessionNameRef}
-      />
+      <Box sx={BoxConfigProps}>
+        <EditorPatientSelect
+          patientList={patientList}
+          setPatientID={setPatientID}
+          patientNameRef={patientNameRef}
+        />
+      </Box>
+      <Box sx={BoxConfigProps}>
+        <EditorSessionSelect
+          sessionList={sessionList}
+          sessionNameRef={sessionNameRef}
+        />
+      </Box>
     </Container>
   );
 }

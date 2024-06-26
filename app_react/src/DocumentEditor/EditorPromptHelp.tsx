@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { SessionData } from "../Session_Management/utils";
 import { PatientData } from "../Patient_Management/utils";
 import FormControl from "@mui/material/FormControl";
@@ -6,7 +6,17 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { MenuItem } from "@mui/material";
-import { EditorPatientPromptProps, EditorSessionPromptProps } from "./util";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+
+import {
+  EditorPatientPromptProps,
+  EditorSessionPromptProps,
+  EditorTitleProps,
+} from "./util";
 
 export function EditorPatientSelect({
   patientNameRef,
@@ -73,6 +83,43 @@ export function EditorSessionSelect({
           })}
         </Select>
       </FormControl>
+    </React.Fragment>
+  );
+}
+
+export function EditorTitleInput({
+  filenameRef,
+}: EditorTitleProps): ReactElement {
+  return (
+    <React.Fragment>
+      <Box
+        sx={{
+          m: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          minWidth: 500,
+        }}
+      >
+        <Box component="form" noValidate sx={{ mt: 3, minWidth: 500 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="given-title"
+                name="Filename"
+                required
+                fullWidth
+                id="Filename"
+                label="Filename"
+                autoFocus
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  filenameRef.current = e.target.value;
+                }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
     </React.Fragment>
   );
 }

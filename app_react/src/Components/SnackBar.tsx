@@ -23,9 +23,6 @@ export default function MySnackbar({ open, setOpen, message }: ToastProps) {
 
   const action = (
     <React.Fragment>
-      <Button color="info" size="small" onClick={handleClose}>
-        CLOSE
-      </Button>
       <IconButton
         size="small"
         aria-label="close"

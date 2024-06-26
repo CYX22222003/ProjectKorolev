@@ -1,6 +1,7 @@
 import React, { SetStateAction } from "react"
 import { SessionData } from "../Session_Management/utils"
 import { PatientData } from "../Patient_Management/utils"
+import { SxProps } from "@mui/material"
 
 export type EditorPatientPromptProps = {
     patientNameRef : React.MutableRefObject<string>
@@ -14,17 +15,24 @@ export type EditorSessionPromptProps = {
 }
 
 export type EditorPromptProps = {
+    filenameRef : React.MutableRefObject<string>
     patientNameRef : React.MutableRefObject<string>
     sessionNameRef : React.MutableRefObject<string>
 }
 
 export type EditorTemplateProps = {
+    filenameRef : React.MutableRefObject<string>
     patientNameRef : React.MutableRefObject<string>
     sessionNameRef : React.MutableRefObject<string>
 }
 
 
-export function detectMutableRef(target : React.MutableRefObject<any>) 
-    : boolean {
-    return target.current !== null;
+export type EditorTitleProps = {
+    filenameRef : React.MutableRefObject<string>
+}
+
+export const BoxConfigProps = {
+    marginTop: 1,
+    display: "flex",
+    alignItems: "center"
 }

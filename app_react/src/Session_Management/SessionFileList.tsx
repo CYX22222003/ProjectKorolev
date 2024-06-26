@@ -17,6 +17,7 @@ import { downLoadDocument } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
 import { FileDeleteButton } from "./SessionFileDelete";
+import { Box, Typography } from "@mui/material";
 
 type SessionFileListProps = {
   open: boolean;
@@ -123,7 +124,12 @@ function SessionFileListFrag({
               );
             })}
           </TableBody>
-        </Table>
+        </Table>  
+      </TableContainer>
+      <Box sx={{alignItems:"center"}}>
+        <Typography mt={4} variant="h5">
+          Selected File: {aiTargetFile}
+        </Typography><br />
         {startPrompt && (
           <AIPromptForm
             fileName={aiTargetFile}
@@ -136,7 +142,8 @@ function SessionFileListFrag({
         <br />
         {startCalling && <CircularProgress />}
         {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
-      </TableContainer>
+
+      </Box>
     </React.Fragment>
   );
 }
