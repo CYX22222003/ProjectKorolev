@@ -27,5 +27,3 @@ def test_genai_manager():
 
 if __name__ == "__main__":
     print(test_genai_manager())
-
-    
