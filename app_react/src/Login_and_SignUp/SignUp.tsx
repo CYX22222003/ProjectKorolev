@@ -49,13 +49,12 @@ export default function SignUp(): ReactElement {
 
     setFormValid(
       isUsernameValid &&
-      isEmailValid &&
-      isPasswordValid &&
-      username.trim().length > 0 &&
-      email.trim().length > 0 &&
-      password.trim().length > 0
+        isEmailValid &&
+        isPasswordValid &&
+        username.trim().length > 0 &&
+        email.trim().length > 0 &&
+        password.trim().length > 0,
     );
-
   }, [username, email, password]);
 
   async function handleSignUp(
@@ -81,15 +80,15 @@ export default function SignUp(): ReactElement {
     }
   }
 
- const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const handleUsernameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setUsername(value);
 
     if (!usernameValidator(value)) {
       setUsernameError(
-        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number."
+        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number.",
       );
       setFormValid(false); // Disable form submission
     } else {
@@ -98,15 +97,13 @@ export default function SignUp(): ReactElement {
   };
 
   const handleEmailChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setEmail(value);
 
     if (!validateEmail(value)) {
-      setEmailError(
-        "Invalid email address."
-      );
+      setEmailError("Invalid email address.");
       setFormValid(false);
     } else {
       setEmailError("");
@@ -115,13 +112,13 @@ export default function SignUp(): ReactElement {
   };
 
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setPasswd(value);
     //validateForm();
   };
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">

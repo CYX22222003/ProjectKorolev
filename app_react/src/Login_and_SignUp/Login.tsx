@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useContext, useEffect  } from "react";
+import React, { ReactElement, useState, useContext, useEffect } from "react";
 import { LoginInfo } from "./constants";
 import { loginAction } from "./utils";
 import { AuthenContext } from "../App";
@@ -32,17 +32,17 @@ export default function Login(): ReactElement {
 
   useEffect(() => {
     setFormValid(username.trim().length > 0 && passwd.trim().length > 0);
-  }, [username, passwd] );
+  }, [username, passwd]);
 
   const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setUsername(value);
   };
 
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setPasswd(value);
