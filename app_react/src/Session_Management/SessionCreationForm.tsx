@@ -15,6 +15,7 @@ import {
   SessionUIProps,
   SessionData,
 } from "./utils";
+import MySnackbar from "../Components/SnackBar";
 /**
  * session creation form
  *
@@ -27,21 +28,26 @@ export default function SessionCreationForm({
 }: SessionUIProps) {
   const defaultTheme = createTheme();
   const [date, setDate] = useState<string>("");
+  const [openSnackBar, setOpenSnackBar] = useState<boolean>(false);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await createSession({
         patient_id: patient_id,
         session_name: generateSessionName(patient_name, date),
-      }).then((res) => {
-        console.log(res.status);
-      });
+      })
+        .then((res) => {
+          console.log(res.status);
+          setOpenSnackBar(res.status !== 200);
+        })
+        .catch((err: any) => setOpenSnackBar(true));
 
       await getPatientSessionList(patient_id).then((res: SessionData[]) => {
         setRows(res);
       });
     } catch (err: any) {
-      throw new Error("fail to add patient");
+      throw new Error("fail to add session");
     }
   };
   return (
@@ -82,6 +88,11 @@ export default function SessionCreationForm({
           </Box>
         </Box>
       </Container>
+      <MySnackbar
+        open={openSnackBar}
+        setOpen={setOpenSnackBar}
+        message="Fail to create session"
+      />
     </ThemeProvider>
   );
 }

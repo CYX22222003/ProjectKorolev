@@ -43,10 +43,10 @@ export default function EditorElement({
           type="submit"
           color="info"
           disabled={
-            sentBody === "" ||
-            filenameRef.current === "" ||
-            patientNameRef.current === "" ||
-            sessionNameRef.current === ""
+            sentBody.trim() === "" ||
+            filenameRef.current.trim() === "" ||
+            patientNameRef.current.trim() === "" ||
+            sessionNameRef.current.trim() === ""
           }
           onClick={async () => {
             setStartProgress(true);
@@ -75,8 +75,20 @@ export default function EditorElement({
         </Button>
       </Box>
       {startProgress && <CircularProgress />}
-      {<MySnackbar open={openToast} setOpen={setOpenToast} message="Uploaded successfully" />}
-      {<MySnackbar open={openError} setOpen={setOpenError} message="Fail to upload" />}
-    </React.Fragment> 
+      {
+        <MySnackbar
+          open={openToast}
+          setOpen={setOpenToast}
+          message="Uploaded successfully"
+        />
+      }
+      {
+        <MySnackbar
+          open={openError}
+          setOpen={setOpenError}
+          message="Fail to upload"
+        />
+      }
+    </React.Fragment>
   );
 }

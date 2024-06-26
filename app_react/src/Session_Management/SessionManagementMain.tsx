@@ -33,7 +33,7 @@ export default function SessionManagementMain(): ReactElement {
           rows={rows}
           setRows={setRows}
         />,
-        <PatientSessionList rows={rows} />,
+        <PatientSessionList rows={rows} setRows={setRows} />,
       ]}
       header="Session Management"
     />

@@ -3,6 +3,7 @@ import { BlobUploadCommonResponse } from "@azure/storage-blob";
 import { displayToday } from "../utils/timeManagement";
 import { uploadAction } from "../utils/Document_Upload/documentManager";
 import React, { SetStateAction } from "react";
+import { deleteSimple } from "../utils/APIInteractionManager";
 
 export type SessionFileListFragProps = {
   setFileList : React.Dispatch<SetStateAction<string[]>>
@@ -17,6 +18,7 @@ export type SessionUIProps = {
 };
 
 export type SessionListProps = {
+  setRows : React.Dispatch<SetStateAction<SessionData[]>>
   rows: SessionData[];
 };
 
@@ -108,4 +110,17 @@ export async function uploadSessionDocument(
     `${username}/${patientName}/${patientName}_${date}`,
   );
   return res;
+}
+
+export async function deleteSession(session_id : number) : Promise<boolean> {
+  const baseAddress : string = process.env.REACT_APP_SESSION_BASE??"";
+
+  const address : string = `${baseAddress}/${session_id}/delete`
+
+  return (await deleteSimple(address, process.env.REACT_APP_API_KEY)
+  .then((res : Response) => {
+    return res.status === 200
+  } ).catch((err : any) => {
+    return false;
+  }));
 }

@@ -1,8 +1,8 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "../Login_and_SignUp/Logout";
 import { LoginInfo } from "../Login_and_SignUp/constants";
-import { getTest } from "../utils/APIInteractionManager";
-import { Button } from "@mui/material";
+// import { getTest } from "../utils/APIInteractionManager";
+// import { Button } from "@mui/material";
 import { Warning } from "../Components/Warning";
 import { getLocalStorage } from "../utils/localStorageManager";
 import Typography from "@mui/material/Typography";

@@ -124,12 +124,13 @@ function SessionFileListFrag({
               );
             })}
           </TableBody>
-        </Table>  
+        </Table>
       </TableContainer>
-      <Box sx={{alignItems:"center"}}>
+      <Box sx={{ alignItems: "center" }}>
         <Typography mt={4} variant="h5">
           Selected File: {aiTargetFile}
-        </Typography><br />
+        </Typography>
+        <br />
         {startPrompt && (
           <AIPromptForm
             fileName={aiTargetFile}
@@ -142,7 +143,6 @@ function SessionFileListFrag({
         <br />
         {startCalling && <CircularProgress />}
         {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
-
       </Box>
     </React.Fragment>
   );
