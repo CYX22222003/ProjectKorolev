@@ -16,11 +16,16 @@ class GenAIManager:
         response = self.model.generate_content(f"{self.task}\n{self.text}")
         return response.text
 
-
-if __name__ == "__main__":
+def test_GenAI_manager():
     manager = GenAIManager(
         "Statement: Singapore is the largest city in the world.",
         "Is the statement correct?",
     )
 
-    print(manager.get_ai_response())
+    return manager.get_ai_response()
+
+
+if __name__ == "__main__":
+    print(test_GenAI_manager())
+
+    

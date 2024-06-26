@@ -3,8 +3,8 @@ from application import app
 import os
 from dotenv import load_dotenv
 from src.models import database_test
-
-
+from src.file_manager import test_file_manager
+from src.genai_manager import test_GenAI_manager
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -23,9 +23,14 @@ class FlaskTest(unittest.TestCase):
     def test_db(self):
         self.assertEqual(database_test(), True)
 
-    # # simple tests for file manager
-    # def test_file_manager(self):
-    #     self.assertEqual(test_file_manager(), True)
+    # simple tests for file manager
+    def test_file_manager(self):
+        self.assertEqual(test_file_manager(), True)
+
+    # simple tests for genai manager
+    def test_GenAI_manager(self):
+        out = test_GenAI_manager()
+        self.assertGreater(len(out), 0)
 
 
 if __name__ == "__main__":
