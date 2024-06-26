@@ -58,7 +58,7 @@ export default function EditorElement({
               console.log(sentBody);
               await uploadAction(
                 sentBlob,
-                filenameRef.current,
+                `${filenameRef.current}.txt`,
                 `${getLocalStorage("PersonAIUsername", "")}` +
                   `/${patientNameRef.current}/${sessionNameRef.current}`,
               );
