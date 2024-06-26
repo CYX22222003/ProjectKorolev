@@ -121,7 +121,6 @@ export default function SignUp(): ReactElement {
     setPasswd(value);
     //validateForm();
   };
-
   
   return (
     <ThemeProvider theme={defaultTheme}>
