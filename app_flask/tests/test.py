@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from src.models import database_test
 from src.file_manager import test_file_manager
-from src.genai_manager import test_GenAI_manager
+from src.genai_manager import test_genai_manager
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -29,7 +29,7 @@ class FlaskTest(unittest.TestCase):
 
     # simple tests for genai manager
     def test_GenAI_manager(self):
-        out = test_GenAI_manager()
+        out = test_genai_manager()
         self.assertGreater(len(out), 0)
 
 
