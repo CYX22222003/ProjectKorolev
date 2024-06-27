@@ -75,7 +75,7 @@ export default function Login(): ReactElement {
   }
 };
 
-const handleCloseSnackbar = () => {
+const handleCloseSnackbar = (event: React.SyntheticEvent | Event) => {
   setOpenSnackbar(false);
 };
 
