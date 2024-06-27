@@ -1,23 +1,20 @@
 import "@testing-library/jest-dom/extend-expect";
-import { render, screen } from "@testing-library/react";
-import App2 from "./AppTest";
+import { render, screen, fireEvent} from "@testing-library/react";
 import MySnackbar from "../Components/SnackBar";
-import React, { ReactElement, useState } from "react";
-
-export function SnackbarTestStub() : ReactElement {
-    const [open, setOpen] = useState<boolean>(true);
-    return <MySnackbar open={open} setOpen={setOpen} message="test"/>;
-}
-
-//simple js testing
-it("renders learn react link", () => {
-  render(<App2 />);
-  const linkElement = screen.getByText(/Test/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import React, { ReactElement } from "react";
+import userEvent from "@testing-library/user-event";
 
 
-test("Test snack bar", () => {
+
+test("Test snack bar", async () => {
+  const func = jest.fn();
+  function SnackbarTestStub() : ReactElement {
+    const open = true
+    return <MySnackbar open={open} setOpen={func} message="test"/>;
+  }
+
   render(<SnackbarTestStub />);
   expect(screen.getByText(/test/i)).toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button"));
+  expect(func).toBeCalled()
 })
