@@ -16,11 +16,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Warning } from "../Components/Warning";
 import { usernameValidator } from "../utils/formatValidator";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
+
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
-  const [open, setOpen] = useState<boolean>(false);
-  const [promptMessage, setPrompt] = useState<string>("");
 
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -29,6 +30,11 @@ export default function SignUp(): ReactElement {
   const [usernameError, setUsernameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [formValid, setFormValid] = useState<boolean>(false);
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
+
 
   const validateUsername = (value: string): boolean => {
     return usernameValidator(value);
@@ -69,17 +75,18 @@ export default function SignUp(): ReactElement {
       password: hashPassword(password),
     };
 
-    const out: boolean = await signupAction(data).catch((err) => {
-      return false;
-    });
-    if (!out) {
-      setPrompt("Sign up fails. Account already exists");
-      setOpen(true);
+    const success = await signupAction(data).catch((err) => false);
+    if (!success) {
+      setSnackbarMessage("Sign up fails. Account already exists");
+      setSnackbarSeverity("error");
+      setSnackbarOpen(true);
     } else {
-      setPrompt("New account is created");
-      setOpen(true);
+      setSnackbarMessage("New account is created");
+      setSnackbarSeverity("success");
+      setSnackbarOpen(true);
     }
   }
+    
 
  const handleUsernameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -206,7 +213,20 @@ export default function SignUp(): ReactElement {
           </Box>
         </Box>
       </Container>
-      <Warning open={open} setOpen={setOpen} text={promptMessage} />
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity}
+        >
+          {snackbarMessage}
+        </MuiAlert>
+      </Snackbar>
     </ThemeProvider>
   );
 }
