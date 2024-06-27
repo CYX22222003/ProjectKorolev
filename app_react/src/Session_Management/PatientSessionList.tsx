@@ -41,8 +41,8 @@ export default function PatientSessionList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow>
+            {rows.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell>{row.session_id}</TableCell>
                 <TableCell>{row.session_name}</TableCell>
                 <TableCell>

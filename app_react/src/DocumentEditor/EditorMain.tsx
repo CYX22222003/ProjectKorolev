@@ -3,7 +3,7 @@ import EditorElement from "./EditorElement";
 import EditorPrompt from "./EditorPrompt";
 import React, { useRef } from "react";
 
-export default function Element() {
+export default function Editor() {
   const patientNameRef: React.MutableRefObject<string> = useRef<string>("");
   const sessionNameRef: React.MutableRefObject<string> = useRef<string>("");
   const fileNameRef: React.MutableRefObject<string> = useRef<string>("");

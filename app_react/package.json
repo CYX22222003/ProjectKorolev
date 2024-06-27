@@ -26,6 +26,7 @@
     "@types/react": "^18.2.67",
     "@types/react-dom": "^18.2.22",
     "axios": "^1.6.8",
+    "babel-jest": "^29.7.0",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.11",
     "g": "^2.0.1",

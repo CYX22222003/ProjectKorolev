@@ -39,8 +39,8 @@ export default function PatientList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow>
+            {rows.map((row, index) => (
+              <TableRow key={index}>
                 <TableCell>{row.patient_id}</TableCell>
                 <TableCell>{row.patient_name}</TableCell>
                 {/* <TableCell>
