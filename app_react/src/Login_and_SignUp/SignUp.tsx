@@ -35,7 +35,6 @@ export default function SignUp(): ReactElement {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
 
-
   const validateUsername = (value: string): boolean => {
     return usernameValidator(value);
   };
@@ -61,7 +60,6 @@ export default function SignUp(): ReactElement {
       email.trim().length > 0 &&
       password.trim().length > 0
     );
-
   }, [username, email, password]);
 
   async function handleSignUp(
@@ -87,7 +85,6 @@ export default function SignUp(): ReactElement {
     }
   }
     
-
  const handleUsernameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -96,7 +93,7 @@ export default function SignUp(): ReactElement {
 
     if (!usernameValidator(value)) {
       setUsernameError(
-        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number."
+        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number.",
       );
       setFormValid(false); // Disable form submission
     } else {
@@ -128,7 +125,7 @@ export default function SignUp(): ReactElement {
     setPasswd(value);
     //validateForm();
   };
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">

@@ -1,5 +1,13 @@
 // Azure Storage dependency
-import { BlobServiceClient, ContainerClient, BlockBlobClient, BlobUploadCommonResponse, BlobClient} from '@azure/storage-blob';
+import { 
+  BlobServiceClient, 
+  ContainerClient, 
+  BlockBlobClient, 
+  BlobUploadCommonResponse, 
+  BlobClient, 
+  BlobDeleteOptions, 
+  BlobDeleteIfExistsResponse
+} from '@azure/storage-blob';
 //import { getLocalStorage } from '../localStorageManager';
 
 export type UploadProps = {
@@ -50,6 +58,23 @@ export function downloadFileFromBrowser(blob : Blob) {
     if(link.parentNode !== null) {
       link.parentNode.removeChild(link);
     }
+}
+
+export async function deleteBlob(containerName:string, blobName:string) : Promise<void> {
+  const blobServiceClient : BlobServiceClient = createStorageServiceClient();
+  const containerClient : ContainerClient = blobServiceClient.getContainerClient(containerName);
+  const blockBlobClient : BlockBlobClient = await containerClient.getBlockBlobClient(blobName);
+
+  const options: BlobDeleteOptions = {
+    deleteSnapshots: 'include'
+  };
+
+  const blobDeleteIfExistsResponse: BlobDeleteIfExistsResponse =
+    await blockBlobClient.deleteIfExists(options);
+
+  if (!blobDeleteIfExistsResponse.errorCode) {
+    console.log(`deleted blob ${blobName}`);
+  }
 }
 
 export async function downLoadDocument(containerName: string, blobname: string) : Promise<void> {

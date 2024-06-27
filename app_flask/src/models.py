@@ -52,7 +52,7 @@ class Patient(db.Model):
     __tablename__ = "patient_table"
 
     patient_id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(nullable=False)
+    name: Mapped[str] = mapped_column(nullable=False, unique=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("user_table.id"))
     sessions: Mapped[list["Session"]] = relationship()
 
@@ -65,7 +65,7 @@ class Session(db.Model):
     __tablename__ = "session_table"
 
     session_id: Mapped[int] = mapped_column(primary_key=True)
-    session_name: Mapped[str] = mapped_column(nullable=False)
+    session_name: Mapped[str] = mapped_column(nullable=False, unique=True)
     patient_id: Mapped[int] = mapped_column(ForeignKey("patient_table.patient_id"))
     user_id: Mapped[int] = mapped_column(ForeignKey("user_table.id"))
 

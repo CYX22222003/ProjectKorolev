@@ -10,7 +10,7 @@ import { displayToday } from "../utils/timeManagement";
 //modified from sample elements in https://mui.com/x/react-date-pickers/
 
 type DatePickerProps = {
-  value : string
+  value: string;
   setVal: React.Dispatch<React.SetStateAction<string>>;
 };
 

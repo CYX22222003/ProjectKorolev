@@ -40,7 +40,7 @@ export default function Background({
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px",
+              pr: "12px",
             }}
           >
             <IconButton
@@ -49,7 +49,7 @@ export default function Background({
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
-                marginRight: "36px",
+                marginRight: "24px",
                 ...(open && { display: "none" }),
               }}
             >
@@ -98,24 +98,24 @@ export default function Background({
               theme.palette.mode === "light"
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
-            flexGrow: 1,
+            flexGrow: 3,
             height: "100vh",
             overflow: "auto",
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="xl" sx={{ mt: 3, mb: 3 }}>
             <Grid container spacing={3}>
               {/* Welcome Test */}
               {elements.map((ele) => {
                 return (
-                  <Grid item xs={12} md={8} lg={9}>
+                  <Grid item xs={12} md={10} lg={9}>
                     <Paper
                       sx={{
-                        p: 2,
+                        p: 3,
                         display: "flex",
                         flexDirection: "column",
-                        width: 1000,
+                        width: 1400,
                       }}
                     >
                       {ele}

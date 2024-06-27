@@ -1,10 +1,11 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "../Login_and_SignUp/Logout";
 import { LoginInfo } from "../Login_and_SignUp/constants";
-import { getTest } from "../utils/APIInteractionManager";
-import { Button } from "@mui/material";
+// import { getTest } from "../utils/APIInteractionManager";
+// import { Button } from "@mui/material";
 import { Warning } from "../Components/Warning";
 import { getLocalStorage } from "../utils/localStorageManager";
+import Typography from "@mui/material/Typography";
 
 export default function WelcomeHelp(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
@@ -24,8 +25,8 @@ export default function WelcomeHelp(): ReactElement {
   const [welcome_info, setWelcome] = useState<string>("");
   return (
     <div>
-      <h1>Welcome !</h1>
-      <Button
+      {/* <h1>Welcome !</h1> */}
+      {/* <Button
         onClick={() => {
           if (welcome_info !== "") {
             setOpen(true);
@@ -51,11 +52,10 @@ export default function WelcomeHelp(): ReactElement {
         variant="outlined"
       >
         welcome test
-      </Button>
-      <p>
-        Hello {getLocalStorage("PersonAIUsername", "")}! Click to receive the
-        welcome message to test backend connectivity
-      </p>
+      </Button> */}
+      <Typography variant="h5">
+        Hello {getLocalStorage("PersonAIUsername", "")}! Welcome to personAI!
+      </Typography>
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />
