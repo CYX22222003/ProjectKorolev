@@ -118,7 +118,7 @@ export default function SignUp(): ReactElement {
   };
 
   const handleCloseSnackbar = (event: React.SyntheticEvent | Event) => {
-    setOpenSnackbar(false);
+    setSnackbarOpen(false);
   };
 
   const handlePasswordChange = (
