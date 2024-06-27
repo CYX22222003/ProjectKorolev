@@ -1,4 +1,4 @@
-import { passwordValidator, usernameValidator } from "./formatValidator";
+import { passwordValidator, usernameValidator } from "../utils/formatValidator";
 
 test("Username validator test:",
     () => {

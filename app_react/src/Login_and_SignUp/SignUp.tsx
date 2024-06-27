@@ -16,9 +16,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Warning } from "../Components/Warning";
 import { usernameValidator } from "../utils/formatValidator";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
@@ -33,7 +32,9 @@ export default function SignUp(): ReactElement {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">(
+    "success",
+  );
 
   const validateUsername = (value: string): boolean => {
     return usernameValidator(value);
@@ -54,11 +55,11 @@ export default function SignUp(): ReactElement {
 
     setFormValid(
       isUsernameValid &&
-      isEmailValid &&
-      isPasswordValid &&
-      username.trim().length > 0 &&
-      email.trim().length > 0 &&
-      password.trim().length > 0
+        isEmailValid &&
+        isPasswordValid &&
+        username.trim().length > 0 &&
+        email.trim().length > 0 &&
+        password.trim().length > 0,
     );
   }, [username, email, password]);
 
@@ -84,9 +85,9 @@ export default function SignUp(): ReactElement {
       setSnackbarOpen(true);
     }
   }
-    
- const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+
+  const handleUsernameChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setUsername(value);
@@ -102,15 +103,13 @@ export default function SignUp(): ReactElement {
   };
 
   const handleEmailChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setEmail(value);
 
     if (!validateEmail(value)) {
-      setEmailError(
-        "Invalid email address."
-      );
+      setEmailError("Invalid email address.");
       setFormValid(false);
     } else {
       setEmailError("");
@@ -121,9 +120,9 @@ export default function SignUp(): ReactElement {
   const handleCloseSnackbar = (event: React.SyntheticEvent | Event) => {
     setOpenSnackbar(false);
   };
-  
+
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setPasswd(value);

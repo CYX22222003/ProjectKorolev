@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useContext, useEffect  } from "react";
+import React, { ReactElement, useState, useContext, useEffect } from "react";
 import { LoginInfo } from "./constants";
 import { loginAction } from "./utils";
 import { AuthenContext } from "../App";
@@ -17,7 +17,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 
 export default function Login(): ReactElement {
   const { AuthoState, setState } = useContext(AuthenContext);
@@ -33,51 +33,51 @@ export default function Login(): ReactElement {
 
   useEffect(() => {
     setFormValid(username.trim().length > 0 && passwd.trim().length > 0);
-  }, [username, passwd] );
+  }, [username, passwd]);
 
   const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setUsername(value);
   };
 
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setPasswd(value);
   };
 
- const handleLogin = async ( 
-    e: React.FormEvent<HTMLFormElement>
- ): Promise<void> => {
+  const handleLogin = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
     const data: LoginInfo = {
       username: username,
       passwd: hashPassword(passwd),
     };
 
-  try {
-    const success = await loginAction(data);
-    if (!success) {
+    try {
+      const success = await loginAction(data);
+      if (!success) {
+        setOpenSnackbar(true);
+        setSnackbarMessage("Failed to login");
+      } else {
+        setLocalStorage("PersonAIUsername", username);
+      }
+      setStatusIn(success);
+      setState(success);
+      setLocalStorage("loginState", success);
+    } catch (error) {
       setOpenSnackbar(true);
-      setSnackbarMessage("Failed to login");
-    } else {
-      setLocalStorage("PersonAIUsername", username);
+      setSnackbarMessage("Error occurred during login");
     }
-    setStatusIn(success);
-    setState(success);
-    setLocalStorage("loginState", success);
-  } catch (error) {
-    setOpenSnackbar(true);
-    setSnackbarMessage("Error occurred during login");
-  }
-};
+  };
 
-const handleCloseSnackbar = (event: React.SyntheticEvent | Event) => {
-  setOpenSnackbar(false);
-};
+  const handleCloseSnackbar = (event: React.SyntheticEvent | Event) => {
+    setOpenSnackbar(false);
+  };
 
   const defaultTheme = createTheme();
 

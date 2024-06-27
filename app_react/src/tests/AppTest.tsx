@@ -1,6 +1,6 @@
 import "../App.css";
-import React from "react";
-export default function App2() {
+import React, { ReactElement } from "react";
+export default function App2() : ReactElement {
   return (
     <div className="App">
       <header className="App-header">

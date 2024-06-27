@@ -35,3 +35,8 @@ export default function MyDatePicker({ value, setVal }: DatePickerProps) {
     </React.Fragment>
   );
 }
+
+export function CalendarTestStub() : React.ReactElement{
+  const [val, setVal] = useState<string>("");
+  return (<MyDatePicker value={val} setVal={setVal}/>)
+}
