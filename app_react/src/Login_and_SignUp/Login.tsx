@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useContext, useEffect } from "react";
+import React, { ReactElement, useState, useContext, useEffect  } from "react";
 import { LoginInfo } from "./constants";
 import { loginAction } from "./utils";
 import { AuthenContext } from "../App";
@@ -17,12 +17,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Warning } from "../Components/Warning";
+import Snackbar from '@mui/material/Snackbar';
 
 export default function Login(): ReactElement {
   const { AuthoState, setState } = useContext(AuthenContext);
-  const [open, setOpen] = useState<boolean>(false);
-  const [promptMessage, setPrompt] = useState<string>("");
 
   const [username, setUsername] = useState<string>("");
   const [passwd, setPasswd] = useState<string>("");
@@ -30,57 +28,56 @@ export default function Login(): ReactElement {
 
   const [formValid, setFormValid] = useState<boolean>(false);
 
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
+
   useEffect(() => {
     setFormValid(username.trim().length > 0 && passwd.trim().length > 0);
-  }, [username, passwd]);
+  }, [username, passwd] );
 
   const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const value = event.target.value;
     setUsername(value);
   };
 
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const value = event.target.value;
     setPasswd(value);
   };
 
-  async function handleLogin(
-    e: React.FormEvent<HTMLFormElement>,
-  ): Promise<boolean> {
+ const handleLogin = async ( 
+    e: React.FormEvent<HTMLFormElement>
+ ): Promise<void> => {
     e.preventDefault();
     const data: LoginInfo = {
       username: username,
       passwd: hashPassword(passwd),
     };
 
-    const out: boolean = await loginAction(data)
-      .then((res: boolean) => {
-        if (!res) {
-          setOpen(true);
-          setPrompt("Fail to login");
-        } else {
-          setLocalStorage("PersonAIUsername", username);
-        }
-        return res;
-      })
-      .catch((e) => {
-        setOpen(true);
-        setPrompt("error caught");
-        return false;
-      });
-
-    setStatusIn(out);
-    console.log(statusIn);
-    setTimeout(() => {}, 500);
-
-    setState(out);
-    setLocalStorage("loginState", out);
-    return out;
+  try {
+    const success = await loginAction(data);
+    if (!success) {
+      setOpenSnackbar(true);
+      setSnackbarMessage("Failed to login");
+    } else {
+      setLocalStorage("PersonAIUsername", username);
+    }
+    setStatusIn(success);
+    setState(success);
+    setLocalStorage("loginState", success);
+  } catch (error) {
+    setOpenSnackbar(true);
+    setSnackbarMessage("Error occurred during login");
   }
+};
+
+const handleCloseSnackbar = () => {
+  setOpenSnackbar(false);
+};
 
   const defaultTheme = createTheme();
 
@@ -158,7 +155,12 @@ export default function Login(): ReactElement {
           </Box>
         </Box>
       </Container>
-      <Warning open={open} setOpen={setOpen} text={promptMessage} />
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={5000}
+        onClose={handleCloseSnackbar}
+        message={snackbarMessage}
+      />
     </ThemeProvider>
   );
 }
