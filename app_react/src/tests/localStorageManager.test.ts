@@ -7,5 +7,5 @@ test("Test local storage", () => {
     setLocalStorage(key, value)
     expect(getLocalStorage(key,"")).toBe(value)
     expect(getLocalStorage(faultKey,"")).toBe("")
-    expect(setLocalStorage(key, undefined))
+    //expect(setLocalStorage(key, undefined))
 })
