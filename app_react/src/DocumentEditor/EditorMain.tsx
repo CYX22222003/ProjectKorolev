@@ -1,9 +1,9 @@
 import Background from "../Components/Background";
 import EditorElement from "./EditorElement";
 import EditorPrompt from "./EditorPrompt";
-import React, { useRef } from "react";
+import React, { ReactElement, useRef } from "react";
 
-export default function Editor() {
+export default function Editor() : ReactElement {
   const patientNameRef: React.MutableRefObject<string> = useRef<string>("");
   const sessionNameRef: React.MutableRefObject<string> = useRef<string>("");
   const fileNameRef: React.MutableRefObject<string> = useRef<string>("");
