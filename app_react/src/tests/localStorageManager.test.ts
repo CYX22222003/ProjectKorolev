@@ -3,12 +3,13 @@ const key : string = "TestKey";
 const value : string = "TestValue"
 const faultKey : string = "TestKey123###"
 
-it("Test local storage", () => {
+describe("Test the use of local storage", () => {
+it("Test for storing value", () => {
     setLocalStorage(key, value)
     expect(getLocalStorage(key,"")).toEqual(value)
 })
 
-it("Test local storage", () => {
+it("Test for extracting storage", () => {
     const faultKey : string = "TestKey123###"
     expect(getLocalStorage(faultKey,"")).toEqual("")
 })
@@ -16,8 +17,7 @@ it("Test local storage", () => {
 it('throws an error when localStorage.setItem fails', () => {
     const key = 'testKey';
     const value = { key: 'value' };
-
-    // Mock localStorage.setItem to throw an error
+    
     jest.spyOn(window.localStorage.__proto__, 'setItem').mockImplementation(() => {
         throw new Error('LocalStorage error');
     });
@@ -32,3 +32,4 @@ it("throws an error when localStorage.getItem fails", () => {
 
     expect(getLocalStorage(faultKey, "test")).toEqual("test");
 })
+});

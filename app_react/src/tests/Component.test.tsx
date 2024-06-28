@@ -6,6 +6,8 @@ import userEvent from "@testing-library/user-event";
 import MyDatePicker from "../Components/DatePicker";
 import Upload from "../Components/Upload";
 
+
+describe("Test self-created components", () => {
 test("Test snack bar", async () => {
   const func = jest.fn();
   function SnackbarTestStub(): ReactElement {
@@ -35,3 +37,4 @@ it("Test Upload", async () => {
   render(<Upload title="test" containerName="data" />);
   expect(screen.getByText(/test/i)).toBeInTheDocument();
 });
+})

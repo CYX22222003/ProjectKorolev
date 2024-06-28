@@ -1,9 +1,9 @@
-import { postTest, getTest } from "../utils/APIInteractionManager";
+import { postTest, getTest,deleteSimple } from "../utils/APIInteractionManager";
 import fetchMock from 'jest-fetch-mock';
 
 fetchMock.enableMocks()
 
-describe('getTest', () => {
+describe('Test GET request sent from frontend', () => {
   beforeEach(() => {
     fetchMock.resetMocks()
   });
@@ -13,12 +13,12 @@ describe('getTest', () => {
     .rejects.toThrow("address is undefined");
   });
 
-  it('api jey error handling', async () => {
+  it('API key error handling', async () => {
     await expect(getTest('http://example.com', undefined))
     .rejects.toThrow("apiKey is undefined");
   });
 
-  it('calls fetch with the correct parameters', async () => {
+  it('GET with the correct parameters', async () => {
     const address = 'http://example.com';
     const apiKey = 'dummyApiKey';
 
@@ -58,12 +58,12 @@ describe('getTest', () => {
 });
 
 
-describe("postTest", () => {
+describe("Test POST request from frontend", () => {
   beforeEach(() => {
     fetchMock.enableMocks();
   })
 
-  it("api key error handling", async () => {
+  it("API key error handling", async () => {
     await expect(postTest(2, "a", undefined))
     .rejects.toThrow("apiKey is undefined");
   })
@@ -73,7 +73,7 @@ describe("postTest", () => {
     .rejects.toThrow("address is undefined");
   })
 
-  it("data post test", async () => {
+  it("data POST test", async () => {
     const address = 'http://example.com';
     const apiKey = 'dummyApiKey';
     const data = { key: 'value' };
@@ -101,5 +101,47 @@ describe("postTest", () => {
 
   afterEach(() => {
     fetchMock.mockClear();
+  })
+})
+
+describe("Test DELETE request from frontend", () => {
+  beforeEach(() => {
+    fetchMock.enableMocks();
+  })
+
+  it("API key error handling", async () => {
+    await expect(deleteSimple("a", undefined))
+    .rejects.toThrow("apiKey is undefined");
+  })
+
+  it("address error handling", async () => {
+    await expect(deleteSimple(undefined, "test"))
+    .rejects.toThrow("address is undefined");
+  })
+
+  it("DELETE request test", async () => {
+    const address = 'http://example.com';
+    const apiKey = 'dummyApiKey';
+    const data = { key: 'value' };
+
+    fetchMock.mockResponseOnce(JSON.stringify(data));
+    const res = await deleteSimple(address, apiKey).then(data => data.json());
+
+    expect(fetchMock).toHaveBeenCalledWith(address, {
+      method: "DELETE",
+      mode: "cors",
+      redirect: "follow",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": apiKey,
+        "Accept" : "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive"
+      }
+    });
+
+    expect(res).toEqual(data)
+
   })
 })
