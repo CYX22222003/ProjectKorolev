@@ -40,11 +40,9 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
-    - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
-
+    - *current progress*: We have implemented the summarization function using gemini AI.
+      
 #### 4. Insight Generation
-- **Trend Analysis**: Track progress over time by identifying patterns in the patient’s condition and response to treatment.
-    - **Visual Dashboards**: Create visual dashboards to show trends, progress, and key metrics (e.g., mood scores, medication changes).
 - **Predictive Insights**: Use machine learning to predict potential issues or improvements based on historical data.
     - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
     - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
@@ -83,8 +81,6 @@ Therefore, we decide to design a web App providing a seamless experience for use
 **Flow:**
 1. The practitioner logs into the system and selects an existing patient.
 2. The practitioner uploads documentations from a recent session. Documentations are in form of 
-	- videos recordings
-	- voice recordings
 	- text documents
 4. The practitioner specifies the context for AI interpretation (e.g., therapy type, session focus).
 5. The system calls the AI service to generate a summary of the session and extracts key insights.
@@ -96,8 +92,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 1. The practitioner logs into the system and selects an existing patient.
 2. The practitioner navigates to the patient's history dashboard.
 3. The system displays summaries of past sessions
-4. The practitioner can choose to view the quantitative analysis of patients conditions as the system can display visual trend analyses, and key metrics (e.g., mood scores, symptom progression).
-5. Based on insights, the practitioner adjusts the treatment plan if necessary.
+4. Based on past trajectory of treatment and the feedback, the practitioner adjusts the treatment plan if necessary.
 
 ### 4. Preparing for a Session
 **Actors:** Mental Health Practitioner
@@ -147,7 +142,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - Form for specifying AI context parameters
     - Display AI-generated summaries and insights
 5. **Dashboard:**
-    - Visualizations for patient progress and insights
+    - Visualizations for patient's history record of AI-generated insights
 6. **Navigation:**
     - Header with navigation links
     - Sidebar or menu for easy access to different sections
@@ -156,9 +151,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 #### Libraries:
 - **React Router**: For client-side routing.
-- **Axios**: For making HTTP requests to the Flask backend.
 - **Material-UI** or other UI libraries: For consistent and responsive UI components.
-- **Redux or Context API**: For state management, especially for user authentication and session data.
 
 ### Backend (Flask)
 
@@ -188,6 +181,11 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **SQL Database**: Use **SQLite SQL** database to store user authentication data 
 - **Cloud Storage**: **Azure Blob Storage** to store patient information, session data, and AI context parameters.
 
+### ER Diagram 
+![PersonAI-第 2 页 drawio](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/73e08b9f-3e3e-458b-9675-e106a17838b3)
+
+[[https://drive.google.com/file/d/1pMKzt3fDZuSfAY_eT246xQ7bkCAfw11B/view?usp=sharing]]
+
 ### Deployment
 - **Frontend**: Host on **Vercel** for static site hosting.
 - **Backend**: Deploy Flask app on **Azure cloud services**.
@@ -200,7 +198,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 ## Development Plan
 **Link to the schedule**:
-[[https://lh0jvpcfxg-bunch.plaky.com/spaces/72420/boards/77883/views/131689]]
+[[https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true]]
 
 ## Proof of Concept
 **Link to the website**: 
@@ -210,15 +208,34 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 **Test on the website**
 - Test the website by accessing the URL in the `Proof of concept`
+- Unit test report:
+  [[https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing]]
 
 ## Project Management and SWE practices
 Our team manages projects using GitHub Issues, pull requests, and GitHub Projects. We adopt the Scrum Agile principles in our project management. In addition, We haveve also set up CI/CD automated pipelines with GitHub Actions to streamline the development, integration and deployment of the application. Additionally, we organize our work by allocating tasks into sprints iteration within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
 
 1. **GitHub Issues and Pull Requests**: We utilize GitHub Issues to track tasks, bugs, and feature requests. Pull requests are used for code reviews and merging changes, ensuring quality and collaboration.
+![Screenshot 2024-06-29 112459](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/dec30d9b-f7f1-4709-982a-b8d1a9165879)
 
+[[https://drive.google.com/file/d/1Teuk5ZnNbC2_QWJT7FBiQqEFBk8Y0c7x/view?usp=sharing]]
+![Screenshot 2024-06-29 112511](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/c518405c-d845-40e1-a151-e74190d5927d)
+
+[[https://drive.google.com/file/d/1F1KT7xpLce9J1vlTzf1eiLj2ksCatZJT/view?usp=sharing]]
 2. **GitHub Projects**: Our Kanban board in GitHub Projects visualizes our workflow. We allocate tasks into a two-week sprints iteration, with columns typically labeled as "To Do", "In Progress", and "Done." This sprint-based approach helps us manage our workload, ensuring we meet our goals efficiently.
+![Screenshot 2024-06-29 112425](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/42b5fbab-52b4-4afb-8c8d-e5e487b6be20)
+
+[[https://drive.google.com/file/d/1eyfF0VQIYlExFpFOL3LLilf-MbOi2pFq/view?usp=sharing]] 
+
 
 3. **CI/CD Pipelines**: Using GitHub Actions, we have automated our continuous integration and continuous deployment (CI/CD) processes. This automation handles basic unit testing on integration and the deployment of the application. This ensures a smooth and efficient development cycle.
+![Screenshot 2024-06-29 112619](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/e78fe072-5737-4c7f-bb41-8b41db6c0c98)
+
+[[https://drive.google.com/file/d/1JDn_hTuLWBrBOWOhWAFZ8TM7utyCBrjX/view?usp=sharing]]
 
 ## Project Log
 [[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
+
+## Problems encountered
+- CORS errors
+- CI/CD setup
+- GenAI prompt generation implementation
