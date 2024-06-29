@@ -44,7 +44,7 @@ export function downloadFileFromBrowser(blob : Blob) {
     );
     const link = document.createElement('a');
     link.href = url;
-     link.setAttribute(
+    link.setAttribute(
       'download',
       "Downloads" + blob.type
     );

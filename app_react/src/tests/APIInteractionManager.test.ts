@@ -60,7 +60,7 @@ describe('Test GET request sent from frontend', () => {
 
 describe("Test POST request from frontend", () => {
   beforeEach(() => {
-    fetchMock.enableMocks();
+    fetchMock.resetMocks();
   })
 
   it("API key error handling", async () => {

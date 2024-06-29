@@ -10,16 +10,38 @@ import {
     createNewUserContainer
 } from "../utils/Document_Upload/documentManager";
 
-import { BlobServiceClient, BlockBlobClient, ContainerClient, BlobClient } from "@azure/storage-blob";
+import { 
+    BlobServiceClient, 
+    BlockBlobClient, 
+    ContainerClient, 
+    BlobClient, 
+    BlobDeleteIfExistsResponse, 
+    BlobDeleteOptions 
+} from "@azure/storage-blob";
 
 jest.mock('@azure/storage-blob', () => {
     return {
         BlobServiceClient: jest.fn().mockImplementation(() => ({
-            createContainer: jest.fn()
+            createContainer: jest.fn((containerName, options) => {
+                return Promise.resolve(
+                    new (jest.requireMock('@azure/storage-blob').ContainerClient)()
+                );
+            }),
+
+            getContainerClient : jest.fn().mockImplementation((containerName, options) => {
+                {
+                    return new (jest.requireMock("@azure/storage-blob").ContainerClient)(containerName)
+                }
+            })
         })),
         
         ContainerClient : jest.fn().mockImplementation(() => ({
-            getBlobClient : jest.fn()
+            getBlobClient : jest.fn((blobName) => 
+                new (jest.requireMock('@azure/storage-blob').BlobClient)()
+            ),
+            getBlockBlobClient : jest.fn().mockImplementation((blobName) => (
+                new (jest.requireMock("@azure/storage-blob").BlockBlobClient)()
+            ))
         })),
         
         BlobClient : jest.fn().mockImplementation(() => ({
@@ -27,10 +49,17 @@ jest.mock('@azure/storage-blob', () => {
         })),
 
         BlockBlobClient : jest.fn().mockImplementation(() => ({
-            getBlockBlobClient : jest.fn()
-        }))
+            deleteIfExists : jest.fn().mockImplementation((options) => {
+                return new (
+                    jest.requireMock("@azure/storage-blob")
+                    .BlobDeleteIfExistsResponse)()
+            })
+        })),
+
+        BlobDeleteIfExistsResponse : jest.fn().mockReturnValue({errorCode : undefined})
     };
 });
+
 
 const originalEnv = process.env;
 
@@ -76,7 +105,6 @@ describe("Test Azure Container creation", () => {
     let mockContainerService : jest.Mocked<ContainerClient>;
 
     beforeEach(() => {
-        process.env = { ...originalEnv };
         process.env.REACT_APP_AZURE_STORAGE_SAS_TOKEN = 'fake_sas_token';
         process.env.REACT_APP_AZURE_STORAGE_ACCOUNT = 'https://fakeaccount.'
                                             + 'blob.core.windows.net';
@@ -99,4 +127,72 @@ describe("Test Azure Container creation", () => {
         expect(mockBlobServiceClient.createContainer).toHaveBeenCalledWith("test-container");
         expect(result).toBe(mockContainerService)
     })
+})
+
+describe("Test file downloading function", () => {
+  let createObjectURLMock : jest.Mock;
+  let appendChildMock : jest.Mock;
+  let clickMock : jest.Mock;
+  let removeChildMock : jest.Mock;
+  
+  beforeEach(() => {
+    createObjectURLMock = jest.fn().mockReturnValue("blob:url")
+    appendChildMock = jest.fn()
+    clickMock = jest.fn()
+    removeChildMock = jest.fn()
+
+    global.URL.createObjectURL = createObjectURLMock;
+    document.createElement = jest.fn().mockReturnValueOnce({
+      href: '',
+      setAttribute: jest.fn(),
+      click: clickMock,
+      parentNode: {
+        removeChild: removeChildMock
+      }
+    });
+    document.body.appendChild = appendChildMock;
+  })
+  
+  afterEach(() => {
+    jest.restoreAllMocks();
+  })
+
+  it('Test object URL creation and file downloadin', () => {
+    const blob = new Blob(['test content'], { type: 'text/plain' });
+
+    downloadFileFromBrowser(blob);
+
+    expect(createObjectURLMock).toHaveBeenCalledWith(new Blob([blob]));
+    expect(document.createElement).toHaveBeenCalledWith('a');
+    expect(appendChildMock).toHaveBeenCalled();
+    expect(clickMock).toHaveBeenCalled();
+    expect(removeChildMock).toHaveBeenCalled();
+  });
+})
+
+describe("Test blob delete function", () => {
+    let consoleSpy : jest.SpyInstance;
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+        consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+    });
+
+    afterEach(() => {
+        consoleSpy.mockRestore(); // Restore original console.log implementation
+    });
+
+
+    it("Test delete blob function", async () => {
+        
+        await deleteBlob("test1", "test")
+
+        expect(BlobServiceClient).toHaveBeenCalled();
+        expect(ContainerClient).toHaveBeenCalled();
+        expect(BlockBlobClient).toHaveBeenCalledTimes(1);
+
+        expect(console.log).toHaveBeenCalled();
+        expect(console.log).toHaveBeenCalledWith("deleted blob test");
+    })
+
 })
