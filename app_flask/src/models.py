@@ -52,7 +52,7 @@ class Patient(db.Model):
     __tablename__ = "patient_table"
 
     patient_id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(nullable=False, unique=True)
+    name: Mapped[str] = mapped_column(nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey("user_table.id"))
     sessions: Mapped[list["Session"]] = relationship()
 
