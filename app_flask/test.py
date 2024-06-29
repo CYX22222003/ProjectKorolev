@@ -17,23 +17,26 @@ class FlaskTest(unittest.TestCase):
 
     # simple tests for status code
     def test_index(self):
-        """Simple test case for status code"""
+        """Test index endpoint."""
         response = self.app.get("/", headers=self.headers)
         self.assertEqual(response.status_code, 200)
 
     # simple db_test
     def test_db(self):
+        """Test database functionality."""
         self.assertEqual(database_test(), True)
 
     # simple tests for file manager
     def test_file_manager(self):
+        """Test file manager functionality."""
         self.assertEqual(test_file_manager(), True)
 
     # simple tests for genai manager
     def test_genai_manager(self):
+        
         out = test_genai_manager()
         self.assertGreater(len(out), 0)
 
 
 if __name__ == "__main__":
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html"))
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report"))
