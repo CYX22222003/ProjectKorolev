@@ -34,7 +34,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
-- *current progress*: We have set up the cloud storage and test the connection between the web application and the cloud storage with mockup functions. The actual feature is still under development 
+- *current progress*: We have set up the cloud storage and test the connection between the web application and the cloud storage with mockup functions. 
 
 #### 3. Summarization
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
@@ -43,7 +43,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - *current progress*: We have implemented the summarization function using gemini AI.
       
 #### 4. Insight Generation
-- **Predictive Insights**: Use machine learning to predict potential issues or improvements based on historical data.
+- **Predictive Insights**: Use machine learning or any other tools to predict potential issues or improvements based on historical data.
     - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
     - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
 
@@ -200,37 +200,44 @@ Therefore, we decide to design a web App providing a seamless experience for use
 **Link to the schedule**:
 [[https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true]]
 
-## Proof of Concept
-**Link to the website**: 
-[[https://personaiweb.vercel.app/]]
-
 ## User guide for testing
-
 **Test on the website**
-- Test the website by accessing the URL in the `Proof of concept`
+- Test the website by accessing the URL:
+  [[https://personaiweb.vercel.app/]]
 - Unit test report:
   [[https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing]]
 
 ## Project Management and SWE practices
-Our team manages projects using GitHub Issues, pull requests, and GitHub Projects. We adopt the Scrum Agile principles in our project management. In addition, We haveve also set up CI/CD automated pipelines with GitHub Actions to streamline the development, integration and deployment of the application. Additionally, we organize our work by allocating tasks into sprints iteration within GitHub Projects to ensure efficient project management. Here are the key aspects of our setup:
+Our team utilizes GitHub's tools such as Issues for tracking tasks, pull requests for code review, and GitHub Projects for organizing work. We follow Scrum Agile principles to manage projects, breaking down tasks into sprints for efficient execution. Furthermore, we've implemented CI/CD pipelines using GitHub Actions to automate development, integration, and deployment processes, streamlining our workflow:
 
-1. **GitHub Issues and Pull Requests**: We utilize GitHub Issues to track tasks, bugs, and feature requests. Pull requests are used for code reviews and merging changes, ensuring quality and collaboration.
-![Screenshot 2024-06-29 112459](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/dec30d9b-f7f1-4709-982a-b8d1a9165879)
+1. **GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.
+![Screenshot 2024-06-29 220831](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/f3109568-ad1b-43fc-b841-8dbaa16db448)
 
-[[https://drive.google.com/file/d/1Teuk5ZnNbC2_QWJT7FBiQqEFBk8Y0c7x/view?usp=sharing]]
-![Screenshot 2024-06-29 112511](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/c518405c-d845-40e1-a151-e74190d5927d)
 
-[[https://drive.google.com/file/d/1F1KT7xpLce9J1vlTzf1eiLj2ksCatZJT/view?usp=sharing]]
-2. **GitHub Projects**: Our Kanban board in GitHub Projects visualizes our workflow. We allocate tasks into a two-week sprints iteration, with columns typically labeled as "To Do", "In Progress", and "Done." This sprint-based approach helps us manage our workload, ensuring we meet our goals efficiently.
+[[https://drive.google.com/file/d/1FY5faUg5NqCqaKTV1SE4w0_rL7hDwkkM/view?usp=sharing]]
+![Screenshot 2024-06-29 220846](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/21ab90e6-7e6e-440a-a12f-b0416e54983a)
+
+
+[[https://drive.google.com/file/d/1pGcVMUUSQ_W_gv4xBUPQDVR7RWIBENqR/view?usp=sharing]]
+
+2. **GitHub Projects**: In GitHub Projects, our Kanban board provides a visual representation of our workflow. Tasks are organized into two-week sprint iterations, categorized into columns such as "To Do," "In Progress," and "Done." This structured approach to sprints allows us to effectively manage our workload and achieve our goals efficiently.
 ![Screenshot 2024-06-29 112425](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/42b5fbab-52b4-4afb-8c8d-e5e487b6be20)
 
 [[https://drive.google.com/file/d/1eyfF0VQIYlExFpFOL3LLilf-MbOi2pFq/view?usp=sharing]] 
 
-
-3. **CI/CD Pipelines**: Using GitHub Actions, we have automated our continuous integration and continuous deployment (CI/CD) processes. This automation handles basic unit testing on integration and the deployment of the application. This ensures a smooth and efficient development cycle.
+3. **CI/CD Pipelines**: Through GitHub Actions, we've automated our CI/CD processes, which include basic unit testing during integration and application deployment. This automation ensures a seamless and efficient development cycle.
 ![Screenshot 2024-06-29 112619](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/e78fe072-5737-4c7f-bb41-8b41db6c0c98)
 
 [[https://drive.google.com/file/d/1JDn_hTuLWBrBOWOhWAFZ8TM7utyCBrjX/view?usp=sharing]]
+![Screenshot 2024-06-29 222244](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/82eb9881-a948-4491-bb9e-c0110b12f17e)
+
+[[https://drive.google.com/file/d/17IWysZV5ngIdklA3S741IwpZkv-U2XAK/view?usp=sharing]]
+![Screenshot 2024-06-29 222105](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/383a50cc-6168-424c-9e88-9f179cc6193f)
+
+[[https://drive.google.com/file/d/1ilpfF09eQDeZWAfLTdRBQGyJVoVeghF3/view?usp=sharing]]
+![Screenshot 2024-06-29 222326](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/1c4c0cd4-0d4b-4a64-933a-11d374cadd57)
+
+[[https://drive.google.com/file/d/1ZlI7rWAYDQcpVuTwjLhhFg-wNM_qAq5n/view?usp=sharing]]
 
 ## Project Log
 [[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
