@@ -30,18 +30,36 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 1. Authentication
 - **Registration and log in**: Practitioners can create new account and log in to manage the patient records.
 - *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication.
+![Screenshot 2024-06-30 194734](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/c772d445-f3ab-4017-acf0-6b505d8c4307)
 
+[[https://drive.google.com/file/d/1M7G4jCz9e7H2GOFZaeg6bFUPd56O3XNF/view?usp=sharing]]
+![Screenshot 2024-06-30 194831](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/bf060edc-17b5-44c0-b960-5740402b38cf)
+
+[[https://drive.google.com/file/d/1bFa_aGTICfDsW7ntJsFDcxahutsOQSth/view?usp=sharing]]
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
 - *current progress*: We have set up the cloud storage and test the connection between the web application and the cloud storage with mockup functions. 
+![Screenshot 2024-06-30 194916](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/3bac4e52-e199-4984-b936-afb5c1709dea)
 
+[[https://drive.google.com/file/d/1CztprENJbKz_9CoAgLXt7bWfzmLmvomL/view?usp=sharing]]
+![Screenshot 2024-06-30 194956](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/8cd416d7-7812-45f7-b6fb-3a6ff64ffeb6)
+
+[[https://drive.google.com/file/d/1ILBiN_l12A6FqNgkGPVs2ZJicohskOCn/view?usp=sharing]]
+![Screenshot 2024-06-30 194947](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/4e7a9bad-78b4-4eb2-b51e-6c298fc790d3)
+
+[[https://drive.google.com/file/d/1NshgtzWcUa3bvjPdeJaHLEJUyDRZUPVG/view?usp=sharing]]
 #### 3. Summarization
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
     - *current progress*: We have implemented the summarization function using gemini AI.
-      
+![Screenshot 2024-06-30 195105](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/703b207d-7f90-4a3b-a90c-4f27498a50b5)
+
+[[https://drive.google.com/file/d/1bUJqvgU6PBYjYG85tY4wIrI8yGDfxhxP/view?usp=sharing]]
+![Screenshot 2024-06-30 195127](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/27ab2ce9-311e-4aa4-8d2d-0413c21bf12d)
+
+[[https://drive.google.com/file/d/1tr_uZacKAo0kZbNURCK8pCZwQmRrgXMp/view?usp=sharing]]      
 #### 4. Insight Generation
 - **Predictive Insights**: Use machine learning or any other tools to predict potential issues or improvements based on historical data.
     - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
@@ -51,7 +69,9 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment, including potential therapy adjustments.
 - **Session Preparation**: Generate summaries and key points for the practitioner before each session to ensure they are fully informed of the patient’s history and current state.
 - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
+![Screenshot 2024-06-30 200303](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/5fad1044-1d61-49db-bdde-e0ab5a5d81c4)
 
+[[https://drive.google.com/file/d/16h9DnE6rOdbO59QVKaxxRUuTCrhzdEG8/view?usp=sharing]]
 ## User stories 
 - As a Mental Health Practitioner, I want to add new patients to the system to manage their profiles and initial assessments efficiently.
 - As a Mental Health Practitioner, I want to upload session documentation and get AI-generated summaries to quickly review key insights from the sessions.
