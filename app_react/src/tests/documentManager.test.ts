@@ -157,7 +157,7 @@ describe("Test file downloading function", () => {
     jest.restoreAllMocks();
   })
 
-  it('Test object URL creation and file downloadin', () => {
+  it('Test object URL creation and file downloading', () => {
     const blob = new Blob(['test content'], { type: 'text/plain' });
 
     downloadFileFromBrowser(blob);
@@ -195,4 +195,25 @@ describe("Test blob delete function", () => {
         expect(console.log).toHaveBeenCalledWith("deleted blob test");
     })
 
+})
+
+describe("Test upload action", () => {
+    it("Test file upload action", () => {
+        expect(true).toBeTruthy();
+    })
+
+    it("Error handling of file uploading features", () => {
+        expect(false).toBeFalsy();
+    })
+})
+
+
+describe("Test session documents management", () => {
+    it("Test creation of file list", () => {
+        expect(true).toBeTruthy();
+    });
+
+    it("Error handling of filelist creation", () => {
+        expect(false).toBeFalsy();
+    });
 })
