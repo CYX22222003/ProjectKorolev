@@ -6,9 +6,12 @@ from dotenv import load_dotenv
 from src.models import db, User, database_test
 from src.file_manager import test_file_manager
 from src.genai_manager import test_genai_manager
-from flask_login import LoginManager, login_user, current_user
+from flask_login import LoginManager, login_user, current_user, logout_user, UserMixin
 import HtmlTestRunner
 
+class MockUser(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -59,9 +62,20 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.get_data(as_text=True), "1 logged in")
 
-    @patch("flask_login.logout_user")
-    def test_user_login(self, mock_logout_user):
-        mock_logout_user.return_value 
+    def test_user_logout(self):
+        pass
+
+    def test_patient_creation(self):
+        pass
+
+    def test_patient_delete(self):
+        pass
+
+    def test_session_creation(self):
+        pass
+
+    def test_session_delete(self):
+        pass
 
     # simple db_test
     def test_db(self):

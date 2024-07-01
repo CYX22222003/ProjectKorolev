@@ -154,7 +154,7 @@ def welcome():
 @login_required
 def logout():
     logout_user()
-    return Response("logged out successfully", status=500)
+    return Response("logged out successfully", status=200)
 
 
 @app.route("/user/update", methods=["PUT"])
