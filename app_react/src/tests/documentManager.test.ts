@@ -207,13 +207,3 @@ describe("Test upload action", () => {
     })
 })
 
-
-describe("Test session documents management", () => {
-    it("Test creation of file list", () => {
-        expect(true).toBeTruthy();
-    });
-
-    it("Error handling of filelist creation", () => {
-        expect(false).toBeFalsy();
-    });
-})

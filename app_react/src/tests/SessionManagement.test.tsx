@@ -35,7 +35,7 @@ jest.mock("../utils/APIInteractionManager", () => {
   }
 })
 
-describe("Test session management feature", () => {
+describe("Test session creation feature", () => {
   beforeEach(() => {
     fetchMock.resetMocks()
     process.env = { ...originalEnv }
@@ -74,4 +74,15 @@ describe("Test session management feature", () => {
     const data = { "session_name": "Test", "patient_id": 1 };   
     expect(createSession(data)).rejects.toThrow("Error")
   })
+})
+
+
+describe("Test session documents management", () => {
+    it("Test creation of file list", () => {
+        expect(true).toBeTruthy();
+    });
+
+    it("Error handling of filelist creation", () => {
+        expect(false).toBeFalsy();
+    });
 })
