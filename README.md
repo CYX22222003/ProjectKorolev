@@ -30,7 +30,6 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 1. Authentication
 - **Registration and log in**: Practitioners can create new account and log in to manage the patient records.
 - *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication.
-![Screenshot](/C:/Users/金荻悦/Downloads/Screenshot%202024-06-30%20194734.png)
 <img src="/ProjectKorolev/images/image1.png" >
 
 [[https://drive.google.com/file/d/1M7G4jCz9e7H2GOFZaeg6bFUPd56O3XNF/view?usp=sharing]]
