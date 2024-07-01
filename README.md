@@ -30,7 +30,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 1. Authentication
 - **Registration and log in**: Practitioners can create new account and log in to manage the patient records.
 - *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication.
-![image 1](/images/Screenshot%202024-06-30%20194734.png?raw=true)
+![image 1](https://github.com/CYX22222003/ProjectKorolev/blob/Golddirio-patch-4/images/Screenshot%202024-06-30%20194734.png?raw=true)
 
 [[https://drive.google.com/file/d/1M7G4jCz9e7H2GOFZaeg6bFUPd56O3XNF/view?usp=sharing]]
 ![Screenshot 2024-06-30 194831](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/bf060edc-17b5-44c0-b960-5740402b38cf)
