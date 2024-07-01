@@ -63,7 +63,7 @@ describe("Test session creation feature", () => {
     process.env.REACT_APP_API_KEY = undefined;
 
     const data = { "session_name": "Test", "patient_id": 1 };   
-    expect(createSession(data)).rejects.toThrow("Error")
+    await expect(createSession(data)).rejects.toThrow("Error")
 
   })
 
@@ -72,7 +72,7 @@ describe("Test session creation feature", () => {
     process.env.REACT_APP_API_KEY = "apiKey";
 
     const data = { "session_name": "Test", "patient_id": 1 };   
-    expect(createSession(data)).rejects.toThrow("Error")
+    await expect(createSession(data)).rejects.toThrow("Error")
   })
 })
 
