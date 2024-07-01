@@ -1,3 +1,4 @@
+import React, {ReactElement} from "react";
 import { useTheme } from "@mui/material";
 import {
   MenuButtonBlockquote,
@@ -16,9 +17,10 @@ import {
   MenuSelectHeading,
 } from "mui-tiptap";
 
-export default function EditorMenuControls() {
+export default function EditorMenuControls() : ReactElement {
   const theme = useTheme();
   return (
+    <>
     <MenuControlsContainer>
       <MenuSelectHeading />
 
@@ -57,5 +59,6 @@ export default function EditorMenuControls() {
       <MenuButtonUndo />
       <MenuButtonRedo />
     </MenuControlsContainer>
+    </>
   );
 }

@@ -1,6 +1,7 @@
+import React from "react";
 import Container from "@mui/material/Container";
 import { CssBaseline, Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { EditorPatientSelect, EditorSessionSelect } from "./EditorPromptHelp";
 import { getPatientList, PatientData } from "../Patient_Management/utils";
 import { SessionData } from "../Session_Management/utils";
@@ -11,7 +12,7 @@ export default function EditorPrompt({
   filenameRef,
   patientNameRef,
   sessionNameRef,
-}: EditorPromptProps) {
+}: EditorPromptProps) : ReactElement {
   const [patientID, setPatientID] = useState<number>(0);
 
   const [patientList, setPatientList] = useState<PatientData[]>([]);
@@ -34,6 +35,7 @@ export default function EditorPrompt({
   }, [patientID]);
 
   return (
+    <>
     <Container component="main">
       <CssBaseline />
       <Box sx={BoxConfigProps}>
@@ -50,5 +52,6 @@ export default function EditorPrompt({
         />
       </Box>
     </Container>
+    </>
   );
 }
