@@ -61,14 +61,14 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 [[https://drive.google.com/file/d/1tr_uZacKAo0kZbNURCK8pCZwQmRrgXMp/view?usp=sharing]]      
 #### 4. Insight Generation
-- **Predictive Insights**: Use machine learning or any other tools to predict potential issues or improvements based on historical data.
+- **Predictive Insights**: Predict potential based on the session documents.
     - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
-    - *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
+    - *current progress*: Mental health practitioners are able to download the sentimental analysis reports generated from AI. We are working on improving the quality of the sentimental analysis generated.
 
 #### 5. Actionable Recommendations
-- **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment, including potential therapy adjustments.
+- **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment including potential therapy adjustments based on mental health practitioners' notes on mode of therapy.
 - **Session Preparation**: Generate summaries and key points for the practitioner before each session to ensure they are fully informed of the patient’s history and current state.
-- *current progress*: We are exploring on different Generative AI models, and the feature is yet to be implemented.
+- *current progress*: We have implemented the feature for storing and displaying patients' history data. A simple treatment recommendations feature is implemented and we are working on fine-tuning the GenAI model with more data or prompt engineering techniques. 
 ![Screenshot 2024-06-30 200303](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/5fad1044-1d61-49db-bdde-e0ab5a5d81c4)
 
 [[https://drive.google.com/file/d/16h9DnE6rOdbO59QVKaxxRUuTCrhzdEG8/view?usp=sharing]]
@@ -102,7 +102,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 1. The practitioner logs into the system and selects an existing patient.
 2. The practitioner uploads documentations from a recent session. Documentations are in form of 
 	- text documents
-4. The practitioner specifies the context for AI interpretation (e.g., therapy type, session focus).
+4. The practitioner specifies the context for AI interpretation (e.g., therapy type, session focus) and use editor to create notes on mode of therapy.
 5. The system calls the AI service to generate a summary of the session and extracts key insights.
 6. The practitioner reviews the AI-generated summary and insights, which are displayed on the web app.
 
@@ -171,7 +171,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 #### Libraries:
 - **React Router**: For client-side routing.
-- **Material-UI** or other UI libraries: For consistent and responsive UI components.
+- **Material-UI**: For consistent and responsive UI components.
 
 ### Backend (Flask)
 
@@ -200,6 +200,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ### Database
 - **SQL Database**: Use **SQLite SQL** database to store user authentication data 
 - **Cloud Storage**: **Azure Blob Storage** to store patient information, session data, and AI context parameters.
+- **Generative AI**: fine-tuned **Google Gemini AI** to generate response with well designed prompts
 
 ### ER Diagram 
 ![PersonAI-第 2 页 drawio](https://github.com/CYX22222003/ProjectKorolev/assets/142647056/73e08b9f-3e3e-458b-9675-e106a17838b3)
@@ -219,11 +220,6 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ## Development Plan
 **Link to the schedule**:
 [[https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true]]
-
-## Setting Up
-**Test on the website**
-- Test the website by accessing the URL:
-  [[https://personaiweb.vercel.app/]]
 
 ## Testing
 ### Unit testing
@@ -279,7 +275,7 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
 We initially allow medical practitioner to key in their own prompts to generate analysis reports about the session documents. However, this always causes inaccurate and low quality responses to be generated. Therefore, we provided pre-designed prompts for users to choose based on the tasks they want to perform. To further improve the reliablity of the responses, we employ some prompting design strategies. We have give instructions that provide more details about the context, specify the format of the response and set constraints about the size of response. In addition, we planned to include few-shots example with a standard analysis of mock session documents. We are planning to further fine-tune our application with more consulting session documents so that it can generate meaningful contents for mental health practitioners.
 
 ### Integration of editor
-
+Through the weekly meething with external organization PersonAI, we realize that mental health practitioners often need to add their own notes on mode of therapy after the end of each sessions. Therefore, we add an additional features of editor by customizing the RichTextEditor component from MUI library. This makes the editor more user-friendly and increases mental health practitioners' creativity in taking down the notes.
 
 ### Continuous Delivery and Deployment  
 The current application is deployed on my Azure Cloud service personal account, which lacks secure storage for sensitive data and has limited capacity to handle a large volume of requests. To prepare the application for public use, we containerize the frontend web app to run an Apache server. We also containerize the Flask backend with a Gunicorn WSGI server. Furthermore, We use Docker Compose to orchestrate and streamline the interaction between the frontend and backend, we can enhance the efficiency and flexibility of deployment. This approach increases the likelihood of hosting the application on a more secure and robust server in the future.
@@ -287,4 +283,9 @@ The current application is deployed on my Azure Cloud service personal account, 
 The seperation of frontend application and backend application deployment also results in the CORS errors when they interact with HTTP requests. Our initial solution was to add proxy in the dependencies of frontend web app. However, this will cause server error when the services are deployed on cloud servers. Finally, we utilized the Flask-CORS library to configure headers of the backend responses to enable CORS mechanism and session authentication.  
 
 ### Storage for Blob
+We initially decide to store BLOB data such as word document in SQL database on the frontend server in the format of a byte string. However, this approach makes our backend cubersome, as the conversion between the blobs and byte string makes the processing of BLOB files inefficient and complicated. Therefore, we switch to use Cloud services such as Azure Blob Storage for a more efficient and secure storage of large media files. Furthermore, we streamline the interaction between the web application and cloud storage and enable Blob data to be directly sent from the frontend to the cloud storage utilize the API of Azure Cloud Service. The backend will only store the reference to the Blob file in the cloud storage in the database, and use these reference to extract the documents from cloud storage for further processing.
 
+## Setting Up
+**Test on the website**
+- Test the website by accessing the URL:
+  [[https://personaiweb.vercel.app/]]
