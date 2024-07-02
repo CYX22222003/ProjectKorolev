@@ -1,4 +1,3 @@
-# Project Korolev
 ## Team
 Team Korolev
 
@@ -40,7 +39,9 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
-- *current progress*: We have set up the cloud storage and test the connection between the web application and the cloud storage with mockup functions. 
+- **Note-taking editor**: Built-in note-taking editor for metal health practitioners to add additional notes such as the modelities of therapy
+- **Document preview**: Enable users to preview focuments uploaded to cloud storage. 
+- *current progress*: We have implemented the cloud storage and database for users to store and extract documents. The text editior is also available for users. We are still working on implementing the document preview 
 <img src="/ProjectKorolev/images/image3.png" >
 
 
@@ -55,7 +56,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
-    - *current progress*: We have implemented the summarization function using gemini AI.
+- *current progress*: We have implemented the summarization function using gemini AI.
 <img src="/ProjectKorolev/images/image6.png" >
 
 
@@ -64,9 +65,9 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
  
 #### 4. Insight Generation
-- **Predictive Insights**: Predict potential based on the session documents.
-    - **Risk Flags**: Identify warning signs that may need immediate attention, such as signs of relapse or worsening symptoms.
-    - *current progress*: Mental health practitioners are able to download the sentimental analysis reports generated from AI. We are working on improving the quality of the sentimental analysis generated.
+- **Trend Insights**: Analyze multiple documents for a specific patients.
+- **Thematic analysis**: Analyze patients data based on a specific theme such as family issues.
+- *current progress*: Mental health practitioners are able to download the sentimental analysis reports and session summaries generated from AI. We are working on improving the quality of the sentimental analysis generated. We are also working on enabling the GenAI to analyse multiple doucments related to a user
 
 #### 5. Actionable Recommendations
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment including potential therapy adjustments based on mental health practitioners' notes on mode of therapy.
@@ -92,16 +93,18 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 
 ### 1. New Patient Onboarding
-**Actors:** Mental Health Practitioner, Patient
+**Actors:** Mental Health Practitioner, Patient  
+
 **Flow:**
-1. The practitioner logs into the system and selects "Add New Patient."
+1. The practitioner logs into the system and selects "Create New Patient."
 2. The practitioner inputs the patient's details and creates a new patient profile.
 3. The system generates a unique patient ID and creates a cloud storage directory for the patient's files.
 4. The practitioner uploads initial assessment notes and any relevant documents.
 5. The system digitizes and stores the documents securely.
 
 ### 2. Session Documentation and Summarization 
-**Actors:** Mental Health Practitioner
+**Actors:** Mental Health Practitioner  
+
 **Flow:**
 1. The practitioner logs into the system and selects an existing patient.
 2. The practitioner uploads documentations from a recent session. Documentations are in form of 
@@ -111,7 +114,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 6. The practitioner reviews the AI-generated summary and insights, which are displayed on the web app.
 
 ### 3. Reviewing Patient Progress
-**Actors:** Mental Health Practitioner
+**Actors:** Mental Health Practitioner  
+
 **Flow:**
 1. The practitioner logs into the system and selects an existing patient.
 2. The practitioner navigates to the patient's history dashboard.
@@ -119,7 +123,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 4. Based on past trajectory of treatment and the feedback, the practitioner adjusts the treatment plan if necessary.
 
 ### 4. Preparing for a Session
-**Actors:** Mental Health Practitioner
+**Actors:** Mental Health Practitioner  
+
 **Flow:**
 1. The practitioner logs into the system and selects an upcoming session with a patient.
 2. The system retrieves and displays a summary of the patient's history and recent sessions.
@@ -127,15 +132,17 @@ Therefore, we decide to design a web App providing a seamless experience for use
 4. The practitioner uses this information to prepare for the session, ensuring they are up-to-date with the patient's current state.
 
 ### 5. Patient Follow-up and Risk Management
-**Actors:** Mental Health Practitioner
+**Actors:** Mental Health Practitioner  
+
 **Flow:**
-1. The system periodically analyzes patient data to detect potential risk factors (e.g., signs of relapse or worsening symptoms).
-2. If a risk is detected, the system generates an alert for the practitioner.
-3. The practitioner reviews the alert and associated insights.
+1. The system periodically analyzes patient data to generate a reports about patients progress. 
+2. Practitioners can used the generated documents detect potential risk factors (e.g., signs of relapse or worsening symptoms).
+3. If a risk is detected, the system generates an alert for the practitioner.
 4. The practitioner contacts the patient to address the issue and adjust the treatment plan as necessary.
 
 ### 7. Secure Access and Data Privacy
-**Actors:** Mental Health Practitioner
+**Actors:** Mental Health Practitioner  
+
 **Flow:**
 1. Users log into the system using their credentials.
 2. The system verifies user roles and permissions.
@@ -182,18 +189,24 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### Endpoints:
 
 1. **Authentication Endpoints:**
-    - `/loginTest`
+    - `/login`
     - `/create_user`
-    - `/logoutTest`
+    - `/logout`
 2. **Patient Management Endpoints:**
-    - `/patients` (GET, POST)
-    - `/patients/<patient_id>` (GET, PUT, DELETE)
+    - `/patients` (GET)
+    - `/patient/<patient_id>` (GET, DELETE, PUT)
+    - `/patient/create` (POST)
 3. **Session Management Endpoints:**
-    - `/patients/<patient_id>/sessions` (GET, POST)
-    - `/patients/<patient_id>/sessions/<session_id>` (GET, PUT, DELETE)
+    - `/patients/session/create` (POST)
+    - `/patients/sessions/<session_id>` (GET, PUT, DELETE)
 4. **AI Integration Endpoints:**
     - `/ai/summary` (POST): To request AI-generated summaries of each session.
     - `/ai/insight` (POST): To request for analysis of patients' patterns and trends
+
+#### API design:
+<a href="https://api.postman.com/collections/32139578-2adfeb79-ccf3-4377-8c8b-8cd204ca9a1c?access_key=PMAT-01J1RPWHCNH4HA4AV31Z5NTGTM">
+    Postman JSON file link in OpenAPI standard
+</a>
 
 #### Libraries: 
 - **Flask**: Lightweight Python web framework for building RESTful APIs.
@@ -221,22 +234,26 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 
 ## Development Plan
-**Link to the schedule**:
-[[https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true]]
+<a href="https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true">
+    Link to the schedule
+</a>
 
 ## Testing
 ### Unit testing
-We used the Jest framework for unit testing in our login, signup, session management and document creation features in the React frontend. In addition, we also use Python unittest library to perform unit testing on business logics and functions such as prompt construction, GenAI API call and operations on database in our Flask backend. 
-Unit test report:
-  [[https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing]]
+We used the Jest framework for unit testing in our login, signup, session management and document creation features in the React frontend. In addition, we also use Python unittest library to perform unit testing on business logics and functions such as prompt construction, GenAI API call and operations on database in our Flask backend.   
+   
+Unit test report: <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>
 
 ### Integration testing
-In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing.
+In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing.  
+
 System test report:
   [[]]
 
 ### User testing
-We conducted user testing for through meeting with mental health practitioners from PeronAI at the end of each sprint iteration. We would present the new features or changes made in the sprint to the practitioner and ask for feedback. Then, we would analyzed the feedback and used it to guide our development in the next iteration.
+We conducted user testing for through meeting with Mdm Dawn Heng, the mental health practitioners from PeronAI on a weekly basis. We would present the new features or changes made in the sprint to the practitioner and ask for feedback. Then, we would analyzed the feedback and used it to guide our development in the next iteration.
+
+Mdm Heng has tested our prototype before our MS2 submission. She was satisfied with the session document management and the interaction with GenAI. At the same time, she also suggested us to improve the interactivity of the UI/UX design and add additional features of document preview fratures.
 
 ## Project Management and SWE practices
 Our team utilizes GitHub's tools such as Issues for tracking tasks, pull requests for code review, and GitHub Projects for organizing work. We follow Scrum Agile principles to manage projects, breaking down tasks into sprints for efficient execution. Furthermore, we've implemented CI/CD pipelines using GitHub Actions to automate development, integration, and deployment processes, streamlining our workflow:
@@ -269,7 +286,9 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
 
 
 ## Project Log
-[[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
+<a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
+    Link to project log
+</a>
 
 ## Problems encountered
 ### GenAI prompt generation implementation
@@ -289,4 +308,7 @@ We initially decide to store BLOB data such as word document in SQL database on 
 ## Setting Up
 **Test on the website**
 - Test the website by accessing the URL:
-  [[https://personaiweb.vercel.app/]]
+  <a href="https://personaiweb.vercel.app/">Link</a>
+- Video tutorial:
+  <a href="">Link to video tutorial</a>
+
