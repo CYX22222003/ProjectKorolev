@@ -287,7 +287,17 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ### Unit testing
 We used the Jest framework for unit testing in our login, signup, session management and document creation features in the React frontend. In addition, we also use Python unittest library to perform unit testing on business logics and functions such as prompt construction, GenAI API call and operations on database in our Flask backend.   
    
-Unit test report: <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>
+Unit test report: <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>   
+  
+Frontend test report:   
+<img src="/ProjectKorolev/images/test_report1.png">   
+<img src="/ProjectKorolev/images/test_report2.png">  
+<img src="/ProjectKorolev/images/test_report3.png">   
+<img src="/ProjectKorolev/images/test_report4.png">    
+<img src="/ProjectKorolev/images/test_report5.png">  
+
+Backend test report:   
+<img src="/ProjectKorolev/images/test_report6.png"> 
 
 ### Integration testing
 In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.  
