@@ -236,7 +236,52 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ## Development Plan
 <a href="https://docs.google.com/spreadsheets/d/1SRqs8lnIfb-OR-RiBW3CiIKhSkH2khLF/edit?usp=sharing&ouid=102555423746749954313&rtpof=true&sd=true">
     Link to the schedule
-</a>
+</a>  
+   
+| Title                                                                               | Priority | Size | Iteration   | Status      |
+| ----------------------------------------------------------------------------------- | -------- | ---- | ----------- | ----------- |
+| Feature: Implement user login on frontend                                           | P0       | M    | Iteration 1 | Done        |
+| Docs: Update documents for MS1 submission (design plan, README, project log)        | P0       | S    | Iteration 1 | Done        |
+| Feature: Implement user sign-up feature for frontend                                | P0       | M    | Iteration 1 | Done        |
+| Feature: Implement basic interactions with GenAI API                                | P0       | L    | Iteration 2 | Done        |
+| Feature: Implement patients management and sessions management                      | P0       | L    | Iteration 2 | Done        |
+| Feature: Set up interaction with cloud storage and implement file uploading feature | P0       | L    | Iteration 2 | Done        |
+| Docs: Create mockup of the frontend and complete API design                         | P0       | M    | Iteration 2 | Done        |
+| Test: Add unit test cases for utility functions                                     | P1       | M    | Iteration 3 | In Progress |
+| Bug: Exception caused by the failure to follow username convention is not handled   | P2       | S    | Iteration 3 | Done        |
+| Bug: Use Toast elements to display warnings and alerts                              | P2       | S    | Iteration 3 | Done        |
+| Bug: detect empty inputs during signup and login                                    | P2       | M    | Iteration 3 | Done        |
+| Feature: create text editor for users to key in context documents                   | P0       | S    | Iteration 3 | Done        |
+| Feature: enable users to delete unwanted documents from cloud storage               | P0       | M    | Iteration 3 | Done        |
+| Docs: Update README, video and poster for MS2 submission                            | P0       | L    | Iteration 3 | In Progress |
+| Enhancement: enable users to preview uploaded documents                             | P0       | M    | Iteration 4 | Todo        |
+| Feature: audio-to-text/ dialogue-to-text                                            | P0       | L    | Iteration 4 | Todo        |
+| Feature: Implement user account management feature                                  | P0       | M    | Iteration 4 | Todo        |
+| Feature: fine-tune GenAI model to improve its performance and quality of response   | P0       | L    | Iteration 4 | Todo        |
+| Enhancement : use GenAI to implement analysis of multiple related documents         | P0       | L    | Iteration 4 | Todo        |
+| Enhancement: beautify the webpage design to improve UI/UX                           | P1       | L    | Iteration 5 | Todo        |
+| Docs: Update relevant documents, posters and videos for final submission            | P1       | L    | Iteration 5 | Todo        |    
+     
+| Iteration   | From      | To        |
+| ----------- | --------- | --------- |
+| Iteration 1 | 20/5/2024 | 6/6/2024  |
+| Iteration 2 | 7/6/2024  | 20/6/2024 |
+| Iteration 3 | 21/6/2024 | 4/7/2024  |
+| Iteration 4 | 5/7/2024  | 18/7/2024 |
+| Iteration 5 | 19/7/2024 | 2/8/2024  |   
+   
+| Priority | Description |     
+| -------- | ----------- |
+| P0       | High        |
+| P1       | Medium      |
+| P2       | Low         |   
+    
+| Size | Description                     |
+| ---- | ------------------------------- |
+| L    | changes of more than 100 lines. |
+| M    | changes of 99-200 lines         |
+| S    | changes of 0-99 lines           |
+
 
 ## Testing
 ### Unit testing
@@ -245,10 +290,8 @@ We used the Jest framework for unit testing in our login, signup, session manage
 Unit test report: <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>
 
 ### Integration testing
-In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing.  
+In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.  
 
-System test report:
-  [[]]
 
 ### User testing
 We conducted user testing for through meeting with Mdm Dawn Heng, the mental health practitioners from PeronAI on a weekly basis. We would present the new features or changes made in the sprint to the practitioner and ask for feedback. Then, we would analyzed the feedback and used it to guide our development in the next iteration.
@@ -311,4 +354,10 @@ We initially decide to store BLOB data such as word document in SQL database on 
   <a href="https://personaiweb.vercel.app/">Link</a>
 - Video tutorial:
   <a href="">Link to video tutorial</a>
-
+      
+**Docker images**   
+We have stored the backend and frontend images in the remote registry of dockerHub. Public images are available to be pulled to local machine for testing.  
+- frontend image: `e1155533/orbital_test:frontend_ms2`
+- backend image: `e1155533/orbital_test:backend_ms2`
+- use `docker pull` to pull images to the local machine
+- use `docker run` to build and run backend and frontend service in docker container
