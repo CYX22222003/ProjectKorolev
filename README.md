@@ -253,8 +253,9 @@ Therefore, we decide to design a web App providing a seamless experience for use
 | Bug: detect empty inputs during signup and login                                    | P2       | M    | Iteration 3 | Done        |
 | Feature: create text editor for users to key in context documents                   | P0       | S    | Iteration 3 | Done        |
 | Feature: enable users to delete unwanted documents from cloud storage               | P0       | M    | Iteration 3 | Done        |
-| Docs: Update README, video and poster for MS2 submission                            | P0       | L    | Iteration 3 | In Progress |
+| Docs: Update README, video and poster for MS2 submission                            | P0       | L    | Iteration 3 | Done        |
 | Enhancement: enable users to preview uploaded documents                             | P0       | M    | Iteration 4 | Todo        |
+| Enhancement: enable users to search for the patient and the session                 | P0       | M    | Iteration 4 | Todo        |
 | Feature: audio-to-text/ dialogue-to-text                                            | P0       | L    | Iteration 4 | Todo        |
 | Feature: Implement user account management feature                                  | P0       | M    | Iteration 4 | Todo        |
 | Feature: fine-tune GenAI model to improve its performance and quality of response   | P0       | L    | Iteration 4 | Todo        |
