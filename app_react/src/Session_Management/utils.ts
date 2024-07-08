@@ -6,7 +6,7 @@ import React, { SetStateAction } from "react";
 import { deleteSimple } from "../utils/APIInteractionManager";
 
 export type SessionFileListFragProps = {
-  setFileList : React.Dispatch<SetStateAction<string[]>>
+  setFileList: React.Dispatch<SetStateAction<string[]>>
   fileList: string[];
 };
 
@@ -18,7 +18,7 @@ export type SessionUIProps = {
 };
 
 export type SessionListProps = {
-  setRows : React.Dispatch<SetStateAction<SessionData[]>>
+  setRows: React.Dispatch<SetStateAction<SessionData[]>>
   rows: SessionData[];
 };
 
@@ -40,7 +40,7 @@ export async function createSession(data: SessionDataSent): Promise<Response> {
     data,
     process.env.REACT_APP_CREATE_SESSION,
     process.env.REACT_APP_API_KEY,
-  );
+  ).catch((err: any) => { throw new Error(err) });
   return res;
 }
 
@@ -112,15 +112,15 @@ export async function uploadSessionDocument(
   return res;
 }
 
-export async function deleteSession(session_id : number) : Promise<boolean> {
-  const baseAddress : string = process.env.REACT_APP_SESSION_BASE??"";
+export async function deleteSession(session_id: number): Promise<boolean> {
+  const baseAddress: string = process.env.REACT_APP_SESSION_BASE ?? "";
 
-  const address : string = `${baseAddress}/${session_id}/delete`
+  const address: string = `${baseAddress}/${session_id}/delete`
 
   return (await deleteSimple(address, process.env.REACT_APP_API_KEY)
-  .then((res : Response) => {
-    return res.status === 200
-  } ).catch((err : any) => {
-    return false;
-  }));
+    .then((res: Response) => {
+      return res.status === 200
+    }).catch((err: any) => {
+      return false;
+    }));
 }

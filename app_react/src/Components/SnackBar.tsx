@@ -1,5 +1,4 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,10 +12,6 @@ export type ToastProps = {
 };
 
 export default function MySnackbar({ open, setOpen, message }: ToastProps) {
-  const handleClick = () => {
-    setOpen(true);
-  };
-
   const handleClose = (event: React.SyntheticEvent | Event) => {
     setOpen(false);
   };
@@ -28,6 +23,7 @@ export default function MySnackbar({ open, setOpen, message }: ToastProps) {
         aria-label="close"
         color="inherit"
         onClick={handleClose}
+        defaultValue="close"
       >
         <CloseIcon fontSize="small" />
       </IconButton>

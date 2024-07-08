@@ -132,12 +132,12 @@ def login_test():
         ).scalar_one()
 
         if user is None:
-            return "unable to login"
+            return Response("unable to login", status=500)
 
         if not user.is_active:
-            return "inactive account"
+            return Response("inactive account", status=500)
         if not user.verify_password(passwd):
-            return "wrong password or username"
+            return Response("wrong password or username", status=500)
 
         login_user(user)
         return f"{current_user.get_id()} logged in"

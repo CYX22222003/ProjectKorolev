@@ -107,9 +107,9 @@ export default function Background({
           <Container maxWidth="xl" sx={{ mt: 3, mb: 3 }}>
             <Grid container spacing={3}>
               {/* Welcome Test */}
-              {elements.map((ele) => {
+              {elements.map((ele, index) => {
                 return (
-                  <Grid item xs={12} md={10} lg={9}>
+                  <Grid item xs={12} md={10} lg={9} key={index}>
                     <Paper
                       sx={{
                         p: 3,

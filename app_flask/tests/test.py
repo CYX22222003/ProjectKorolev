@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from src.models import database_test
 from src.file_manager import test_file_manager
 from src.genai_manager import test_genai_manager
+import HtmlTestRunner
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -16,6 +17,7 @@ class FlaskTest(unittest.TestCase):
 
     # simple tests for status code
     def test_index(self):
+        """Simple test case for status code"""
         response = self.app.get("/", headers=self.headers)
         self.assertEqual(response.status_code, 200)
 
@@ -34,4 +36,4 @@ class FlaskTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html"))

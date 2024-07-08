@@ -86,7 +86,7 @@ function SessionFileListFrag({
           <TableBody>
             {fileList.map((fileName: string, index: number) => {
               return (
-                <TableRow>
+                <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{fileName}</TableCell>
                   <TableCell>

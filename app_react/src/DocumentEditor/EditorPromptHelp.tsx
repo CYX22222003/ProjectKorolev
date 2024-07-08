@@ -38,9 +38,10 @@ export function EditorPatientSelect({
           autoWidth
           label="Select Patient"
         >
-          {patientList?.map((pt: PatientData) => {
+          {patientList?.map((pt: PatientData, index: number) => {
             return (
               <MenuItem
+                key={index}
                 value={pt.patient_name}
                 onClick={() => {
                   patientNameRef.current = pt.patient_name;
@@ -76,9 +77,11 @@ export function EditorSessionSelect({
           autoWidth
           label="Select Session"
         >
-          {sessionList?.map((pt: SessionData) => {
+          {sessionList?.map((pt: SessionData, index: number) => {
             return (
-              <MenuItem value={pt.session_name}>{pt.session_name}</MenuItem>
+              <MenuItem key={index} value={pt.session_name}>
+                {pt.session_name}
+              </MenuItem>
             );
           })}
         </Select>
