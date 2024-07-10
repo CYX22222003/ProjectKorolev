@@ -135,7 +135,9 @@ function SessionFileListFrag({
                         fileName
                       )
                       if (fileName.includes(".txt")) {
-                        setPreviewType("text/plain")
+                        const content = await file.text();
+                        file = new Blob([content], {type : "text/html"});
+                        setPreviewType("text/html")
                       } else {
                         const arrayBuff = await file.arrayBuffer();
                         await mammoth.convertToHtml({arrayBuffer : arrayBuff})
