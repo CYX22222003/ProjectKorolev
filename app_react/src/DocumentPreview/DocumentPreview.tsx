@@ -1,9 +1,9 @@
 import React, { ReactElement, SetStateAction} from 'react'
-import DocViewer, {DocViewerRenderers} from '@cyntler/react-doc-viewer'
+import DocViewer, {HTMLRenderer} from '@cyntler/react-doc-viewer'
 import Dialog from '@mui/material/Dialog'
-import { DialogActions, DialogContent } from '@mui/material'
+import { DialogActions, DialogContent} from '@mui/material'
 import Button from '@mui/material/Button'
-import "@cyntler/react-doc-viewer/dist/index.css";
+//import "@cyntler/react-doc-viewer/dist/index.css";
 
 export type Props = {
     fileuri : string
@@ -25,10 +25,10 @@ export function DocxView({ fileuri, open, type, setOpen }: Props): ReactElement 
                         documents={[{
                             uri : fileuri,
                             fileType : type,
-                            fileName : "preview"
+                            fileName : "document preview"
                         }]}
 
-                        pluginRenderers={DocViewerRenderers}
+                        pluginRenderers={[HTMLRenderer]}
                     />
                 </DialogContent>
                 <DialogActions>

@@ -136,13 +136,18 @@ function SessionFileListFrag({
                       )
                       if (fileName.includes(".txt")) {
                         const content = await file.text();
-                        file = new Blob([content], {type : "text/html"});
+                        file = new Blob([content], {type : "text/html;charset=UTF-8"});
                         setPreviewType("text/html")
                       } else {
                         const arrayBuff = await file.arrayBuffer();
                         await mammoth.convertToHtml({arrayBuffer : arrayBuff})
                         .then((result) => {
-                          file = new Blob([result.value],{type : "text/html"})
+                          console.log(result.value)
+                          const content = result.value
+                              .replace(/[\u2018\u2019]/g, "'")
+                              .replace(/[\u201C\u201D]/g, '"')
+                          console.log(content);
+                          file = new Blob([content],{type : "text/html;chatset=UTF-8"})
                         })
 
                         setPreviewType("text/html")
