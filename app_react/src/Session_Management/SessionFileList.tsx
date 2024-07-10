@@ -18,6 +18,9 @@ import { getLocalStorage } from "../utils/localStorageManager";
 import { AIPromptForm } from "../GenAI_Management/AIPromptForm";
 import { FileDeleteButton } from "./SessionFileDelete";
 import { Box, Typography } from "@mui/material";
+import DocxView from "../DocumentPreview/DocumentPreview";
+import { downloadForPreview } from "../DocumentPreview/previewUtils";
+import mammoth from "mammoth";
 
 type SessionFileListProps = {
   open: boolean;
@@ -69,6 +72,10 @@ function SessionFileListFrag({
   const [displayAIMessage, setDisplayAIMessage] = useState<boolean>(false);
   const [startCalling, setStartCalling] = useState<boolean>(false);
 
+  const [startPreview, setStartPreview] = useState<boolean>(false);
+  const [previewblob, setPreviewBlob] = useState<string>("");
+  const [previewType, setPreviewType] = useState<string>("");
+
   return (
     <React.Fragment>
       <Title>Session file List</Title>
@@ -81,6 +88,7 @@ function SessionFileListFrag({
               <TableCell>view AI summary</TableCell>
               <TableCell>download</TableCell>
               <TableCell>delete</TableCell>
+              <TableCell>preview document</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -120,6 +128,37 @@ function SessionFileListFrag({
                       fileName={fileName}
                     />
                   </TableCell>
+                  <TableCell>
+                    <Button onClick={async () => {
+                      var file: Blob = await downloadForPreview(
+                        getLocalStorage("PersonAIUsername", ""),
+                        fileName
+                      )
+                      if (fileName.includes(".txt")) {
+                        const content = await file.text();
+                        file = new Blob([content], {type : "text/html;charset=UTF-8"});
+                        setPreviewType("text/html")
+                      } else {
+                        const arrayBuff = await file.arrayBuffer();
+                        await mammoth.convertToHtml({arrayBuffer : arrayBuff})
+                        .then((result) => {
+                          console.log(result.value)
+                          const content = result.value
+                              .replace(/[\u2018\u2019]/g, "'")
+                              .replace(/[\u201C\u201D]/g, '"')
+                          console.log(content);
+                          file = new Blob([content],{type : "text/html;chatset=UTF-8"})
+                        })
+
+                        setPreviewType("text/html")
+                      }
+
+                      setPreviewBlob(window.URL.createObjectURL(file));
+                      setStartPreview(true);
+                    }}>
+                      Preview File
+                    </Button>
+                  </TableCell>
                 </TableRow>
               );
             })}
@@ -144,6 +183,12 @@ function SessionFileListFrag({
         {startCalling && <CircularProgress />}
         {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
       </Box>
+      <DocxView
+        fileuri={previewblob}
+        open={startPreview}
+        type={previewType}
+        setOpen={setStartPreview}
+      />
     </React.Fragment>
   );
 }
