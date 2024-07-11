@@ -32,7 +32,6 @@ export default function PatientList({
             <TableRow>
               <TableCell>id</TableCell>
               <TableCell>Name</TableCell>
-              {/* <TableCell>Initialization</TableCell> */}
               <TableCell>Sessions Management</TableCell>
               <TableCell>Container name</TableCell>
               <TableCell>Delete patient</TableCell>
@@ -43,16 +42,6 @@ export default function PatientList({
               <TableRow key={index}>
                 <TableCell>{row.patient_id}</TableCell>
                 <TableCell>{row.patient_name}</TableCell>
-                {/* <TableCell>
-                  <Button
-                    onClick={() => {
-                      setPatientName(row.patient_name);
-                      setOpen(true);
-                    }}
-                  >
-                    upload initial document
-                  </Button>
-                </TableCell> */}
                 <TableCell>
                   <Link
                     href={`/sessions/${row.patient_id}/${row.patient_name}`}

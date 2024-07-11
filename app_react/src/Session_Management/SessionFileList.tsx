@@ -21,6 +21,7 @@ import { Box, Typography } from "@mui/material";
 import DocxView from "../DocumentPreview/DocumentPreview";
 import { downloadForPreview } from "../DocumentPreview/previewUtils";
 import mammoth from "mammoth";
+import { ThemeAnalysis } from "../GenAI_Management/ThematicAnalysisForm";
 
 type SessionFileListProps = {
   open: boolean;
@@ -76,6 +77,8 @@ function SessionFileListFrag({
   const [previewblob, setPreviewBlob] = useState<string>("");
   const [previewType, setPreviewType] = useState<string>("");
 
+  const [startThematicAnalysis, setStartTheme] = useState<boolean>(false);
+
   return (
     <React.Fragment>
       <Title>Session file List</Title>
@@ -86,6 +89,7 @@ function SessionFileListFrag({
               <TableCell>index</TableCell>
               <TableCell>file name</TableCell>
               <TableCell>view AI summary</TableCell>
+              <TableCell>AI Thematic Analysis</TableCell>
               <TableCell>download</TableCell>
               <TableCell>delete</TableCell>
               <TableCell>preview document</TableCell>
@@ -102,11 +106,31 @@ function SessionFileListFrag({
                       variant="contained"
                       color="info"
                       onClick={() => {
-                        setAITargetFile(fileName);
-                        setStartPrompt(true);
+                        if (startPrompt) {
+                          setStartPrompt(false);
+                        } else {
+                          setAITargetFile(fileName);
+                          setStartPrompt(true);
+                        }
                       }}
                     >
                       AI insights
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="info"
+                      onClick={() => {
+                        if (startThematicAnalysis) {
+                          setStartTheme(false);
+                        } else {
+                          setAITargetFile(fileName)
+                          setStartTheme(true);
+                        }
+                      }}
+                    >
+                      Thematic Analysis
                     </Button>
                   </TableCell>
                   <TableCell>
@@ -129,33 +153,40 @@ function SessionFileListFrag({
                     />
                   </TableCell>
                   <TableCell>
-                    <Button onClick={async () => {
-                      var file: Blob = await downloadForPreview(
-                        getLocalStorage("PersonAIUsername", ""),
-                        fileName
-                      )
-                      if (fileName.includes(".txt")) {
-                        const content = await file.text();
-                        file = new Blob([content], {type : "text/html;charset=UTF-8"});
-                        setPreviewType("text/html")
-                      } else {
-                        const arrayBuff = await file.arrayBuffer();
-                        await mammoth.convertToHtml({arrayBuffer : arrayBuff})
-                        .then((result) => {
-                          console.log(result.value)
-                          const content = result.value
-                              .replace(/[\u2018\u2019]/g, "'")
-                              .replace(/[\u201C\u201D]/g, '"')
-                          console.log(content);
-                          file = new Blob([content],{type : "text/html;chatset=UTF-8"})
-                        })
+                    <Button
+                      onClick={async () => {
+                        var file: Blob = await downloadForPreview(
+                          getLocalStorage("PersonAIUsername", ""),
+                          fileName,
+                        );
+                        if (fileName.includes(".txt")) {
+                          const content = await file.text();
+                          file = new Blob([content], {
+                            type: "text/html;charset=UTF-8",
+                          });
+                          setPreviewType("text/html");
+                        } else {
+                          const arrayBuff = await file.arrayBuffer();
+                          await mammoth
+                            .convertToHtml({ arrayBuffer: arrayBuff })
+                            .then((result) => {
+                              console.log(result.value);
+                              const content = result.value
+                                .replace(/[\u2018\u2019]/g, "'")
+                                .replace(/[\u201C\u201D]/g, '"');
+                              console.log(content);
+                              file = new Blob([content], {
+                                type: "text/html;chatset=UTF-8",
+                              });
+                            });
 
-                        setPreviewType("text/html")
-                      }
+                          setPreviewType("text/html");
+                        }
 
-                      setPreviewBlob(window.URL.createObjectURL(file));
-                      setStartPreview(true);
-                    }}>
+                        setPreviewBlob(window.URL.createObjectURL(file));
+                        setStartPreview(true);
+                      }}
+                    >
                       Preview File
                     </Button>
                   </TableCell>
@@ -172,6 +203,16 @@ function SessionFileListFrag({
         <br />
         {startPrompt && (
           <AIPromptForm
+            fileName={aiTargetFile}
+            type="docx"
+            setStartCalling={setStartCalling}
+            setDisplayAIMessage={setDisplayAIMessage}
+            setAIResponse={setAIResponse}
+          />
+        )}{" "}
+        <br />
+        {startThematicAnalysis && (
+          <ThemeAnalysis
             fileName={aiTargetFile}
             type="docx"
             setStartCalling={setStartCalling}
