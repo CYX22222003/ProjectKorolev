@@ -6,8 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { AIPromptFormProps } from "./utils";
-import { TriggerAIAction } from "./utils";
+import { AIPromptFormProps, TriggerAIAction} from "./utils";
 import { Typography } from "@mui/material";
 
 export function AIPromptForm({

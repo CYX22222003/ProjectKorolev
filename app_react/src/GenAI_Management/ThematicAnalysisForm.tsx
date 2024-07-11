@@ -2,8 +2,7 @@ import React, { ReactElement, useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { AIPromptFormProps } from "./utils";
-import { TriggerAIAction } from "./utils";
+import { AIPromptFormProps, TriggerAIAction } from "./utils";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 
