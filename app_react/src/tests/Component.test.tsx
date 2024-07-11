@@ -9,14 +9,14 @@ import Editor from "../DocumentEditor/EditorMain";
 import fetchMock from "jest-fetch-mock";
 
 describe("Test self-created components", () => {
-  let consoleErrorSpy : jest.SpyInstance;
-  let consoleWarnSpy : jest.SpyInstance;
+  let consoleErrorSpy: jest.SpyInstance;
+  let consoleWarnSpy: jest.SpyInstance;
 
   beforeEach(() => {
     fetchMock.resetMocks();
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => { });
+    consoleErrorSpy = jest.spyOn(console, "error").mockImplementation(() => {});
     consoleWarnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-  })
+  });
 
   it("Test snack bar", async () => {
     const func = jest.fn();
@@ -49,9 +49,8 @@ describe("Test self-created components", () => {
   });
 
   it("Test editor", () => {
-    render(<Editor />)
+    render(<Editor />);
     fetchMock.mockResponse(JSON.stringify({}));
     expect(screen.getByText(/Editor/i)).toBeInTheDocument();
   });
-})
-
+});

@@ -1,4 +1,4 @@
-import React, {ReactElement} from "react";
+import React, { ReactElement } from "react";
 import { useTheme } from "@mui/material";
 import {
   MenuButtonBlockquote,
@@ -17,48 +17,48 @@ import {
   MenuSelectHeading,
 } from "mui-tiptap";
 
-export default function EditorMenuControls() : ReactElement {
+export default function EditorMenuControls(): ReactElement {
   const theme = useTheme();
   return (
     <>
-    <MenuControlsContainer>
-      <MenuSelectHeading />
+      <MenuControlsContainer>
+        <MenuSelectHeading />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonBold />
+        <MenuButtonBold />
 
-      <MenuButtonItalic />
+        <MenuButtonItalic />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonEditLink />
+        <MenuButtonEditLink />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonOrderedList />
+        <MenuButtonOrderedList />
 
-      <MenuButtonBulletedList />
+        <MenuButtonBulletedList />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonBlockquote />
+        <MenuButtonBlockquote />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonCode />
+        <MenuButtonCode />
 
-      <MenuButtonCodeBlock />
+        <MenuButtonCodeBlock />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonRemoveFormatting />
+        <MenuButtonRemoveFormatting />
 
-      <MenuDivider />
+        <MenuDivider />
 
-      <MenuButtonUndo />
-      <MenuButtonRedo />
-    </MenuControlsContainer>
+        <MenuButtonUndo />
+        <MenuButtonRedo />
+      </MenuControlsContainer>
     </>
   );
 }

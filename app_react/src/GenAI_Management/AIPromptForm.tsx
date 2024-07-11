@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { AIPromptFormProps } from "./utils";
 import { TriggerAIAction } from "./utils";
+import { Typography } from "@mui/material";
 
 export function AIPromptForm({
   fileName,
@@ -51,6 +52,9 @@ export function AIPromptForm({
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            <Typography component="h2" variant="h5">
+              General Analysis
+            </Typography>
             <FormControl sx={{ m: 1, minWidth: 500 }}>
               <InputLabel id="demo-simple-select-autowidth-label">
                 AI Prompt
@@ -61,6 +65,7 @@ export function AIPromptForm({
                 value={prompt}
                 onChange={handleChange}
                 autoWidth
+                autoFocus
                 label="AI Prompt"
               >
                 <MenuItem value={"Summarize the content of the session"}>

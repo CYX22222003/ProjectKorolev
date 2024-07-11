@@ -12,7 +12,7 @@ export default function EditorPrompt({
   filenameRef,
   patientNameRef,
   sessionNameRef,
-}: EditorPromptProps) : ReactElement {
+}: EditorPromptProps): ReactElement {
   const [patientID, setPatientID] = useState<number>(0);
 
   const [patientList, setPatientList] = useState<PatientData[]>([]);
@@ -36,22 +36,22 @@ export default function EditorPrompt({
 
   return (
     <>
-    <Container component="main">
-      <CssBaseline />
-      <Box sx={BoxConfigProps}>
-        <EditorPatientSelect
-          patientList={patientList}
-          setPatientID={setPatientID}
-          patientNameRef={patientNameRef}
-        />
-      </Box>
-      <Box sx={BoxConfigProps}>
-        <EditorSessionSelect
-          sessionList={sessionList}
-          sessionNameRef={sessionNameRef}
-        />
-      </Box>
-    </Container>
+      <Container component="main">
+        <CssBaseline />
+        <Box sx={BoxConfigProps}>
+          <EditorPatientSelect
+            patientList={patientList}
+            setPatientID={setPatientID}
+            patientNameRef={patientNameRef}
+          />
+        </Box>
+        <Box sx={BoxConfigProps}>
+          <EditorSessionSelect
+            sessionList={sessionList}
+            sessionNameRef={sessionNameRef}
+          />
+        </Box>
+      </Container>
     </>
   );
 }
