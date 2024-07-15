@@ -30,8 +30,7 @@ def test():
         
 @app.route("/transcribe", methods=["POST"])
 def transcribe():
-    device = -1
-    asr_pipe = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device)
+    asr_pipe = pipeline("automatic-speech-recognition", model="openai/whisper-base")
     
     if 'audio' not in request.files:
         return Response("No audio file provided", status=400)
