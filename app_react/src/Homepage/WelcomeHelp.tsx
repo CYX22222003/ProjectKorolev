@@ -6,6 +6,7 @@ import { LoginInfo } from "../Login_and_SignUp/constants";
 import { Warning } from "../Components/Warning";
 import { getLocalStorage } from "../utils/localStorageManager";
 import Typography from "@mui/material/Typography";
+import UpdateProfile from "../Login_and_SignUp/UpdateProfile";
 
 export default function WelcomeHelp(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
@@ -56,6 +57,9 @@ export default function WelcomeHelp(): ReactElement {
       <Typography variant="h5">
         Hello {getLocalStorage("PersonAIUsername", "")}! Welcome to personAI!
       </Typography>
+      <br />
+      <UpdateProfile />
+      <br />
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />
