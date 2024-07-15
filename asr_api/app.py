@@ -1,3 +1,4 @@
+# This is the backend for meeting transcription
 from flask import Flask, request, jsonify, Response
 from transformers import pipeline
 from flask_cors import CORS
