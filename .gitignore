@@ -28,3 +28,7 @@ yarn-error.log*
 /.virt
 /.venv
 /venv
+
+.env
+__pycache__/
+data.db
