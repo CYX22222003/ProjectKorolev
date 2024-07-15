@@ -35,13 +35,16 @@ def transcribe():
     
     if 'audio' not in request.files:
         return Response("No audio file provided", status=400)
-    
-    audio_file = request.files['audio']
-    audio_path = os.path.join("./downloads", audio_file.filename)
-    audio_file.save(audio_path)
-
-    result = asr_pipe(audio_path)
-    os.remove(audio_path)
+   
+    try:
+        audio_file = request.files['audio']
+        audio_path = os.path.join("./downloads", audio_file.filename)
+        audio_file.save(audio_path)
+        result = asr_pipe(audio_path)
+    except Exception as err:
+        return Response("Error detected " + str(err), status=500 )
+    finally:
+        os.remove(audio_path)
     return jsonify({"script": result["text"]})
 
 if __name__=="__main__":
