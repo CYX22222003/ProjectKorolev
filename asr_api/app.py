@@ -1,4 +1,5 @@
 # This is the backend for meeting transcription
+# The torch can only run on cpu
 from flask import Flask, request, jsonify, Response
 from transformers import pipeline
 from flask_cors import CORS
