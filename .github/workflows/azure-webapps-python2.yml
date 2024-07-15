@@ -58,6 +58,11 @@ jobs:
         run: pip install -r requirements.txt
         working-directory: ./asr_api
 
+      - name: Clean up disk space
+        run: |
+          rm -rf /tmp/*
+          sudo apt-get clean
+
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
