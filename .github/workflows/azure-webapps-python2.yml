@@ -79,7 +79,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: python-app2
+          name: python-app
           path: ./asr_api
 
       - name: 'Deploy to Azure Web App'
