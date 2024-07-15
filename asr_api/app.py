@@ -5,9 +5,6 @@ from dotenv import load_dotenv
 import os
 import torch
 
-device = 0 if torch.cuda.is_available() else -1
-asr_pipe = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device)
-
 load_dotenv()
 
 app = Flask(__name__)
@@ -32,6 +29,9 @@ def test():
         
 @app.route("/transcribe", methods=["POST"])
 def transcribe():
+    device = 0 if torch.cuda.is_available() else -1
+    asr_pipe = pipeline("automatic-speech-recognition", model="openai/whisper-base", device=device)
+    
     if 'audio' not in request.files:
         return Response("No audio file provided", status=400)
     
