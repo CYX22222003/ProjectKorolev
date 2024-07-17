@@ -54,6 +54,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 #### 3. Summarization
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
+    - **Dialogue transcription**: Generate a text transcription for the consulting sessions with patients.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
 - *current progress*: We have implemented the summarization function using gemini AI.
@@ -337,7 +338,7 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
 
 <img src="/ProjectKorolev/images/image18.png" >
 
-
+4. **Microservices architecture with dockers**
 
 ## Project Log
 <a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
