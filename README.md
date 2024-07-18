@@ -108,8 +108,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 **Flow:**
 1. The practitioner logs into the system and selects an existing patient.
-2. The practitioner uploads documentations from a recent session. Documentations are in form of 
-	- text documents
+2. The practitioner uploads documentations from a recent session. Documentations are in form of text documents
+3. They can also transcribe the video and audio recordings using the meeting transcription feature and upload the scripts to the backend.
 4. The practitioner specifies the context for AI interpretation (e.g., therapy type, session focus) and use editor to create notes on mode of therapy.
 5. The system calls the AI service to generate a summary of the session and extracts key insights.
 6. The practitioner reviews the AI-generated summary and insights, which are displayed on the web app.
@@ -338,7 +338,7 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
 
 <img src="/ProjectKorolev/images/image18.png" >
 
-4. **Microservices architecture with dockers**
+4. **Microservices architecture with dockers**: We use docker to containerized the baclend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.
 
 ## Project Log
 <a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
