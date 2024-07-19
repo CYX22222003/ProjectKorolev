@@ -56,7 +56,7 @@ function App() {
         />
         <Route path="/test" element={<CreatePatient />} />
         <Route path="/editor" element={<Editor />} />
-        <Route path="/audio" element={<MeetingTranscriptionMain />}/>
+        <Route path="/audio" element={<MeetingTranscriptionMain />} />
       </Routes>
     </AuthenContext.Provider>
   ) : (
@@ -66,7 +66,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/test" element={<Welcome />} />
         <Route path="/editor" element={<Editor />} />
-        <Route path="/audio" element={<MeetingTranscriptionMain />}/>
+        <Route path="/audio" element={<MeetingTranscriptionMain />} />
       </Routes>
     </AuthenContext.Provider>
   );

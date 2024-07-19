@@ -1,8 +1,19 @@
 import React, { useState, FormEvent } from "react";
-import { postTest } from "../utils/APIInteractionManager";
+import Typography from "@mui/material/Typography";
+import { Button, CircularProgress, TextField } from "@mui/material";
+import MySnackbar from "../Components/SnackBar";
 
-export default function AudioUploadForm(): React.ReactElement {
+type AudioUploadFormProbs = {
+  setDisplay: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function AudioUploadForm({
+  setDisplay,
+}: AudioUploadFormProbs): React.ReactElement {
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorState, setErrorState] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -18,47 +29,64 @@ export default function AudioUploadForm(): React.ReactElement {
       return;
     }
 
-    console.log(file)
+    console.log(file);
     const formData = new FormData();
     formData.append("audio", file, "upload_audio.mp3");
-    console.log(formData.keys())
+
     try {
       const address: string = process.env.REACT_APP_TRANSCRIPTION_URL as string;
-      const apiKey : string = process.env.REACT_APP_TRANSCRIPTION_API_KEY as string;
-
+      const apiKey: string = process.env
+        .REACT_APP_TRANSCRIPTION_API_KEY as string;
+      setLoading(true);
       const response = await fetch(address, {
         method: "POST",
         mode: "cors",
         redirect: "follow",
         credentials: "include",
         headers: {
-          "Authorization": apiKey,
+          Authorization: apiKey,
           "Accept-Encoding": "gzip, deflate, br",
-          "Connection": "keep-alive",
+          Connection: "keep-alive",
         },
         body: formData,
+      }).then((res) => {
+        setLoading(false);
+        return res;
       });
 
       if (response.ok) {
-        alert("File uploaded successfully!");
+        const data = await response.json();
+        setDisplay(data["script"] as string);
       } else {
-        alert("File upload failed.");
+        setErrorState(true);
+        setErrorMessage("File upload failed.");
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("Error uploading file.");
+      setErrorMessage("Error uploading file.");
     }
   };
 
   return (
     <React.Fragment>
-        <form onSubmit={handleSubmit}>
-            <label>
-                Upload Audio/Video:
-                <input type="file" onChange={handleFileChange} />
-            </label>
-            <button type="submit">Upload</button>
-        </form>
+      <form onSubmit={handleSubmit}>
+        <Typography>Upload Audio/Video:</Typography>
+        <br />
+        <TextField type="file" onChange={handleFileChange} />
+        <br />
+        <br />
+        <Button variant="contained" type="submit">
+          Upload
+        </Button>
+      </form>
+      {loading && <CircularProgress />}
+      {errorState && (
+        <MySnackbar
+          open={errorState}
+          setOpen={setErrorState}
+          message={errorMessage}
+        />
+      )}
     </React.Fragment>
   );
 }
