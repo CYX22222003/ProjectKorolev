@@ -28,7 +28,7 @@ export default function UpdateProfile(): ReactElement {
   const [oldPassword, setOldPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [newUsername, setNewUsername] = useState<string>(""); // Assuming this comes from fetching user data
+  //const [newUsername, setNewUsername] = useState<string>(""); // Assuming this comes from fetching user data
   const [newEmail, setNewEmail] = useState<string>(""); // Assuming this comes from fetching user data
 
 
@@ -53,20 +53,20 @@ export default function UpdateProfile(): ReactElement {
   };
 
   useEffect(() => {
-    const isUsernameValid = validateUsername(newUsername);
+    //const isUsernameValid = validateUsername(newUsername);
     const isEmailValid = validateEmail(newEmail);
     const isPasswordValid = validatePassword(newPassword) && newPassword === confirmPassword;
 
     setFormValid(
-      isUsernameValid &&
+      //isUsernameValid &&
       isEmailValid &&
       isPasswordValid &&
-      newUsername.trim().length > 0 &&
+      //newUsername.trim().length > 0 &&
       newEmail.trim().length > 0 &&
       newPassword.trim().length > 0
     );
 
-  }, [newUsername, newEmail, newPassword, confirmPassword]);
+  }, [newEmail, newPassword, confirmPassword]);
   
   async function handleUpdateProfile(
     e: React.FormEvent<HTMLFormElement>,
@@ -81,13 +81,14 @@ export default function UpdateProfile(): ReactElement {
     }
 
     const dataToUpdate = {
-      username: newUsername,
+      //username: newUsername,
       email: newEmail,
       password: hashPassword(newPassword),
       oldPassword: hashPassword(oldPassword),
     };
 
     try {  
+      /*
       const response = await fetch('/user/update', {
         method: 'PUT',
         headers: {
@@ -95,6 +96,10 @@ export default function UpdateProfile(): ReactElement {
         },
         body: JSON.stringify(dataToUpdate),
       });
+      */
+      const address = "/user/update";
+
+      const response = await postTest(dataToUpdate, address, process.env.REACT_APP_API_KEY, "PUT");
 
       if (!response.ok) {
         throw new Error('Failed to update profile.');
@@ -104,7 +109,7 @@ export default function UpdateProfile(): ReactElement {
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
 
-      setNewUsername(newUsername);
+      //setNewUsername(newUsername);
       setNewEmail(newEmail);
       setNewPassword(newPassword);
     } catch (error) {
@@ -116,7 +121,7 @@ export default function UpdateProfile(): ReactElement {
 
     
   
-
+/*
   const handleUsernameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -134,6 +139,7 @@ export default function UpdateProfile(): ReactElement {
       
     }
   };
+  */
    
   const handleEmailChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -202,20 +208,6 @@ export default function UpdateProfile(): ReactElement {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="newUsername"
-                  required
-                  fullWidth
-                  id="username"
-                  label="New Username(only lower case letters, numbers and hyphen allowed)"
-                  autoFocus
-                  error={!!usernameError}
-                  helperText={usernameError}
-                  onChange={handleUsernameChange}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
