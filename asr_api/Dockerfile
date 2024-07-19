@@ -10,6 +10,6 @@ COPY requirements.txt /
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
-ENV FLASK_APP=application.py
+ENV FLASK_APP=app.py
 
 CMD ["gunicorn", "--config", "gunicorn.config.py", "app:app"]
