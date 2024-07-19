@@ -66,7 +66,7 @@ export function ThemeAnalysis({
           <Button
             type="submit"
             variant="contained"
-            sx={{ mt: 3, mb: 2, ml: 2}}
+            sx={{ mt: 3, mb: 2, ml: 2 }}
           >
             Create
           </Button>
