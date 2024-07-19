@@ -164,13 +164,13 @@ def update_account():
         request.get_data()
         result = json.loads(request.data.decode())
 
-        username = result["username"]
+        #username = result["username"]
         email = result["email"]
         new_password = result["password"]
         old_password = result["oldPassword"]
 
         if current_user.verify_password(old_password):
-            current_user.username = username
+            #current_user.username = username
             current_user.password = new_password
             current_user.email = email
             db.session.commit()
