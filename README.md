@@ -373,3 +373,10 @@ We have stored the backend and frontend images in the remote registry of dockerH
 - backend image: `e1155533/orbital_test:backend_ms2`
 - use `docker pull` to pull images to the local machine
 - use `docker run` to build and run backend and frontend service in docker container
+
+## Reference materials:
+[cloud service](https://share.note.sx/alos0eue#NObNy2D49ZJmA//fo50xkAyhlX1n0rwW8LocoFzCXEc)       [Azure documents](https://share.note.sx/luuzym71#lvTJuUiM3wOsYAWginZhiAqwPzB7MFr2Yxi6NooarQw)       [cloud storage](https://share.note.sx/7rqk45zw#qKZw7C/mCYsTiPgXMDp9Y3ECw4oNJ298tIKPL1CW8BU)     
+[docker](https://share.note.sx/jeri1eck#ENk2viHPPqonpxz6rz4VriyjqnDlnxsVZ9UxM2U44gs)      [Flask](https://share.note.sx/0chnqv2p#nWmCPPLJRoBSLBKVZkEs5o5v54p/G55Lzw0CnDg+bDI)       [integration](https://share.note.sx/vedo0ifc#3bEIkmyrVp5J41wbF98pwVEtDBGKXfQ7Z8GNv2XK7bg)  
+[React frontend](https://share.note.sx/z0pexh1x#pEUK0Hgm7kTrbKUt8aF3A23Sa75CGQktnwaIVumE/Kk)     [software testing](https://share.note.sx/8gbtefgq#Dc4eAIeSm+v70oNSULYb0PwDGzHFUZyZ/N9foKWNwtw)      [SWE practice](https://share.note.sx/bzv8ec4a#Di+RbONLhOrNcHMKsRwInaQA9Sr4QAZuaQrdUbnSKA8)  
+[UML modeling](https://share.note.sx/y9tjpvv6#oe/AdN1MHWpvdcRBPxqAS6+rrp3+OomH7iKCva6S8Cc)    [Environment file](https://share.note.sx/mq7eqx88#R2xhlwjExXX2cgdDYKOIDBxp2h53hkv3pHN2Nfpdekg)    [Web server](https://share.note.sx/wz3m4xjs#9jML9VY+YN6RE4n0p72JoKxpm+jdm/xvBb6OKiURkG4)
+
