@@ -24,12 +24,12 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Patient Management" />
     </ListItemButton>
-    {/* <ListItemButton href="/patients">
+    <ListItemButton href="/audio">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Manage sessions" />
-    </ListItemButton> */}
+      <ListItemText primary="Meeting Transcription" />
+    </ListItemButton>
     <ListItemButton href="/editor">
       <ListItemIcon>
         <LayersIcon />
