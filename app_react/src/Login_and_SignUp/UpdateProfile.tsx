@@ -1,7 +1,6 @@
 import React, { ReactElement, useEffect } from "react";
 import { useState } from "react";
-import { SignUpForm } from "./constants";
-import { signupAction } from "./utils";
+import { postTest } from "../utils/APIInteractionManager";
 import { hashPassword } from "./utils";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
