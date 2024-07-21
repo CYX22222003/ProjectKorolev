@@ -1,4 +1,4 @@
-import React, { ReactElement} from "react";
+import React, { ReactElement } from "react";
 import { SessionData } from "../Session_Management/utils";
 import { PatientData } from "../Patient_Management/utils";
 import FormControl from "@mui/material/FormControl";

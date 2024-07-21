@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/f948c442-5253-4f31-a0f0-f3bdf9084b49/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/personai-meeting-transcribe",
+    "appService.deploySubpath": "."
+}
