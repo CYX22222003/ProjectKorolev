@@ -54,7 +54,7 @@ class FileManager:
     def handle_txt_file(self):
         with open(self.dest + ".txt", "rt") as file:
             return file.read()
-    
+
     def list_blob(self, container_name, key):
         container_client = self.blob_service_client.get_container_client(container=container_name)
         xs = container_client.list_blob_names(name_starts_with=key)
