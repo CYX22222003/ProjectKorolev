@@ -56,11 +56,12 @@ class FileManager:
             return file.read()
 
     def list_blob(self, container_name, key):
-        container_client = self.blob_service_client.get_container_client(container=container_name)
+        container_client = self.blob_service_client.get_container_client(
+            container=container_name
+        )
         xs = container_client.list_blob_names(name_starts_with=key)
-        #print(list(xs))
+        # print(list(xs))
         return list(xs)
-
 
 
 def test_file_manager():

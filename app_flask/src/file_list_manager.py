@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from file_manager import FileManager
 import docx
 
+
 class FileListManager:
     def __init__(self, username, file_list):
         load_dotenv()
@@ -15,7 +16,10 @@ class FileListManager:
 
     async def download_blob_to_file_async(self, blob_service_client, filename):
         directory = os.path.dirname(
-            os.path.join("multi_downloads/", f"{self.username}-{self.transform_filename(filename)}")
+            os.path.join(
+                "multi_downloads/",
+                f"{self.username}-{self.transform_filename(filename)}",
+            )
         )
         if not os.path.exists(directory):
             os.makedirs(directory)
@@ -23,7 +27,10 @@ class FileListManager:
             container=self.username, blob=filename
         )
         with open(
-            file=os.path.join(r"multi_downloads/", f"{self.username}-{self.transform_filename(filename)}"),
+            file=os.path.join(
+                r"multi_downloads/",
+                f"{self.username}-{self.transform_filename(filename)}",
+            ),
             mode="wb",
         ) as sample_blob:
             download_stream = await blob_client.download_blob()
@@ -41,7 +48,9 @@ class FileListManager:
 
     def delete_all_blobs(self):
         for f in self.file_list:
-            path = os.path.join(r"multi_downloads/", f"{self.username}-{self.transform_filename(f)}")
+            path = os.path.join(
+                r"multi_downloads/", f"{self.username}-{self.transform_filename(f)}"
+            )
             if os.path.exists(path):
                 os.remove(path)
 
@@ -66,7 +75,7 @@ class FileListManager:
                 if self.username in r:
                     xs.append(os.path.join(root, r))
         return xs
-    
+
     def compile_all_file(self):
         xs = self.list_local_file()
         out = ""
@@ -84,6 +93,7 @@ class FileListManager:
                 out += f"\nsesion info: {str(f)}\n"
                 out += "-" * 100 + "\n"
         return out
+
 
 async def test_multi_filemanager():
     try:
