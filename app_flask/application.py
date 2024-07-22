@@ -169,12 +169,17 @@ def update_account():
         new_password = result["password"]
         old_password = result["oldPassword"]
 
+        if not old_password:
+            return "Old password must be provided"
+            
         if current_user.verify_password(old_password):
             #current_user.username = username
-            current_user.password = new_password
-            current_user.email = email
-            db.session.commit()
-            return "update successfully"
+             if new_password:
+               current_user.password = new_password
+             if email:
+               current_user.email = email
+             db.session.commit()
+             return "update successfully"
         return "Please key in the correct old password"
     return Response("Fail to update", status=500)
 
