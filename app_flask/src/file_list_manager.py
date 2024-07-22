@@ -2,7 +2,6 @@ import os
 import asyncio
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import load_dotenv
-import os
 from file_manager import FileManager
 
 
@@ -47,9 +46,9 @@ class FileListManager:
                 os.remove(path)
 
     def remove_empty_directory(self):
-        for root, dirs, files in os.walk("multi_downloads/", topdown=False):
-            for dir in dirs:
-                dir_path = os.path.join(root, dir)
+        for root, dirs, _ in os.walk("multi_downloads/", topdown=False):
+            for d in dirs:
+                dir_path = os.path.join(root, d)
                 try:
                     os.rmdir(dir_path)
                     # print(f"Removed empty directory: {dir_path}")
@@ -71,7 +70,6 @@ async def test_multi_filemanager():
         await multi_manager.download_all_blob()
         print("All file downloads")
         await asyncio.sleep(2)
-        
         # clear all documents after processing
         if input("clear?") == "y":
             multi_manager.delete_all_blobs()
