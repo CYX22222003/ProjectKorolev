@@ -17,6 +17,7 @@ import { Warning } from "../Components/Warning";
 import { usernameValidator } from "../utils/formatValidator";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { passwordValidator } from "../utils/formatValidator";
 
 
 export default function UpdateProfile(): ReactElement {
@@ -47,14 +48,10 @@ export default function UpdateProfile(): ReactElement {
     return value.includes("@");
   };
 
-  const validatePassword = (value: string): boolean => {
-    return value.length > 0;
-  };
-
   useEffect(() => {
     //const isUsernameValid = validateUsername(newUsername);
     const isEmailValid = validateEmail(newEmail);
-    const isPasswordValid = validatePassword(newPassword) && newPassword === confirmPassword;
+    const isPasswordValid = passwordValidator(newPassword) && newPassword === confirmPassword;
 
     setFormValid(
       //isUsernameValid &&
@@ -72,7 +69,7 @@ export default function UpdateProfile(): ReactElement {
   ): Promise<void> {
     e.preventDefault();
    
-    if (!validatePassword(newPassword) || newPassword !== confirmPassword) {
+    if (!passwordValidator(newPassword) || newPassword !== confirmPassword) {
       setSnackbarMessage("Passwords do not match.");
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
