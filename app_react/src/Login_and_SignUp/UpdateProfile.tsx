@@ -93,9 +93,8 @@ export default function UpdateProfile(): ReactElement {
         body: JSON.stringify(dataToUpdate),
       });
       */
-      const address = "/user/update";
-
-      const response = await postTest(dataToUpdate, address, process.env.REACT_APP_API_KEY, "PUT");
+  
+      const response = await postTest(dataToUpdate, process.env.REACT_APP_UPDATE_URL, process.env.REACT_APP_API_KEY, "PUT");
 
       if (!response.ok) {
         throw new Error('Failed to update profile.');
