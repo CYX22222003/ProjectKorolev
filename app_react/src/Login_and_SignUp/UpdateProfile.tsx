@@ -56,10 +56,10 @@ export default function UpdateProfile(): ReactElement {
     setFormValid(
       //isUsernameValid &&
       isEmailValid &&
-      isPasswordValid &&
+      isPasswordValid 
       //newUsername.trim().length > 0 &&
-      newEmail.trim().length > 0 &&
-      newPassword.trim().length > 0
+      //newEmail.trim().length > 0 &&
+      //newPassword.trim().length > 0
     );
 
   }, [newEmail, newPassword, confirmPassword]);
