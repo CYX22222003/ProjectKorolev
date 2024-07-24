@@ -170,7 +170,7 @@ def update_account():
         old_password = result["oldPassword"]
 
         if not old_password:
-            return "Old password must be provided"
+            return Response("Old password must be provided", status=400)
 
         if current_user.verify_password(old_password):
             # current_user.username = username
