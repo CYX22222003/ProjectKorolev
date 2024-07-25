@@ -3,6 +3,7 @@ import asyncio
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import load_dotenv
 from file_manager import FileManager
+from genai_manager import GenAIManager
 import docx
 
 
@@ -79,7 +80,7 @@ class FileListManager:
     def compile_all_file(self):
         xs = self.list_local_file()
         out = ""
-        print(xs)
+        # print(xs)
         for f in xs:
             if "docx" in str(f):
                 doc = docx.Document(f)
@@ -93,6 +94,19 @@ class FileListManager:
                 out += f"\nsesion info: {str(f)}\n"
                 out += "-" * 100 + "\n"
         return out
+
+    async def genai_call_helper(self, prompt):
+        try:
+            await self.download_all_blob()
+            out = self.compile_all_file()
+            # print(out)
+            genai_manager = GenAIManager(out, prompt)
+            return genai_manager.get_ai_response()
+        except Exception as exc:
+            raise Exception("call fails") from exc
+        finally:
+            self.delete_all_blobs()
+            self.remove_empty_directory()
 
 
 async def test_multi_filemanager():
@@ -121,5 +135,21 @@ async def test_multi_filemanager():
         raise Exception("test fails") from exc
 
 
+async def test_multi_filemanager2():
+    try:
+        file_manager = FileManager("test")
+        # use list_blob to find all documents related to a patient
+        file_list = file_manager.list_blob("user-test2", "patient1")
+
+        # create multiple-file manager
+        multi_manager = FileListManager("user-test2", file_list=file_list)
+
+        # auto process
+        out = await multi_manager.genai_call_helper("Summarize the text in 50 words")
+        print(out)
+    except Exception as exc:
+        raise Exception("test fails") from exc
+
+
 if __name__ == "__main__":
-    asyncio.run(test_multi_filemanager())
+    asyncio.run(test_multi_filemanager2())
