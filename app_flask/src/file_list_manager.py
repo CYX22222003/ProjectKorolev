@@ -2,6 +2,15 @@ import os
 import asyncio
 from azure.storage.blob.aio import BlobServiceClient
 from dotenv import load_dotenv
+import sys
+# Get the directory containing file_list_manager.py
+current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Add the src directory to sys.path
+src_directory = os.path.abspath(os.path.join(current_directory, '.'))
+if src_directory not in sys.path:
+    sys.path.append(src_directory)
+
 from file_manager import FileManager
 from genai_manager import GenAIManager
 import docx
@@ -152,4 +161,4 @@ async def test_multi_filemanager2():
 
 
 if __name__ == "__main__":
-    asyncio.run(test_multi_filemanager2())
+    asyncio.run(test_multi_filemanager())

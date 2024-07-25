@@ -360,7 +360,7 @@ def call_ai_actions():
     return Response("Wrong method", status=500)
 
 
-@app.route("ai/patient", methods=["POST"])
+@app.route("/ai/patient", methods=["POST"])
 async def patient_analysis():
     # Extract information from request
     request.get_data()
