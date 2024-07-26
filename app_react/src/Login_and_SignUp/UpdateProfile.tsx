@@ -18,82 +18,52 @@ import { usernameValidator } from "../utils/formatValidator";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { passwordValidator } from "../utils/formatValidator";
+import { useNavigate } from "react-router-dom"; 
 
 
 export default function UpdateProfile(): ReactElement {
   const defaultTheme = createTheme();
+  const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
   const [promptMessage, setPrompt] = useState<string>("");
 
   const [oldPassword, setOldPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  //const [newUsername, setNewUsername] = useState<string>(""); // Assuming this comes from fetching user data
   const [newEmail, setNewEmail] = useState<string>(""); // Assuming this comes from fetching user data
 
-
-  const [usernameError, setUsernameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
-  const [formValid, setFormValid] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
 
-  const validateUsername = (value: string): boolean => {
-    return usernameValidator(value);
-  };
-
   const validateEmail = (value: string): boolean => {
     return value.includes("@");
   };
 
-  useEffect(() => {
-    //const isUsernameValid = validateUsername(newUsername);
-    const isEmailValid = validateEmail(newEmail);
-    const isPasswordValid = passwordValidator(newPassword) && newPassword === confirmPassword;
-
-    setFormValid(
-      //isUsernameValid &&
-      isEmailValid &&
-      isPasswordValid 
-      //newUsername.trim().length > 0 &&
-      //newEmail.trim().length > 0 &&
-      //newPassword.trim().length > 0
-    );
-
-  }, [newEmail, newPassword, confirmPassword]);
-  
   async function handleUpdateProfile(
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> {
     e.preventDefault();
    
-    if (!passwordValidator(newPassword) || newPassword !== confirmPassword) {
-      setSnackbarMessage("Passwords do not match.");
-      setSnackbarSeverity("error");
-      setSnackbarOpen(true);
-      return;
+    if (newPassword || confirmPassword) {
+      if (!passwordValidator(newPassword) || newPassword !== confirmPassword) {
+        setSnackbarMessage("Passwords do not match.");
+        setSnackbarSeverity("error");
+        setSnackbarOpen(true);
+        return;
+      }
     }
 
     const dataToUpdate = {
-      //username: newUsername,
       email: newEmail,
       password: hashPassword(newPassword),
       oldPassword: hashPassword(oldPassword),
     };
 
     try {  
-      /*
-      const response = await fetch('/user/update', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToUpdate),
-      });
-      */
-  
       const response = await postTest(dataToUpdate, process.env.REACT_APP_UPDATE_URL, process.env.REACT_APP_API_KEY, "PUT");
 
       if (!response.ok) {
@@ -104,7 +74,6 @@ export default function UpdateProfile(): ReactElement {
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
 
-      //setNewUsername(newUsername);
       setNewEmail(newEmail);
       setNewPassword(newPassword);
     } catch (error) {
@@ -113,28 +82,6 @@ export default function UpdateProfile(): ReactElement {
       setSnackbarOpen(true);
     }
   }
-
-    
-  
-/*
-  const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const value = event.target.value;
-    setNewUsername(value);
-
-   
-    if (!validateUsername(value)) {
-      setUsernameError(
-        "Username can only contain lowercase letters, numbers, and hyphens, and must start with a letter or number."
-      );
-      setFormValid(false); 
-    } else {
-      setUsernameError("");
-      
-    }
-  };
-  */
    
   const handleEmailChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -157,6 +104,15 @@ export default function UpdateProfile(): ReactElement {
   ): void => {
     const value = event.target.value;
     setNewPassword(value);
+
+     if (!passwordValidator(value)) {
+      setPasswordError(
+        "Password must contain at least one special character and minimun length of 6 characters."
+      );
+      setFormValid(false);
+    } else {
+      setPasswordError("");
+    }
   };
 
   const handleConfirmPasswordChange = (
@@ -177,6 +133,9 @@ export default function UpdateProfile(): ReactElement {
     setSnackbarOpen(false);
   };
 
+  const handleGoBack = () => {
+    navigate('/'); 
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -225,6 +184,8 @@ export default function UpdateProfile(): ReactElement {
                type="password"
                id="password"
                autoComplete="new-password"
+               error={!!passwordError}
+               helperText={passwordError}
                onChange={handlePasswordChange}
                />
               </Grid>
@@ -258,10 +219,18 @@ export default function UpdateProfile(): ReactElement {
            fullWidth
            variant="contained"
            sx={{ mt: 3, mb: 2 }}
-           disabled={!formValid}
          >
            Update Profile
          </Button>
+         <Button
+            variant="contained"
+            color="secondary"
+            onClick={handleGoBack}
+            fullWidth
+            sx={{ mt: 2, mb: 2 }}
+          >
+            Go Back
+          </Button>
        </Box>
      </Box>
    </Container>
