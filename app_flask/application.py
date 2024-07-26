@@ -165,16 +165,23 @@ def update_account():
         request.get_data()
         result = json.loads(request.data.decode())
 
-        new_password = result["new_password"]
-        old_password = result["old_password"]
+        # username = result["username"]
         email = result["email"]
+        new_password = result["password"]
+        old_password = result["oldPassword"]
+
+        if not old_password:
+            return Response("Old password must be provided", status=400)
 
         if current_user.verify_password(old_password):
-            current_user.password = new_password
-            current_user.email = email
+            # current_user.username = username
+            if new_password:
+                current_user.password = new_password
+            if email:
+                current_user.email = email
             db.session.commit()
             return "update successfully"
-        return "Please key in the correct password"
+        return Response("Please key in the correct old password", status=401)
     return Response("Fail to update", status=500)
 
 

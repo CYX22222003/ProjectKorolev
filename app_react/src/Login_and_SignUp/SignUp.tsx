@@ -18,6 +18,7 @@ import { Warning } from "../Components/Warning";
 import { usernameValidator } from "../utils/formatValidator";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
+import { passwordValidator } from "../utils/formatValidator";
 
 export default function SignUp(): ReactElement {
   const defaultTheme = createTheme();
@@ -28,6 +29,7 @@ export default function SignUp(): ReactElement {
 
   const [usernameError, setUsernameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
   const [formValid, setFormValid] = useState<boolean>(false);
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -44,14 +46,10 @@ export default function SignUp(): ReactElement {
     return value.includes("@");
   };
 
-  const validatePassword = (value: string): boolean => {
-    return value.length > 0;
-  };
-
   useEffect(() => {
     const isUsernameValid = validateUsername(username);
     const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
+    const isPasswordValid = passwordValidator(password);
 
     setFormValid(
       isUsernameValid &&
@@ -127,6 +125,14 @@ export default function SignUp(): ReactElement {
     const value = event.target.value;
     setPasswd(value);
     //validateForm();
+    if (!passwordValidator(value)) {
+      setPasswordError(
+        "Password must contain at least one special character and minimun length of 6 characters."
+      );
+      setFormValid(false);
+    } else {
+      setPasswordError("");
+    }
   };
 
   return (
@@ -190,6 +196,8 @@ export default function SignUp(): ReactElement {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  error={!!passwordError}
+                  helperText={passwordError}
                   onChange={handlePasswordChange}
                 />
               </Grid>

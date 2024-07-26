@@ -1,5 +1,5 @@
 export async function postTest(data : any, 
-    address : string | undefined, apiKey: string | undefined) 
+    address : string | undefined, apiKey: string | undefined, method: string = "POST") 
     : Promise<Response> {
     if (address === undefined ) {
         throw new Error("address is undefined");
@@ -10,7 +10,7 @@ export async function postTest(data : any,
     }
 
     const res : Response = await fetch(address, {
-        method: "POST",
+        method: method,
         mode: "cors",
         redirect: "follow",
         credentials: 'include',
