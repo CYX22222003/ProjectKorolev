@@ -55,6 +55,14 @@ class FileManager:
         with open(self.dest + ".txt", "rt") as file:
             return file.read()
 
+    def list_blob(self, container_name, key):
+        container_client = self.blob_service_client.get_container_client(
+            container=container_name
+        )
+        xs = container_client.list_blob_names(name_starts_with=key)
+        # print(list(xs))
+        return list(xs)
+
 
 def test_file_manager():
     try:
@@ -75,6 +83,8 @@ def test_file_manager():
         )
         file_manager.handle_txt_file()
         file_manager.remove_file("downloads/test.txt")
+
+        file_manager.list_blob("user-test2", "patient1")
         return True
     except Exception as exc:
         raise Exception("Test fails") from exc

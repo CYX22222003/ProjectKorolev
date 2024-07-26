@@ -3,6 +3,7 @@ from flask_cors import CORS
 from src.models import db, User, Patient, Session
 from src.file_manager import FileManager
 from src.genai_manager import GenAIManager
+from src.file_list_manager import FileListManager
 import json
 import os
 from dotenv import load_dotenv
@@ -102,7 +103,7 @@ def user_detail(user_id):
 def user_delete(user_id):
     user = db.get_or_404(User, user_id)
 
-    if request.method in ('DELETE', 'POST'):
+    if request.method in ("DELETE", "POST"):
         db.session.delete(user)
         db.session.commit()
         return f"{user.username} is deleted"
@@ -357,6 +358,28 @@ def call_ai_actions():
         return jsonify({"AIresponse": genai_manager.get_ai_response()})
 
     return Response("Wrong method", status=500)
+
+
+@app.route("/ai/patient", methods=["POST"])
+async def patient_analysis():
+    # Extract information from request
+    request.get_data()
+    result = json.loads(request.data.decode())
+
+    patient_id = result["patient_id"]
+    prompt = result["prompt"]
+
+    patient = db.get_or_404(Patient, patient_id)
+    patient_name = patient.name
+    # list blobs related to a patient
+    load_lister = FileManager("")
+    file_list = load_lister.list_blob(current_user.get_id(), patient_name)
+
+    # create multiple document compiler
+    compiler = FileListManager(current_user.get_id(), file_list=file_list)
+    out = await compiler.genai_call_helper(prompt)
+
+    return jsonify({"AIResponse" : out})
 
 
 @app.after_request
