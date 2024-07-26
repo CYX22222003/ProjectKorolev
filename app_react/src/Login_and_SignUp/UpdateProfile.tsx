@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";F
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -93,7 +93,6 @@ export default function UpdateProfile(): ReactElement {
       setEmailError(
         "Invalid email address."
       );
-      setFormValid(false);
     } else {
       setEmailError("");
     }
@@ -109,7 +108,6 @@ export default function UpdateProfile(): ReactElement {
       setPasswordError(
         "Password must contain at least one special character and minimun length of 6 characters."
       );
-      setFormValid(false);
     } else {
       setPasswordError("");
     }
