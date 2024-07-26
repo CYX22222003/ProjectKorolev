@@ -36,7 +36,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Create Documents" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton href="/trend">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>

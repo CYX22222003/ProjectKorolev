@@ -1,16 +1,15 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { downloadTranscription } from "./utils";
+import Button from "@mui/material/Button";
 
-type MeetingTranscriptionDisplayProbs = {
+type DisplayAnalysisProps = {
   display: string;
 };
 
-export default function MeetingTranscriptionDisplay({
+export default function DisplayAnalysis({
   display,
-}: MeetingTranscriptionDisplayProbs) {
+}: DisplayAnalysisProps): ReactElement {
   return (
     <React.Fragment>
       <Box component="form" noValidate sx={{ maxHeight: 500, minWidth: 300 }}>
@@ -29,13 +28,6 @@ export default function MeetingTranscriptionDisplay({
           }}
         />
       </Box>
-      <Button
-        onClick={() => {
-          downloadTranscription(display);
-        }}
-      >
-        Download AI response
-      </Button>
       <Button
         onClick={() => {
           navigator.clipboard.writeText(display);

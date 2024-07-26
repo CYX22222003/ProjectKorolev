@@ -379,7 +379,7 @@ async def patient_analysis():
     compiler = FileListManager(current_user.get_id(), file_list=file_list)
     out = await compiler.genai_call_helper(prompt)
 
-    return Response(out, status=200)
+    return jsonify({"AIResponse" : out})
 
 
 @app.after_request
