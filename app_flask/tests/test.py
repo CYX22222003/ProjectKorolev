@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from src.models import database_test
 from src.file_manager import test_file_manager
 from src.genai_manager import test_genai_manager
+from src.file_list_manager import test_multi_filemanager2
 import HtmlTestRunner
 
 class FlaskTest(unittest.TestCase):
@@ -32,8 +33,10 @@ class FlaskTest(unittest.TestCase):
     # simple tests for genai manager
     def test_genai_manager(self):
         out = test_genai_manager()
+        out2 = test_multi_filemanager2()
         #out = "1"
         self.assertGreater(len(out), 0)
+        self.assertGreater(len(out2), 0)
 
 
 if __name__ == "__main__":
