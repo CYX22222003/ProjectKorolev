@@ -31,9 +31,9 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(test_file_manager(), True)
 
     # simple tests for genai manager
-    def test_genai_manager(self):
+    async def test_genai_manager(self):
         out = test_genai_manager()
-        out2 = test_multi_filemanager2()
+        out2 = await test_multi_filemanager2()
         #out = "1"
         self.assertGreater(len(out), 0)
         self.assertGreater(len(out2), 0)
