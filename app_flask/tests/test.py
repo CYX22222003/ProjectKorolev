@@ -9,6 +9,7 @@ from src.file_list_manager import test_multi_filemanager2
 import HtmlTestRunner
 import asyncio
 
+
 class FlaskTest(unittest.TestCase):
     # configure for github test
     def setUp(self):
@@ -35,10 +36,11 @@ class FlaskTest(unittest.TestCase):
     def test_genai_manager(self):
         out = test_genai_manager()
         asyncio.run(test_multi_filemanager2())
-        #out = "1"
+        # out = "1"
         self.assertGreater(len(out), 0)
-        
 
 
 if __name__ == "__main__":
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html"))
+    unittest.main(
+        testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html")
+    )
