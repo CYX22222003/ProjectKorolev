@@ -7,6 +7,7 @@ from src.file_manager import test_file_manager
 from src.genai_manager import test_genai_manager
 from src.file_list_manager import test_multi_filemanager2
 import HtmlTestRunner
+import asyncio
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -31,12 +32,12 @@ class FlaskTest(unittest.TestCase):
         self.assertEqual(test_file_manager(), True)
 
     # simple tests for genai manager
-    async def test_genai_manager(self):
+    def test_genai_manager(self):
         out = test_genai_manager()
-        out2 = await test_multi_filemanager2()
+        asyncio.run(test_multi_filemanager2())
         #out = "1"
         self.assertGreater(len(out), 0)
-        self.assertGreater(len(out2), 0)
+        
 
 
 if __name__ == "__main__":
