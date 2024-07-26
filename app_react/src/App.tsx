@@ -4,6 +4,7 @@ import "./App.css";
 import Welcome from "./Homepage/Welcome";
 import SignUp from "./Login_and_SignUp/SignUp";
 import Login from "./Login_and_SignUp/Login";
+import UpdateProfile from "./Login_and_SignUp/UpdateProfile";
 import { AuthoType } from "./Login_and_SignUp/constants";
 import { setLocalStorage } from "./utils/localStorageManager";
 import { welcomeTest } from "./Login_and_SignUp/utils";
@@ -55,6 +56,7 @@ function App() {
         />
         <Route path="/test" element={<CreatePatient />} />
         <Route path="/editor" element={<Editor />} />
+        <Route path="/user/update" element={<UpdateProfile />} />
       </Routes>
     </AuthenContext.Provider>
   ) : (
@@ -64,6 +66,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/test" element={<Welcome />} />
         <Route path="/editor" element={<Editor />} />
+        <Route path="/user/update" element={<UpdateProfile />} />
       </Routes>
     </AuthenContext.Provider>
   );
