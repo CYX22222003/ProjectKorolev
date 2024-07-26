@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { downloadAIResponse } from "../GenAI_Management/utils";
 
 type DisplayAnalysisProps = {
   display: string;
@@ -34,6 +35,9 @@ export default function DisplayAnalysis({
         }}
       >
         Copy to clipboard
+      </Button><br />
+      <Button onClick={() => downloadAIResponse(display)}>
+        Download AI response
       </Button>
     </React.Fragment>
   );
