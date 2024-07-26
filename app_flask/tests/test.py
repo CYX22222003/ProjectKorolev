@@ -5,7 +5,10 @@ from dotenv import load_dotenv
 from src.models import database_test
 from src.file_manager import test_file_manager
 from src.genai_manager import test_genai_manager
+from src.file_list_manager import test_multi_filemanager2
 import HtmlTestRunner
+import asyncio
+
 
 class FlaskTest(unittest.TestCase):
     # configure for github test
@@ -32,8 +35,12 @@ class FlaskTest(unittest.TestCase):
     # simple tests for genai manager
     def test_genai_manager(self):
         out = test_genai_manager()
+        asyncio.run(test_multi_filemanager2())
+        # out = "1"
         self.assertGreater(len(out), 0)
 
 
 if __name__ == "__main__":
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html"))
+    unittest.main(
+        testRunner=HtmlTestRunner.HTMLTestRunner(output="test_report/test.html")
+    )

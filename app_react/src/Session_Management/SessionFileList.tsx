@@ -125,7 +125,7 @@ function SessionFileListFrag({
                         if (startThematicAnalysis) {
                           setStartTheme(false);
                         } else {
-                          setAITargetFile(fileName)
+                          setAITargetFile(fileName);
                           setStartTheme(true);
                         }
                       }}

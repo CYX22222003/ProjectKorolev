@@ -15,6 +15,8 @@ import SessionManagementMain from "./Session_Management/SessionManagementMain";
 import React from "react";
 import { Component } from "react";
 import Editor from "./DocumentEditor/EditorMain";
+import MeetingTranscriptionMain from "./Meeting_Transcription/MeetingTranscriptionMain";
+import TrendAnalysis from "./Trend_Analysis/TrendAnalysisMain";
 
 export const AuthenContext = createContext<AuthoType>({
   AuthoState: true,
@@ -57,6 +59,8 @@ function App() {
         <Route path="/test" element={<CreatePatient />} />
         <Route path="/editor" element={<Editor />} />
         <Route path="/update" element={<UpdateProfile />} />
+        <Route path="/audio" element={<MeetingTranscriptionMain />} />
+        <Route path="/trend" element={<TrendAnalysis />} />
       </Routes>
     </AuthenContext.Provider>
   ) : (
@@ -67,6 +71,7 @@ function App() {
         <Route path="/test" element={<Welcome />} />
         <Route path="/editor" element={<Editor />} />
         <Route path="/update" element={<UpdateProfile />} />
+        <Route path="/audio" element={<MeetingTranscriptionMain />} />
       </Routes>
     </AuthenContext.Provider>
   );

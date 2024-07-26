@@ -16,6 +16,7 @@ class GenAIManager:
         response = self.model.generate_content(f"{self.task}\n{self.text}")
         return response.text
 
+
 def test_genai_manager():
     manager = GenAIManager(
         "Statement: Singapore is the largest city in the world.",
