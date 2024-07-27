@@ -30,7 +30,7 @@ export default function PatientList({
     setFilteredRows(
       rows.filter((row) =>
         row.patient_name.toLowerCase().includes(searchQuery.toLowerCase()),
-      ),
+      )
     );
   }, [searchQuery, rows]);
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -26,6 +26,17 @@ export default function PatientSessionList({
   const [fileList, setFileList] = useState<string[]>([]);
   const [nonEmptyWarning, setNonEmptyWaring] = useState<boolean>(false);
 
+  const [filteredRows, setFilteredRows] = useState<SessionData[]>(rows);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
+  useEffect(() => {
+    setFilteredRows(
+      rows.filter((row) =>
+        row.session_name.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    );
+  }, [rows, searchQuery]);
+
   return (
     <React.Fragment>
       <Title>Session List</Title>
@@ -41,7 +52,7 @@ export default function PatientSessionList({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
+            {filteredRows.map((row, index) => (
               <TableRow key={index}>
                 <TableCell>{row.session_id}</TableCell>
                 <TableCell>{row.session_name}</TableCell>
