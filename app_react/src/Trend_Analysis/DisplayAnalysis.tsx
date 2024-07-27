@@ -35,7 +35,8 @@ export default function DisplayAnalysis({
         }}
       >
         Copy to clipboard
-      </Button><br />
+      </Button>
+      <br />
       <Button onClick={() => downloadAIResponse(display)}>
         Download AI response
       </Button>

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import Link from "@mui/material/Link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,20 +24,25 @@ export default function PatientList({
   const [patientName, setPatientName] = useState<string>("");
   const [deleteError, setDeleteError] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filteredRows, setFilteredRows] = useState<PatientData[]>(rows);
 
-  const filteredRows = rows.filter(row => 
-    row.patient_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    setFilteredRows(
+      rows.filter((row) =>
+        row.patient_name.toLowerCase().includes(searchQuery.toLowerCase()),
+      ),
+    );
+  }, [searchQuery, rows]);
 
   return (
     <React.Fragment>
       <Title>New Patient List</Title>
-      <TextField 
-        label="Search Patients" 
-        variant="outlined" 
-        fullWidth 
-        margin="normal" 
-        onChange={(e) => setSearchQuery(e.target.value)} 
+      <TextField
+        label="Search Patients"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
