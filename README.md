@@ -287,9 +287,11 @@ Therefore, we decide to design a web App providing a seamless experience for use
 
 ## Testing
 ### Unit testing
-We used the Jest framework for unit testing in our login, signup, session management and document creation features in the React frontend. In addition, we also use Python unittest library to perform unit testing on business logics and functions such as prompt construction, GenAI API call and operations on database in our Flask backend.   
+We use a combination of automatic testing and manual testing to test different methods used in various features.
+
+For the automatic testing, we used the Jest framework for unit testing in our login, signup, session management and document creation features in the React frontend. In addition, we also use Python unittest library to perform unit testing on business logics and functions such as prompt construction, GenAI API call and operations on database in our Flask backend.   
    
-Unit test report: <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>   
+Unit test report(both manual and automatic): <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>   
   
 Frontend test report:   
 <img src="/ProjectKorolev/images/test_report1.png">   
@@ -302,48 +304,45 @@ Backend test report:
 <img src="/ProjectKorolev/images/test_report6.png"> 
 
 ### Integration testing
-In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.  
+In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.   
 
-
+   
 ### User testing
-We conducted user testing for through meeting with Mdm Dawn Heng, the mental health practitioners from PeronAI on a weekly basis. We would present the new features or changes made in the sprint to the practitioner and ask for feedback. Then, we would analyzed the feedback and used it to guide our development in the next iteration.
-
-Mdm Heng has tested our prototype before our MS2 submission. She was satisfied with the session document management and the interaction with GenAI. At the same time, she also suggested us to improve the interactivity of the UI/UX design and add additional features of document preview fratures.
+We conducted user testing for through meeting with Mdm Dawn Heng, the mental health practitioners from PeronAI on a weekly basis. We would present the new features or changes made in the sprint to the practitioner and ask for feedback. Then, we would analyzed the feedback and used it to guide our development in the next iteration.   
+   
+Mdm Heng has tested our prototype before our MS2 submission. She was satisfied with the session document management and the interaction with GenAI. At the same time, she also suggested us to improve the interactivity of the UI/UX design and add additional features of document preview fratures.   
 
 ## Project Management and SWE practices
 Our team utilizes GitHub's tools such as Issues for tracking tasks, pull requests for code review, and GitHub Projects for organizing work. We follow Scrum Agile principles to manage projects, breaking down tasks into sprints for efficient execution. Furthermore, we've implemented CI/CD pipelines using GitHub Actions to automate development, integration, and deployment processes, streamlining our workflow:
 
-1. **GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.
-<img src="/ProjectKorolev/images/image12.png" >
-
-
-<img src="/ProjectKorolev/images/image13.png" >
-
-
-
-2. **GitHub Projects**: In GitHub Projects, our Kanban board provides a visual representation of our workflow. Tasks are organized into two-week sprint iterations, categorized into columns such as "To Do," "In Progress," and "Done." This structured approach to sprints allows us to effectively manage our workload and achieve our goals efficiently.
-<img src="/ProjectKorolev/images/image14.png" >
-
-
-
-3. **CI/CD Pipelines**: Through GitHub Actions, we've automated our CI/CD processes, which include basic unit testing during integration and application deployment. This automation ensures a seamless and efficient development cycle.
-<img src="/ProjectKorolev/images/image15.png" >
-
-
-<img src="/ProjectKorolev/images/image16.png" >
-
-
-<img src="/ProjectKorolev/images/image17.png" >
-
-
-<img src="/ProjectKorolev/images/image18.png" >
-
+1. **GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.  
+   
+<img src="/ProjectKorolev/images/image12.png" >  
+  
+<img src="/ProjectKorolev/images/image13.png" >   
+   
+2. **GitHub Projects**: In GitHub Projects, our Kanban board provides a visual representation of our workflow. Tasks are organized into two-week sprint iterations, categorized into columns such as "To Do," "In Progress," and "Done." This structured approach to sprints allows us to effectively manage our workload and achieve our goals efficiently.   
+  
+<img src="/ProjectKorolev/images/image14.png" >  
+  
+  
+3. **CI/CD Pipelines**: Through GitHub Actions, we've automated our CI/CD processes, which include basic unit testing during integration and application deployment. This automation ensures a seamless and efficient development cycle.  
+<img src="/ProjectKorolev/images/image15.png" >  
+   
+<img src="/ProjectKorolev/images/image16.png" >  
+   
+<img src="/ProjectKorolev/images/image17.png" >  
+  
+<img src="/ProjectKorolev/images/image18.png" >  
+  
 4. **Microservices architecture with dockers**: We use docker to containerized the baclend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.
-
+   
+5. **Code reviews and refactoring**: We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.   
+  
 ## Project Log
 <a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
     Link to project log
-</a>
+</a>  
 
 ## Problems encountered
 ### GenAI prompt generation implementation
@@ -375,8 +374,17 @@ We have stored the backend and frontend images in the remote registry of dockerH
 - use `docker run` to build and run backend and frontend service in docker container
 
 ## Reference materials:
-[cloud service](https://share.note.sx/alos0eue#NObNy2D49ZJmA//fo50xkAyhlX1n0rwW8LocoFzCXEc)       [Azure documents](https://share.note.sx/luuzym71#lvTJuUiM3wOsYAWginZhiAqwPzB7MFr2Yxi6NooarQw)       [cloud storage](https://share.note.sx/7rqk45zw#qKZw7C/mCYsTiPgXMDp9Y3ECw4oNJ298tIKPL1CW8BU)     
-[docker](https://share.note.sx/jeri1eck#ENk2viHPPqonpxz6rz4VriyjqnDlnxsVZ9UxM2U44gs)      [Flask](https://share.note.sx/0chnqv2p#nWmCPPLJRoBSLBKVZkEs5o5v54p/G55Lzw0CnDg+bDI)       [integration](https://share.note.sx/vedo0ifc#3bEIkmyrVp5J41wbF98pwVEtDBGKXfQ7Z8GNv2XK7bg)  
-[React frontend](https://share.note.sx/z0pexh1x#pEUK0Hgm7kTrbKUt8aF3A23Sa75CGQktnwaIVumE/Kk)     [software testing](https://share.note.sx/8gbtefgq#Dc4eAIeSm+v70oNSULYb0PwDGzHFUZyZ/N9foKWNwtw)      [SWE practice](https://share.note.sx/bzv8ec4a#Di+RbONLhOrNcHMKsRwInaQA9Sr4QAZuaQrdUbnSKA8)  
-[UML modeling](https://share.note.sx/y9tjpvv6#oe/AdN1MHWpvdcRBPxqAS6+rrp3+OomH7iKCva6S8Cc)    [Environment file](https://share.note.sx/mq7eqx88#R2xhlwjExXX2cgdDYKOIDBxp2h53hkv3pHN2Nfpdekg)    [Web server](https://share.note.sx/wz3m4xjs#9jML9VY+YN6RE4n0p72JoKxpm+jdm/xvBb6OKiURkG4)
+Here are collections of notes and reference materials used in the development of the product.   
+[cloud service](https://share.note.sx/alos0eue#NObNy2D49ZJmA//fo50xkAyhlX1n0rwW8LocoFzCXEc)        
+[Azure documents](https://share.note.sx/luuzym71#lvTJuUiM3wOsYAWginZhiAqwPzB7MFr2Yxi6NooarQw)       
+[cloud storage](https://share.note.sx/7rqk45zw#qKZw7C/mCYsTiPgXMDp9Y3ECw4oNJ298tIKPL1CW8BU)     
+[docker](https://share.note.sx/jeri1eck#ENk2viHPPqonpxz6rz4VriyjqnDlnxsVZ9UxM2U44gs)      
+[Flask](https://share.note.sx/0chnqv2p#nWmCPPLJRoBSLBKVZkEs5o5v54p/G55Lzw0CnDg+bDI)       
+[continuous integration](https://share.note.sx/vedo0ifc#3bEIkmyrVp5J41wbF98pwVEtDBGKXfQ7Z8GNv2XK7bg)    
+[React frontend](https://share.note.sx/z0pexh1x#pEUK0Hgm7kTrbKUt8aF3A23Sa75CGQktnwaIVumE/Kk)     
+[software testing](https://share.note.sx/8gbtefgq#Dc4eAIeSm+v70oNSULYb0PwDGzHFUZyZ/N9foKWNwtw)      
+[SWE practice](https://share.note.sx/bzv8ec4a#Di+RbONLhOrNcHMKsRwInaQA9Sr4QAZuaQrdUbnSKA8)  
+[UML modeling](https://share.note.sx/y9tjpvv6#oe/AdN1MHWpvdcRBPxqAS6+rrp3+OomH7iKCva6S8Cc)    
+[Environment Setup and dependencies management](https://share.note.sx/mq7eqx88#R2xhlwjExXX2cgdDYKOIDBxp2h53hkv3pHN2Nfpdekg)    
+[Web server](https://share.note.sx/wz3m4xjs#9jML9VY+YN6RE4n0p72JoKxpm+jdm/xvBb6OKiURkG4)
 
