@@ -42,7 +42,7 @@ export default function PatientSessionList({
     <React.Fragment>
       <Title>Session List</Title>
       <TextField
-        label="Search Patients"
+        label="Search sessions"
         variant="outlined"
         fullWidth
         margin="normal"
