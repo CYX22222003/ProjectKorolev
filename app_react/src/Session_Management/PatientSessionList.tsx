@@ -13,6 +13,7 @@ import { createListBlobs } from "../utils/Document_Upload/documentManager";
 import { getLocalStorage } from "../utils/localStorageManager";
 import SessionFileList from "./SessionFileList";
 import MySnackbar from "../Components/SnackBar";
+import TextField from "@mui/material/TextField";
 
 export default function PatientSessionList({
   setRows,
@@ -40,6 +41,13 @@ export default function PatientSessionList({
   return (
     <React.Fragment>
       <Title>Session List</Title>
+      <TextField
+        label="Search Patients"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
