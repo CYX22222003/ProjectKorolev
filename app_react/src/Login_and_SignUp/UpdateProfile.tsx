@@ -15,11 +15,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Warning } from "../Components/Warning";
 import { usernameValidator } from "../utils/formatValidator";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { passwordValidator } from "../utils/formatValidator";
-import { useNavigate } from "react-router-dom"; 
-
+import { useNavigate } from "react-router-dom";
 
 export default function UpdateProfile(): ReactElement {
   const defaultTheme = createTheme();
@@ -37,7 +36,9 @@ export default function UpdateProfile(): ReactElement {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">("success");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<"success" | "error">(
+    "success",
+  );
 
   const validateEmail = (value: string): boolean => {
     return value.includes("@");
@@ -47,7 +48,7 @@ export default function UpdateProfile(): ReactElement {
     e: React.FormEvent<HTMLFormElement>,
   ): Promise<void> {
     e.preventDefault();
-   
+
     if (newPassword || confirmPassword) {
       if (!passwordValidator(newPassword) || newPassword !== confirmPassword) {
         setSnackbarMessage("Passwords do not match.");
@@ -63,11 +64,16 @@ export default function UpdateProfile(): ReactElement {
       oldPassword: hashPassword(oldPassword),
     };
 
-    try {  
-      const response = await postTest(dataToUpdate, process.env.REACT_APP_UPDATE_URL, process.env.REACT_APP_API_KEY, "PUT");
+    try {
+      const response = await postTest(
+        dataToUpdate,
+        process.env.REACT_APP_UPDATE_URL,
+        process.env.REACT_APP_API_KEY,
+        "PUT",
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to update profile.');
+        throw new Error("Failed to update profile.");
       }
 
       setSnackbarMessage("Profile updated successfully.");
@@ -82,31 +88,29 @@ export default function UpdateProfile(): ReactElement {
       setSnackbarOpen(true);
     }
   }
-   
+
   const handleEmailChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setNewEmail(value);
 
     if (!validateEmail(value)) {
-      setEmailError(
-        "Invalid email address."
-      );
+      setEmailError("Invalid email address.");
     } else {
       setEmailError("");
     }
   };
 
   const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setNewPassword(value);
 
-     if (!passwordValidator(value)) {
+    if (!passwordValidator(value)) {
       setPasswordError(
-        "Password must contain at least one special character and minimun length of 6 characters."
+        "Password must contain at least one special character and minimun length of 6 characters.",
       );
     } else {
       setPasswordError("");
@@ -114,26 +118,26 @@ export default function UpdateProfile(): ReactElement {
   };
 
   const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setConfirmPassword(value);
-  }
+  };
 
   const handleOldPasswordChecking = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ): void => {
     const value = event.target.value;
     setOldPassword(value);
-  }
+  };
 
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
 
   const handleGoBack = () => {
-    navigate('/'); 
-  }
+    navigate("/");
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -175,64 +179,64 @@ export default function UpdateProfile(): ReactElement {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-               required
-               fullWidth
-               name="newPassword"
-               label="New Password"
-               type="password"
-               id="password"
-               autoComplete="new-password"
-               error={!!passwordError}
-               helperText={passwordError}
-               onChange={handlePasswordChange}
-               />
+                  required
+                  fullWidth
+                  name="newPassword"
+                  label="New Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  error={!!passwordError}
+                  helperText={passwordError}
+                  onChange={handlePasswordChange}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-               required
-               fullWidth
-               name="confirmPassword"
-               label="Confirm New Password"
-               type="password"
-               id="password"
-               autoComplete="new-password"
-               onChange={handleConfirmPasswordChange}
-               />
-            </Grid>
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm New Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={handleConfirmPasswordChange}
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
-               required
-               fullWidth
-               name="oldPassword"
-               label="Confirm the change with the old password"
-               type="password"
-               id="password"
-               autoComplete="new-password"
-               onChange={handleOldPasswordChecking}
-               />
+                  required
+                  fullWidth
+                  name="oldPassword"
+                  label="Confirm the change with the old password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={handleOldPasswordChecking}
+                />
+              </Grid>
             </Grid>
-         </Grid>
-         <Button
-           type="submit"
-           fullWidth
-           variant="contained"
-           sx={{ mt: 3, mb: 2 }}
-         >
-           Update Profile
-         </Button>
-         <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleGoBack}
-            fullWidth
-            sx={{ mt: 2, mb: 2 }}
-          >
-            Go Back
-          </Button>
-       </Box>
-     </Box>
-   </Container>
-   <Snackbar
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Update Profile
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleGoBack}
+              fullWidth
+              sx={{ mt: 2, mb: 2 }}
+            >
+              Go Back
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+      <Snackbar
         open={snackbarOpen}
         autoHideDuration={5000}
         onClose={handleCloseSnackbar}
@@ -246,6 +250,6 @@ export default function UpdateProfile(): ReactElement {
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>
- </ThemeProvider>
-);
+    </ThemeProvider>
+  );
 }

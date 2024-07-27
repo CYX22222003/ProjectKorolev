@@ -127,7 +127,7 @@ export default function SignUp(): ReactElement {
     //validateForm();
     if (!passwordValidator(value)) {
       setPasswordError(
-        "Password must contain at least one special character and minimun length of 6 characters."
+        "Password must contain at least one special character and minimun length of 6 characters.",
       );
       setFormValid(false);
     } else {
