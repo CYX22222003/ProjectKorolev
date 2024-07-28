@@ -325,7 +325,7 @@ In order to ensure diiferent features are intended to work correctly, we decide 
 
 Results of Postman auotomatic integration test  
    
-```[json]
+```javascript
 {
 	"id": "05d726ca-1ea4-4606-a99c-c27578c93c22",
 	"name": "local backend test",
@@ -408,7 +408,7 @@ Results of Postman auotomatic integration test
 }
 ```
     
-```[json]
+```javascript
 {
 	"id": "066b9a0d-dbbf-4578-b264-a60bfaefaed0",
 	"name": "local backend test 2",	
@@ -677,7 +677,7 @@ Results of Postman auotomatic integration test
 }
 ``` 
 
-```[json]
+```javascript
 {
 	"id": "749c4593-a938-4482-8617-873d25284f5e",
 	"name": "simple backend test",
@@ -691,7 +691,9 @@ Results of Postman auotomatic integration test
 		{
 			"id": "4300e21e-c086-48a8-a48c-d0459ef804c8",
 			"name": "transcription Copy",
-			"url": "https://personai-transcription-containerized-h0azhbc9gpfadpb7.centralus-01.azurewebsites.net//transcribe",
+			"url": "https://personai-transcription-containerized" 
+                + "-h0azhbc9gpfadpb7.centralus-01" 
+                + ".azurewebsites.net//transcribe",
 			"time": 52477,
 			"responseCode": {
 				"code": 200,
