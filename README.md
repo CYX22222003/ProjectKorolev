@@ -14,13 +14,13 @@ The Generative AI solution can potentially help practitioners to summarize and d
 
 Therefore, we decide to design a web App providing a seamless experience for users to:
 
-- CRUD (Create/Read/Update/Delete) patient sessions (as a text data file) to cloud storage
+- CRUD (Create/Read/Update/Delete) patient sessions and related documents to cloud storage
     
-- CRUD to allow app users to select/specify the gen AI context to interpret in
+- CRUD to allow app users to select/specify the Gen AI context to interpret in
     
-- Make API calls to either online services/local server Gen AI model
+- Make API calls to Gen AI model   
     
-- Display results of Gen AI summary, insights on Web App
+- Display results of Gen AI summary and insights on Web App
     
 - User Authentication and access to only appropriate user data
 
@@ -41,7 +41,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Structured database for user personal information**: Store the username, email and user password for authentication
 - **Note-taking editor**: Built-in note-taking editor for metal health practitioners to add additional notes such as the modelities of therapy
 - **Document preview**: Enable users to preview focuments uploaded to cloud storage. 
-- *current progress*: We have implemented the cloud storage and database for users to store and extract documents. The text editior is also available for users. We are still working on implementing the document preview 
+- *current progress*: We have implemented the cloud storage and database for users to store and extract documents. The text editior and document preview window are also available for users to improve interactivity and UI/UX.   
 <img src="/ProjectKorolev/images/image3.png" >
 
 
@@ -57,7 +57,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - **Dialogue transcription**: Generate a text transcription for the consulting sessions with patients.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
-- *current progress*: We have implemented the summarization function using gemini AI.
+- *current progress*: We have implemented the summarization and sentimental services with the help of Gemini API. The dialogue transcription has also be implemented based on the transformer model.  
 <img src="/ProjectKorolev/images/image6.png" >
 
 
@@ -68,7 +68,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 4. Insight Generation
 - **Trend Insights**: Analyze multiple documents for a specific patients.
 - **Thematic analysis**: Analyze patients data based on a specific theme such as family issues.
-- *current progress*: Mental health practitioners are able to download the sentimental analysis reports and session summaries generated from AI. We are working on improving the quality of the sentimental analysis generated. We are also working on enabling the GenAI to analyse multiple doucments related to a user
+- *current progress*: We have implemented both features and users can perform trend analysis and thematic analysis on patients.
 
 #### 5. Actionable Recommendations
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment including potential therapy adjustments based on mental health practitioners' notes on mode of therapy.
@@ -83,7 +83,8 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - As a Mental Health Practitioner, I want to upload session documentation and get AI-generated summaries to quickly review key insights from the sessions.
 - As a Mental Health Practitioner, I want to review a patient's progress over time to make informed decisions about their treatment plan.
 - As a Mental Health Practitioner, I want to review a patient's history and recent sessions before an appointment to prepare effectively.
-- As a Mental Health Practitioner, I want to receive alerts about potential risk factors in patient data to intervene promptly and adjust treatment plans.
+- As a Mental Health Practitioner, I want to receive alerts about potential risk factors in patient data to intervene promptly and adjust treatment plans.  
+- As a Mental Health Practitioner, I want to generate a transcript of the consulting session and perform further analysis based on the reports.   
 - As a Mental Health Practitioner, I want to ensure that sensitive patient data is secure and access is restricted based on user roles and permissions to comply with privacy regulations.
 
 
@@ -122,6 +123,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 2. The practitioner navigates to the patient's history dashboard.
 3. The system displays summaries of past sessions
 4. Based on past trajectory of treatment and the feedback, the practitioner adjusts the treatment plan if necessary.
+5. Users can easily navigate to specific patient and session using the search bar on the patient and session management page
 
 ### 4. Preparing for a Session
 **Actors:** Mental Health Practitioner  
@@ -151,14 +153,13 @@ Therefore, we decide to design a web App providing a seamless experience for use
 4. Sensitive patient data is encrypted both in transit and at rest, ensuring privacy and compliance with regulations (e.g., HIPAA).
 
 ## Software architecture design
-### Frontend (React.js)
+### Frontend (React.Ts)
 
 #### Components:
 
 1. **Authentication Components:**
     - Login
     - Registration
-    - Forgot Password
     - Profile Management
 2. **Patient Management:**
     - List of Patients
@@ -171,19 +172,24 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - Add New Session
     - Edit Session Details
 4. **AI Integration:**
-    - Form for specifying AI context parameters
+    - Form for specifying prompts and context
     - Display AI-generated summaries and insights
-5. **Dashboard:**
-    - Visualizations for patient's history record of AI-generated insights
-6. **Navigation:**
+    - Meeting transcriptio   
+5. **Navigation:**
     - Header with navigation links
     - Sidebar or menu for easy access to different sections
-7. **Error Handling and Notifications:**
+6. **Error Handling and Notifications:**
     - Display error messages and notifications for user feedback
 
 #### Libraries:
 - **React Router**: For client-side routing.
 - **Material-UI**: For consistent and responsive UI components.
+- **@azure/storage-blob**: For the interaction with cloud storage.   
+- **jest**: Provide automatic unitesting for some features
+- **mui-tiptap**: For the implementation of rich text editor
+- **dayjs**: For the implementation of datepicker
+- **mammoth**: For the implementation of document preview  
+- **bcrtptjs**: Hashing passwords sent stored in the backend database  
 
 ### Backend (Flask)
 
@@ -201,8 +207,10 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - `/patients/session/create` (POST)
     - `/patients/sessions/<session_id>` (GET, PUT, DELETE)
 4. **AI Integration Endpoints:**
-    - `/ai/summary` (POST): To request AI-generated summaries of each session.
-    - `/ai/insight` (POST): To request for analysis of patients' patterns and trends
+    - `/ai/action` (POST): To request AI-generated summaries of each session.  
+    - `/ai/patient` (POST): To request for analysis of patients' patterns and trends  
+5. **Meeting transcription (different base URL):**  
+    - `/transcribe` (POST): To request for a meeting transcription service
 
 #### API design:
 <a href="https://api.postman.com/collections/32139578-2adfeb79-ccf3-4377-8c8b-8cd204ca9a1c?access_key=PMAT-01J1RPWHCNH4HA4AV31Z5NTGTM">
@@ -210,15 +218,22 @@ Therefore, we decide to design a web App providing a seamless experience for use
 </a>
 
 #### Libraries: 
-- **Flask**: Lightweight Python web framework for building RESTful APIs.
-- **Flask-CORS**: For handling Cross-Origin Resource Sharing (CORS) headers.
-- **Flask-Login**: for user authentication
-- **SQLAlchemy**: For database interactions.
+- **Flask**: Lightweight Python web framework for building RESTful APIs.  
+- **Flask-CORS**: For handling Cross-Origin Resource Sharing (CORS) headers.  
+- **Flask-Login**: for user authentication.  
+- **SQLAlchemy**: For database interactions.  
+- **azure-storage-blob[async]**: For interaction with cloud storage.  
+- **black**: For formatting and beautifying code
+- **google-generativeai**: For the interaction with generative AI  
+- **gunicorn**: Python WSGI HTTP Server to provide web service for the backend     
+- **pylint**: linter to check for programmatic errors and stylistic errors    
+- **huggingface_cli**, **transformers**, **pytorch**: Library to fine-tune, load and provide meeting transcription service
 
-### Database
+### Database and miscellaneous tools
 - **SQL Database**: Use **SQLite SQL** database to store user authentication data 
 - **Cloud Storage**: **Azure Blob Storage** to store patient information, session data, and AI context parameters.
 - **Generative AI**: fine-tuned **Google Gemini AI** to generate response with well designed prompts
+- **Transformer**: **OpenAI whisper-tiny** transformer for meeting transcription
 
 ### ER Diagram 
 <img src="/ProjectKorolev/images/image10.png" >
@@ -248,21 +263,21 @@ Therefore, we decide to design a web App providing a seamless experience for use
 | Feature: Implement patients management and sessions management                      | P0       | L    | Iteration 2 | Done        |
 | Feature: Set up interaction with cloud storage and implement file uploading feature | P0       | L    | Iteration 2 | Done        |
 | Docs: Create mockup of the frontend and complete API design                         | P0       | M    | Iteration 2 | Done        |
-| Test: Add unit test cases for utility functions                                     | P1       | M    | Iteration 3 | In Progress |
+| Test: Add unit test cases for utility functions                                     | P1       | M    | Iteration 3 | Done        |
 | Bug: Exception caused by the failure to follow username convention is not handled   | P2       | S    | Iteration 3 | Done        |
 | Bug: Use Toast elements to display warnings and alerts                              | P2       | S    | Iteration 3 | Done        |
 | Bug: detect empty inputs during signup and login                                    | P2       | M    | Iteration 3 | Done        |
 | Feature: create text editor for users to key in context documents                   | P0       | S    | Iteration 3 | Done        |
 | Feature: enable users to delete unwanted documents from cloud storage               | P0       | M    | Iteration 3 | Done        |
 | Docs: Update README, video and poster for MS2 submission                            | P0       | L    | Iteration 3 | Done        |
-| Enhancement: enable users to preview uploaded documents                             | P0       | M    | Iteration 4 | Todo        |
-| Enhancement: enable users to search for the patient and the session                 | P0       | M    | Iteration 4 | Todo        |
-| Feature: audio-to-text/ dialogue-to-text                                            | P0       | L    | Iteration 4 | Todo        |
-| Feature: Implement user account management feature                                  | P0       | M    | Iteration 4 | Todo        |
-| Feature: fine-tune GenAI model to improve its performance and quality of response   | P0       | L    | Iteration 4 | Todo        |
-| Enhancement : use GenAI to implement analysis of multiple related documents         | P0       | L    | Iteration 4 | Todo        |
-| Enhancement: beautify the webpage design to improve UI/UX                           | P1       | L    | Iteration 5 | Todo        |
-| Docs: Update relevant documents, posters and videos for final submission            | P1       | L    | Iteration 5 | Todo        |    
+| Enhancement: enable users to preview uploaded documents                             | P0       | M    | Iteration 4 | Done        |
+| Enhancement: enable users to search for the patient and the session                 | P0       | M    | Iteration 4 | Done        |
+| Feature: audio-to-text/ dialogue-to-text                                            | P0       | L    | Iteration 4 | Done        |
+| Feature: Implement user account management feature                                  | P0       | M    | Iteration 4 | Done        |
+| Feature: fine-tune GenAI model to improve its performance and quality of response   | P0       | L    | Iteration 4 | Done        |
+| Enhancement : use GenAI to implement analysis of multiple related documents         | P0       | L    | Iteration 4 | Done        |
+| Enhancement: beautify the webpage design to improve UI/UX                           | P1       | L    | Iteration 5 | Done        |
+| Docs: Update relevant documents, posters and videos for final submission            | P1       | L    | Iteration 5 | Done        |    
      
 | Iteration   | From      | To        |
 | ----------- | --------- | --------- |
@@ -304,7 +319,9 @@ Backend test report:
 <img src="/ProjectKorolev/images/test_report6.png"> 
 
 ### Integration testing
-In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. We adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.   
+In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. 
+
+We also adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.   
 
    
 ### User testing
@@ -359,14 +376,15 @@ The seperation of frontend application and backend application deployment also r
 ### Storage for Blob
 We initially decide to store BLOB data such as word document in SQL database on the frontend server in the format of a byte string. However, this approach makes our backend cubersome, as the conversion between the blobs and byte string makes the processing of BLOB files inefficient and complicated. Therefore, we switch to use Cloud services such as Azure Blob Storage for a more efficient and secure storage of large media files. Furthermore, we streamline the interaction between the web application and cloud storage and enable Blob data to be directly sent from the frontend to the cloud storage utilize the API of Azure Cloud Service. The backend will only store the reference to the Blob file in the cloud storage in the database, and use these reference to extract the documents from cloud storage for further processing.
 
+### Over-consumption of computing resources
+When more features are introduced to the 
+
 ## Setting Up
 **Test on the website**
 - Test the website by accessing the URL:
   <a href="https://personaiweb.vercel.app/">Link</a>
-- Video tutorial:
-  <a href="">Link to video tutorial</a>
      
-
+    
 ## Reference materials:
 Here are collections of notes and reference materials used in the development of the product.   
 [cloud service](https://share.note.sx/alos0eue#NObNy2D49ZJmA//fo50xkAyhlX1n0rwW8LocoFzCXEc)        
