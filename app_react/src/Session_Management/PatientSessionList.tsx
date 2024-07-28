@@ -34,7 +34,7 @@ export default function PatientSessionList({
     setFilteredRows(
       rows.filter((row) =>
         row.session_name.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+      ),
     );
   }, [rows, searchQuery]);
 

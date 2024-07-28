@@ -7,8 +7,10 @@ import MyDatePicker from "../Components/DatePicker";
 import Upload from "../Components/Upload";
 import Editor from "../DocumentEditor/EditorMain";
 import fetchMock from "jest-fetch-mock";
+import Background from "../Components/Background";
+import { mainListItems, secondaryListItems } from "../Components/Navbar";
 
-describe("Test self-created components", () => {
+describe("Test the display of self-created components", () => {
   let consoleErrorSpy: jest.SpyInstance;
   let consoleWarnSpy: jest.SpyInstance;
 
@@ -52,5 +54,30 @@ describe("Test self-created components", () => {
     render(<Editor />);
     fetchMock.mockResponse(JSON.stringify({}));
     expect(screen.getByText(/Editor/i)).toBeInTheDocument();
+  });
+
+  it("Test background", () => {
+    render(<Background elements={[]} header="TestBackground" />);
+    expect(screen.getByText(/TestBackground/i)).toBeInTheDocument();
+  });
+
+  it("Test navbar", () => {
+    function TestNavbar(): ReactElement {
+      return (
+        <React.Fragment>
+          {mainListItems}
+          <br />
+          {secondaryListItems}
+        </React.Fragment>
+      );
+    }
+
+    render(<TestNavbar />);
+    expect(screen.getByText(/AI suggestions/i)).toBeInTheDocument();
+    expect(screen.getByText(/About Us/i)).toBeInTheDocument();
+    expect(screen.getByText(/Tutorial/i)).toBeInTheDocument();
+    expect(screen.getByText(/Patient Management/i)).toBeInTheDocument();
+    expect(screen.getByText(/Update Profile/i)).toBeInTheDocument();
+    expect(screen.getByText(/Home/i)).toBeInTheDocument();
   });
 });
