@@ -81,6 +81,41 @@ function SessionFileListFrag({
 
   return (
     <React.Fragment>
+      <Box sx={{ display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "50vh",
+        justifyContent: "center", 
+        textAlign: "center", 
+        gap: 2,
+        }}>
+        <Typography mt={4} variant="h5" sx={{ textAlign: "center" }}>
+          Selected File: {aiTargetFile}
+        </Typography>
+        <br />
+        {startPrompt && (
+          <AIPromptForm
+            fileName={aiTargetFile}
+            type="docx"
+            setStartCalling={setStartCalling}
+            setDisplayAIMessage={setDisplayAIMessage}
+            setAIResponse={setAIResponse}
+          />
+        )}{" "}
+        <br />
+        {startThematicAnalysis && (
+          <ThemeAnalysis
+            fileName={aiTargetFile}
+            type="docx"
+            setStartCalling={setStartCalling}
+            setDisplayAIMessage={setDisplayAIMessage}
+            setAIResponse={setAIResponse}
+          />
+        )}{" "}
+        <br />
+        {startCalling && <CircularProgress />}
+        {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
+      </Box>
       <Title>Session file List</Title>
       <TableContainer sx={{ maxHeight: 500 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -196,34 +231,6 @@ function SessionFileListFrag({
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ alignItems: "center" }}>
-        <Typography mt={4} variant="h5">
-          Selected File: {aiTargetFile}
-        </Typography>
-        <br />
-        {startPrompt && (
-          <AIPromptForm
-            fileName={aiTargetFile}
-            type="docx"
-            setStartCalling={setStartCalling}
-            setDisplayAIMessage={setDisplayAIMessage}
-            setAIResponse={setAIResponse}
-          />
-        )}{" "}
-        <br />
-        {startThematicAnalysis && (
-          <ThemeAnalysis
-            fileName={aiTargetFile}
-            type="docx"
-            setStartCalling={setStartCalling}
-            setDisplayAIMessage={setDisplayAIMessage}
-            setAIResponse={setAIResponse}
-          />
-        )}{" "}
-        <br />
-        {startCalling && <CircularProgress />}
-        {displayAIMessage && <AIMessageDisplay aiResponse={aiResponse} />}
-      </Box>
       <DocxView
         fileuri={previewblob}
         open={startPreview}
