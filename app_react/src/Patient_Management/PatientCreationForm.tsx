@@ -47,7 +47,7 @@ export default function PatientCreationForm({
             alignItems: "center",
           }}
         >
-          <Typography component="h2" variant="h5">
+          <Typography component="h2" sx={{ fontWeight: 1000, color: "primary.main", fontSize: '2rem'}}>
             Create New user
           </Typography>
           <Box
