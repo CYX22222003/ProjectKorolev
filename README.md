@@ -365,13 +365,7 @@ We initially decide to store BLOB data such as word document in SQL database on 
   <a href="https://personaiweb.vercel.app/">Link</a>
 - Video tutorial:
   <a href="">Link to video tutorial</a>
-      
-**Docker images**   
-We have stored the backend and frontend images in the remote registry of dockerHub. Public images are available to be pulled to local machine for testing.  
-- frontend image: `e1155533/orbital_test:frontend_ms2`
-- backend image: `e1155533/orbital_test:backend_ms2`
-- use `docker pull` to pull images to the local machine
-- use `docker run` to build and run backend and frontend service in docker container
+     
 
 ## Reference materials:
 Here are collections of notes and reference materials used in the development of the product.   
