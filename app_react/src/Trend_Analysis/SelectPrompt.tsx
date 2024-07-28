@@ -47,7 +47,7 @@ export default function SelectPrompt({
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography component="h2" variant="h5">
+            <Typography component="h2" variant="h5" mb={2}>
               General Analysis
             </Typography>
             <FormControl sx={{ m: 1, minWidth: 500 }}>
