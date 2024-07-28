@@ -39,8 +39,10 @@ Therefore, we decide to design a web App providing a seamless experience for use
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
+- **patient management dashboard**: Enable users to store information of patients to the backend database and cloud storage and manage the information of patients   
+- **session management dashboard**: Enable users to create, view and delete sessions for specific patients. Documents related to the sessions can also be uploaded for further analysis
 - **Note-taking editor**: Built-in note-taking editor for metal health practitioners to add additional notes such as the modelities of therapy
-- **Document preview**: Enable users to preview focuments uploaded to cloud storage. 
+- **Document preview**: Enable users to preview documents uploaded to cloud storage. 
 - *current progress*: We have implemented the cloud storage and database for users to store and extract documents. The text editior and document preview window are also available for users to improve interactivity and UI/UX.   
 <img src="/ProjectKorolev/images/image3.png" >
 
@@ -56,7 +58,7 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Dialogue transcription**: Generate a text transcription for the consulting sessions with patients.
     - **Text Summarization**: Generate concise summaries of each session, highlighting key points, treatment changes, and notable events.
-    - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood and progression over time.
+    - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood of a specific sessions.
 - *current progress*: We have implemented the summarization and sentimental services with the help of Gemini API. The dialogue transcription has also be implemented based on the transformer model.  
 <img src="/ProjectKorolev/images/image6.png" >
 
