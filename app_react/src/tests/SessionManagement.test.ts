@@ -1,9 +1,5 @@
 import {
   createSession,
-  getPatientSessionList,
-  generateSessionName,
-  uploadSessionDocument,
-  deleteSession
 } from "../Session_Management/utils";
 
 import fetchMock from "jest-fetch-mock";
@@ -77,12 +73,12 @@ describe("Test session creation feature", () => {
 })
 
 
-describe("Test session documents management", () => {
-    it("Test creation of file list (manual)", () => {
+describe("Test session documents management (Manual)", () => {
+    it("Test creation of file list", () => {
         expect(true).toBeTruthy();
     });
 
-    it("Error handling of filelist creation (manual)", () => {
+    it("Error handling of filelist creation", () => {
         expect(false).toBeFalsy();
     });
 })
