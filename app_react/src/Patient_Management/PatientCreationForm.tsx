@@ -72,14 +72,15 @@ export default function PatientCreationForm({
                 />
               </Grid>
             </Grid>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mb: 2 }}>
             <Button
               type="submit"
-              fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{borderRadius: "20px", width: "90px" }}
             >
               Create
             </Button>
+            </Box>
           </Box>
         </Box>
       </Container>
