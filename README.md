@@ -377,7 +377,7 @@ The seperation of frontend application and backend application deployment also r
 We initially decide to store BLOB data such as word document in SQL database on the frontend server in the format of a byte string. However, this approach makes our backend cubersome, as the conversion between the blobs and byte string makes the processing of BLOB files inefficient and complicated. Therefore, we switch to use Cloud services such as Azure Blob Storage for a more efficient and secure storage of large media files. Furthermore, we streamline the interaction between the web application and cloud storage and enable Blob data to be directly sent from the frontend to the cloud storage utilize the API of Azure Cloud Service. The backend will only store the reference to the Blob file in the cloud storage in the database, and use these reference to extract the documents from cloud storage for further processing.
 
 ### Over-consumption of computing resources
-When more features are introduced to the 
+The introduction of new features may over-consume computing resources of the Azure Web Service. Therefore, we decide to adopt the microservice architecture for backend development and seperate some of the API service to different resource group. Different features communicate with each other through API calls. 
 
 ## Setting Up
 **Test on the website**
