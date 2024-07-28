@@ -197,7 +197,7 @@ describe("Test blob delete function", () => {
 
 })
 
-describe("Test upload action", () => {
+describe("Test upload action (manual)", () => {
     it("Test file upload action", () => {
         expect(true).toBeTruthy();
     })
@@ -207,3 +207,8 @@ describe("Test upload action", () => {
     })
 })
 
+describe("Create document list test (manual)", () => {
+    it("Test the display of blob list", () => {
+        expect(true).toBeTruthy();
+    })
+})

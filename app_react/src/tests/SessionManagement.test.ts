@@ -78,11 +78,11 @@ describe("Test session creation feature", () => {
 
 
 describe("Test session documents management", () => {
-    it("Test creation of file list", () => {
+    it("Test creation of file list (manual)", () => {
         expect(true).toBeTruthy();
     });
 
-    it("Error handling of filelist creation", () => {
+    it("Error handling of filelist creation (manual)", () => {
         expect(false).toBeFalsy();
     });
 })
