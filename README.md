@@ -319,9 +319,403 @@ Backend test report:
 <img src="/ProjectKorolev/images/test_report6.png"> 
 
 ### Integration testing
-In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints. 
+In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints.
 
-We also adopt the dogfooding principles to perform manual integration testing. Every components are well functioning and meet the requirements of target audiences.   
+Results of Postman auotomatic integration test  
+   
+```[json]
+{
+	"id": "05d726ca-1ea4-4606-a99c-c27578c93c22",
+	"name": "local backend test",
+	"collection_id": "32139578-c504eecf-7b32-4a35-86a0-c9ba541977a5",
+	"totalPass": 7,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "f36b9d13-fdfc-44d5-8c1a-7457f9eeae5e",
+			"name": "Delete session",
+			"url": "http://localhost:5000/session/1/delete",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			]
+		},
+		{
+			"id": "d531495e-c6db-4bae-ab4b-281a441b5656",
+			"name": "Delete patient",
+			"url": "http://localhost:5000/patient/1/delete",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			]
+		},
+		{
+			"id": "f4d5239c-9156-4175-b838-1b1d68e35c60",
+			"name": "Logout",
+			"url": "http://localhost:5000/logout",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 28
+}
+```
+    
+```[json]
+{
+	"id": "066b9a0d-dbbf-4578-b264-a60bfaefaed0",
+	"name": "local backend test 2",	
+	"collection_id": "32139578-c504eecf-7b32-4a35-86a0-c9ba541977a5",
+	"totalPass": 24,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "90be1dc4-04bf-4653-bbcc-42a6a5c3e850",
+			"name": "Get all users",
+			"url": "http://127.0.0.1:5000/users",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true,
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			]
+		},
+		{
+			"id": "fe37b01c-9712-4552-bc6b-cf1d44e52ce1",
+			"name": "Create Users",
+			"url": "http://localhost:5000/user/create",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true,
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			]
+		},
+		{
+			"id": "df1b4a4d-7fe6-4c6f-8d50-c6c4639e7795",
+			"name": "Login",
+			"url": "http://localhost:5000/login",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			]
+		},
+		{
+			"id": "257f9f8c-7cec-41f8-a021-f2a35f53eef8",
+			"name": "Update record",
+			"url": "http://localhost:5000/user/update",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			]
+		},
+		{
+			"id": "36c2c04e-1835-4806-ac8f-4dfb60a267f9",
+			"name": "Get all patients",
+			"url": "http://localhost:5000/patients",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			]
+		},
+		{
+			"id": "2878e02c-43a0-48c3-a604-eacb760b2b1e",
+			"name": "Create new patient",
+			"url": "http://localhost:5000/patient/create",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			]
+		},
+		{
+			"id": "e353467f-fce9-4bd9-81c6-da17c65922fa",
+			"name": "Update patient",
+			"url": "http://localhost:5000/patient/1/update",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			]
+		},
+		{
+			"id": "52e9659a-0633-45e8-b7dd-ba2d7aa86168",
+			"name": "Create session test",
+			"url": "http://localhost:5000/session/create",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			]
+		},
+		{
+			"id": "f2579667-cc33-4e57-adfe-19c359f727e8",
+			"name": "Get sessions",
+			"url": "http://localhost:5000/sessions",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			]
+		},
+		{
+			"id": "17b18924-6fd4-4955-8dc0-95eade4c7c3d",
+			"name": "Update session",
+			"url": "http://localhost:5000/session/1/update",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			]
+		},
+		{
+			"id": "10eb00e8-8fb3-4f3a-82a9-23b8d1490ffa",
+			"name": "Get patient sessions",
+			"url": "http://localhost:5000/session/1/get",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 92
+}
+``` 
+
+```[json]
+{
+	"id": "749c4593-a938-4482-8617-873d25284f5e",
+	"name": "simple backend test",
+	"collection_id": "32139578-00b2d87f-b2a5-44e5-abf3-e8161dcfcbfc",
+	"totalPass": 1,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "4300e21e-c086-48a8-a48c-d0459ef804c8",
+			"name": "transcription Copy",
+			"url": "https://personai-transcription-containerized-h0azhbc9gpfadpb7.centralus-01.azurewebsites.net//transcribe",
+			"time": 52477,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Returns 200 OK status": true
+			},
+			"testPassFailCounts": {
+				"Returns 200 OK status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				52477
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 52477
+}
+``` 
+
+
+We also adopt the dogfooding principles to perform manual integration testing on the interaction between cloud storage and the application. Every components are well functioning and meet the requirements of target audiences.   
 
    
 ### User testing
