@@ -61,8 +61,10 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - *current progress*: We have implemented the summarization and sentimental services with the help of Gemini API. The dialogue transcription has also be implemented based on the transformer model.  
 <img src="/ProjectKorolev/images/image6.png" >
     
-<img src="/ProjectKorolev/images/image7.png" >
-    
+<img src="/ProjectKorolev/images/image7.png" >   
+     
+<img src="/ProjectKorolev/images/meeting_transcription.png">
+    	 
 
 #### 4. Insight Generation
 - **Trend Insights**: Analyze multiple documents for a specific patients.
