@@ -62,7 +62,7 @@ export default function SessionCreationForm({
             alignItems: "center",
           }}
         >
-          <Typography component="h2" variant="h5">
+          <Typography component="h2" sx={{ fontWeight: 1000, color: "primary.main", fontSize: '1.7rem'}}>
             Create New Session for {patient_name}
           </Typography>
           <Box
@@ -76,15 +76,17 @@ export default function SessionCreationForm({
                 <MyDatePicker value={date} setVal={setDate} />
               </Grid>
             </Grid>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3, mb: 2 }}>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="info"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{borderRadius: "20px", width: "90px" }}
             >
-              Create session
+              Create
             </Button>
+            </Box>
           </Box>
         </Box>
       </Container>
