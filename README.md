@@ -726,7 +726,7 @@ Mdm Heng has tested our prototype before our MS2 submission. She was satisfied w
 ## Project Management and SWE practices
 Our team utilizes GitHub's tools such as Issues for tracking tasks, pull requests for code review, and GitHub Projects for organizing work. We follow Scrum Agile principles to manage projects, breaking down tasks into sprints for efficient execution. Furthermore, we've implemented CI/CD pipelines using GitHub Actions to automate development, integration, and deployment processes, streamlining our workflow:
    
-**GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.  
+**GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development. We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.       
     
 <img src="/ProjectKorolev/images/image12.png" >  
   
@@ -766,8 +766,7 @@ ENV FLASK_APP=app.py
 
 CMD ["gunicorn", "--config", "gunicorn.config.py", "app:app"]
 ```
-
-**Code reviews and refactoring**: We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.    
+     
     
 ## Project Log
 <a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
