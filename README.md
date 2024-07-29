@@ -27,15 +27,15 @@ Therefore, we decide to design a web App providing a seamless experience for use
 ### Features
 
 #### 1. Authentication
-- **Registration and log in**: Practitioners can create new account and log in to manage the patient records.
-- *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication.
-<img src="/ProjectKorolev/images/image1.png" >
+- **Registration and log in**: Practitioners can create new account and log in to manage the patient records.   
+- **Update personal information**: Practitioners can update their account name and password when necessary.   
+- *current progress*: We have created the Sign Up and Sign In page for use with email and password authentication. User can now update their passwords and emails.
+<img src="/ProjectKorolev/images/image1.png" >   
+    
+<img src="/ProjectKorolev/images/image2.png" >   
 
-
-<img src="/ProjectKorolev/images/image2.png" >
-
-
-
+<img src="/ProjectKorolev/images/update_personal_info.png">      
+      
 #### 2. Data Storage and Organization
 - **Cloud storage for documents**: Store the digitized data in a cloud storage, categorizing information by patient, date, session, and other relevant tags.
 - **Structured database for user personal information**: Store the username, email and user password for authentication
@@ -44,16 +44,15 @@ Therefore, we decide to design a web App providing a seamless experience for use
 - **Note-taking editor**: Built-in note-taking editor for metal health practitioners to add additional notes such as the modelities of therapy
 - **Document preview**: Enable users to preview documents uploaded to cloud storage. 
 - *current progress*: We have implemented the cloud storage and database for users to store and extract documents. The text editior and document preview window are also available for users to improve interactivity and UI/UX.   
-<img src="/ProjectKorolev/images/image3.png" >
-
-
-<img src="/ProjectKorolev/images/image4.png" >
-
-
-<img src="/ProjectKorolev/images/image5.png" >
-
-
-
+<!-- <img src="/ProjectKorolev/images/image3.png" > <img src="/ProjectKorolev/images/image4.png" > <img src="/ProjectKorolev/images/image5.png" > -->
+<img src="/ProjectKorolev/images/patient_management_page.png">   
+    
+<img src="/ProjectKorolev/images/session_management_page.png">    
+    
+<img src="/ProjectKorolev/images/document_editor.png">
+   
+<img src="/ProjectKorolev/images/document_preview.png">   
+    
 #### 3. Summarization
 - **Natural Language Processing (NLP)**: Use NLP models to read through the text and summarize each session.
     - **Dialogue transcription**: Generate a text transcription for the consulting sessions with patients.
@@ -61,16 +60,17 @@ Therefore, we decide to design a web App providing a seamless experience for use
     - **Sentiment Analysis**: Analyze the emotional tone of the notes to gauge the patient’s mood of a specific sessions.
 - *current progress*: We have implemented the summarization and sentimental services with the help of Gemini API. The dialogue transcription has also be implemented based on the transformer model.  
 <img src="/ProjectKorolev/images/image6.png" >
-
-
+    
 <img src="/ProjectKorolev/images/image7.png" >
+    
 
-
- 
 #### 4. Insight Generation
 - **Trend Insights**: Analyze multiple documents for a specific patients.
 - **Thematic analysis**: Analyze patients data based on a specific theme such as family issues.
 - *current progress*: We have implemented both features and users can perform trend analysis and thematic analysis on patients.
+<img src="/ProjectKorolev/images/multiple_document_analysis.png">   
+   
+<img src="/ProjectKorolev/images/thematic analysis.png">
 
 #### 5. Actionable Recommendations
 - **Treatment Suggestions**: Provide evidence-based recommendations for next steps in treatment including potential therapy adjustments based on mental health practitioners' notes on mode of therapy.
@@ -725,19 +725,19 @@ Mdm Heng has tested our prototype before our MS2 submission. She was satisfied w
 
 ## Project Management and SWE practices
 Our team utilizes GitHub's tools such as Issues for tracking tasks, pull requests for code review, and GitHub Projects for organizing work. We follow Scrum Agile principles to manage projects, breaking down tasks into sprints for efficient execution. Furthermore, we've implemented CI/CD pipelines using GitHub Actions to automate development, integration, and deployment processes, streamlining our workflow:
-
-1. **GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.  
    
+**GitHub Issues and Pull Requests**: We employ GitHub Issues for tracking tasks, bugs, and feature requests. Pull requests serve the purpose of code reviews and merging changes, ensuring high quality and collaborative development.  
+    
 <img src="/ProjectKorolev/images/image12.png" >  
   
 <img src="/ProjectKorolev/images/image13.png" >   
    
-2. **GitHub Projects**: In GitHub Projects, our Kanban board provides a visual representation of our workflow. Tasks are organized into two-week sprint iterations, categorized into columns such as "To Do," "In Progress," and "Done." This structured approach to sprints allows us to effectively manage our workload and achieve our goals efficiently.   
-  
+**GitHub Projects**: In GitHub Projects, our Kanban board provides a visual representation of our workflow. Tasks are organized into two-week sprint iterations, categorized into columns such as "To Do," "In Progress," and "Done." This structured approach to sprints allows us to effectively manage our workload and achieve our goals efficiently.    
+     
 <img src="/ProjectKorolev/images/image14.png" >  
-  
-  
-3. **CI/CD Pipelines**: Through GitHub Actions, we've automated our CI/CD processes, which include basic unit testing during integration and application deployment. This automation ensures a seamless and efficient development cycle.  
+    
+   
+**CI/CD Pipelines**: Through GitHub Actions, we've automated our CI/CD processes, which include basic unit testing during integration and application deployment. This automation ensures a seamless and efficient development cycle.    
 <img src="/ProjectKorolev/images/image15.png" >  
    
 <img src="/ProjectKorolev/images/image16.png" >  
@@ -746,10 +746,29 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
   
 <img src="/ProjectKorolev/images/image18.png" >  
   
-4. **Microservices architecture with dockers**: We use docker to containerized the backend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.
-   
-5. **Code reviews and refactoring**: We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.   
-  
+**Microservices architecture with dockers**: We use docker to containerized the backend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.   
+
+Dockerfile to build the docker image        
+```dockerfile
+FROM python:3.10-bullseye
+
+RUN apt-get update && apt-get install -y ffmpeg
+
+WORKDIR /app
+COPY . /app
+
+COPY requirements.txt /
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+ENV FLASK_APP=app.py
+
+CMD ["gunicorn", "--config", "gunicorn.config.py", "app:app"]
+```
+
+**Code reviews and refactoring**: We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.    
+    
 ## Project Log
 <a href="https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing">
     Link to project log
