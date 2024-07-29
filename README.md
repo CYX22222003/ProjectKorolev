@@ -750,7 +750,7 @@ Our team utilizes GitHub's tools such as Issues for tracking tasks, pull request
   
 <img src="/ProjectKorolev/images/image18.png" >  
   
-4. **Microservices architecture with dockers**: We use docker to containerized the baclend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.
+4. **Microservices architecture with dockers**: We use docker to containerized the backend web application that provides meeting transcription features, and deployed it to Azure App Service following a Microservice Architecture. The frontend will interact with the meeting transcription service directly. This is to avoid overconsuming the computing resources of the main backend application and reduce the complexity of the codebase. We also set up a CI/CD pipelines for the meeting transcription service seperately.
    
 5. **Code reviews and refactoring**: We utilize the comment and review features of GitHub to conduct regular code reviews on the commits and pull requests merged into the main branch. This is to ensure the readability and quality of the code.   
   
