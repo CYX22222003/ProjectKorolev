@@ -311,14 +311,15 @@ For the automatic testing, we used the Jest framework for unit testing in our lo
 Unit test report(both manual and automatic): <a href="https://drive.google.com/file/d/1mVC4hax4lYrE56JqwSlKzLZ3Xymc18zE/view?usp=sharing">Link</a>   
   
 Frontend test report:   
-<img src="/ProjectKorolev/images/test_report1.png">   
+<!-- <img src="/ProjectKorolev/images/test_report1.png">   
 <img src="/ProjectKorolev/images/test_report2.png">  
 <img src="/ProjectKorolev/images/test_report3.png">   
 <img src="/ProjectKorolev/images/test_report4.png">    
-<img src="/ProjectKorolev/images/test_report5.png">  
+<img src="/ProjectKorolev/images/test_report5.png">   -->
+<img src="/ProjectKorolev/images/test_for_readme_1.jpeg">
 
 Backend test report:   
-<img src="/ProjectKorolev/images/test_report6.png"> 
+<img src="/ProjectKorolev/images/test_for_readme_2.jpeg"> 
 
 ### Integration testing
 In order to ensure diiferent features are intended to work correctly, we decide to conduct integration testing on interdependent components in the frontend on browser. For the backend deployed on a seperate server, we utilize the framework provided by Postman to mock the interaction with different API endpoints.
