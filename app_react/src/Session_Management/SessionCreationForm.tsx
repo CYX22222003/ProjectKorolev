@@ -62,7 +62,7 @@ export default function SessionCreationForm({
             alignItems: "center",
           }}
         >
-          <Typography component="h2" sx={{ fontWeight: 1000, color: "primary.main", fontSize: '1.7rem'}}>
+          <Typography component="h2" sx={{ fontWeight: 1000, color: "primary.main", whiteSpace: 'nowrap', fontSize: '1.5rem'}}>
             Create New Session for {patient_name}
           </Typography>
           <Box
