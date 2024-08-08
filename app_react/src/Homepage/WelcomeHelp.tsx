@@ -18,7 +18,6 @@ const theme = createTheme({
 
 export default function WelcomeHelp(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
 
   const test_password: string | undefined =
     process.env.REACT_APP_LOGIN_TEST_PASSWORD;
@@ -28,10 +27,6 @@ export default function WelcomeHelp(): ReactElement {
     passwd: test_password,
   };
 
-  const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
-  const addressWelcome: string | undefined = process.env.REACT_APP_WELCOME_URL;
-
-  const [welcome_info, setWelcome] = useState<string>("");
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ p: 3 }}>
