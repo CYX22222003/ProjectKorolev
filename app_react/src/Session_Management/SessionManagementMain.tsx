@@ -5,12 +5,15 @@ import SessionCreationForm from "./SessionCreationForm";
 import { SessionData } from "./utils";
 import PatientSessionList from "./PatientSessionList";
 import { getTest } from "../utils/APIInteractionManager";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 export default function SessionManagementMain(): ReactElement {
   const { patient_id, patient_name } = useParams();
   const patientID: number = Number(patient_id);
   const patientName: string = patient_name as string;
   const [rows, setRows] = useState<SessionData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const address: string =
@@ -21,8 +24,17 @@ export default function SessionManagementMain(): ReactElement {
       .then((out) => setRows(out))
       .catch((err: Error) => {
         throw new Error("Fail to load session lists");
-      });
+      })
+      .finally(() => setLoading(false));
   }, [patientID]);
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Background
