@@ -29,17 +29,31 @@ export default function DisplayAnalysis({
           }}
         />
       </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
       <Button
         onClick={() => {
           navigator.clipboard.writeText(display);
+        }}
+        variant="contained"
+        sx={{
+          borderRadius: "8px",
+          margin: "8px 0",
+          width: "240px",
         }}
       >
         Copy to clipboard
       </Button>
       <br />
-      <Button onClick={() => downloadAIResponse(display)}>
+      <Button onClick={() => downloadAIResponse(display)}
+        variant="contained"
+        sx={{
+          borderRadius: "8px",
+          margin: "8px 0",
+          width: "240px",
+        }}>
         Download AI response
       </Button>
+      </Box>
     </React.Fragment>
   );
 }

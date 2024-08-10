@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@mui/material/Container";
-import { CssBaseline, Box } from "@mui/material";
+import { CssBaseline, Box, Typography } from "@mui/material";
 import { ReactElement, useEffect, useState } from "react";
 import { EditorPatientSelect, EditorSessionSelect } from "./EditorPromptHelp";
 import { getPatientList, PatientData } from "../Patient_Management/utils";
@@ -39,17 +39,27 @@ export default function EditorPrompt({
       <Container component="main">
         <CssBaseline />
         <Box sx={BoxConfigProps}>
+         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+            <Typography variant="h6" sx={{ mr: 2 }}>
+              Patient:
+            </Typography>
           <EditorPatientSelect
             patientList={patientList}
             setPatientID={setPatientID}
             patientNameRef={patientNameRef}
           />
+          </Box>
         </Box>
         <Box sx={BoxConfigProps}>
+           <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+            <Typography variant="h6" sx={{ mr: 2 }}>
+              Session:
+            </Typography>
           <EditorSessionSelect
             sessionList={sessionList}
             sessionNameRef={sessionNameRef}
           />
+          </Box>
         </Box>
       </Container>
     </>

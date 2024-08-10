@@ -8,7 +8,9 @@ import { getPatientList, PatientData } from "../Patient_Management/utils";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
-import { MenuItem } from "@mui/material";
+import { MenuItem, Typography, CssBaseline, Box } from "@mui/material";
+import Container from "@mui/material/Container";
+
 
 type SelectPatientProps = {
   setPatientID: React.Dispatch<SetStateAction<number>>;
@@ -29,6 +31,12 @@ export default function SelectPatient({
 
   return (
     <React.Fragment>
+     <Container component="main">
+      <CssBaseline />
+        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+            <Typography variant="h6" sx={{ mr: 2 }}>
+              Patient:
+            </Typography>
       <FormControl sx={{ m: 1, minWidth: 500 }}>
         <InputLabel id="demo-simple-select-autowidth-label1">
           Select Patient
@@ -54,6 +62,8 @@ export default function SelectPatient({
           })}
         </Select>
       </FormControl>
+      </Box>
+      </Container>
     </React.Fragment>
   );
 }

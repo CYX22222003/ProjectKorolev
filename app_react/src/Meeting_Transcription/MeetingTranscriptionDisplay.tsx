@@ -29,9 +29,16 @@ export default function MeetingTranscriptionDisplay({
           }}
         />
       </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
       <Button
         onClick={() => {
           downloadTranscription(display);
+        }}
+        variant="contained"
+        sx={{
+          borderRadius: "8px",
+          margin: "8px 0",
+          width: "240px",
         }}
       >
         Download AI response
@@ -40,9 +47,16 @@ export default function MeetingTranscriptionDisplay({
         onClick={() => {
           navigator.clipboard.writeText(display);
         }}
+        variant="contained"
+        sx={{
+          borderRadius: "8px",
+          margin: "8px 0",
+          width: "240px",
+        }}
       >
         Copy to clipboard
       </Button>
+      </Box>
     </React.Fragment>
   );
 }

@@ -70,7 +70,13 @@ export default function AudioUploadForm({
   return (
     <React.Fragment>
       <form onSubmit={handleSubmit}>
-        <Typography>Upload Audio/Video:</Typography>
+        <Typography sx={{
+           padding: "12px 24px",
+           fontSize: "23px",
+           minWidth: "150px",
+         }}>
+          Upload Audio/Video:
+        </Typography>
         <br />
         <TextField type="file" onChange={handleFileChange} />
         <br />

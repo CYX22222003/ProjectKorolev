@@ -10,6 +10,7 @@ import { EditorTitleInput } from "./EditorPromptHelp";
 import Box from "@mui/material/Box";
 import MySnackbar from "../Components/SnackBar";
 import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 
 export default function EditorElement({
   filenameRef,
@@ -24,10 +25,13 @@ export default function EditorElement({
 
   return (
     <React.Fragment>
+      <Typography variant="h6" sx={{ mb: 1 }}>
+          Document:
+      </Typography>
       <Box sx={BoxConfigProps}>
         <EditorTitleInput filenameRef={filenameRef} />
       </Box>
-      <Box>
+      <Box sx={BoxConfigProps}>
         <RichTextEditor
           extensions={[StarterKit]}
           renderControls={() => <EditorMenuControls />}
@@ -42,6 +46,11 @@ export default function EditorElement({
         <Button
           type="submit"
           color="info"
+          sx={{
+            padding: "12px 24px",
+            fontSize: "16px",
+            minWidth: "150px",
+          }}
           disabled={
             sentBody.trim() === "" ||
             filenameRef.current.trim() === "" ||

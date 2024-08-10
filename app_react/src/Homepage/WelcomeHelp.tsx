@@ -1,11 +1,20 @@
 import React, { ReactElement, useState } from "react";
 import Logout from "../Login_and_SignUp/Logout";
 import { LoginInfo } from "../Login_and_SignUp/constants";
-// import { getTest } from "../utils/APIInteractionManager";
-// import { Button } from "@mui/material";
 import { Warning } from "../Components/Warning";
 import { getLocalStorage } from "../utils/localStorageManager";
-import Typography from "@mui/material/Typography";
+import { Typography, Box } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Cursive, Arial, sans-serif', 
+    h5: {
+      fontFamily: 'Fantasy, serif',
+    },
+  },
+});
 
 export default function WelcomeHelp(): ReactElement {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,45 +30,20 @@ export default function WelcomeHelp(): ReactElement {
 
   const apiKey: string | undefined = process.env.REACT_APP_API_KEY;
   const addressWelcome: string | undefined = process.env.REACT_APP_WELCOME_URL;
-
-  const [welcome_info, setWelcome] = useState<string>("");
+  
   return (
-    <div>
-      {/* <h1>Welcome !</h1> */}
-      {/* <Button
-        onClick={() => {
-          if (welcome_info !== "") {
-            setOpen(true);
-            setMessage(welcome_info);
-          } else {
-            getTest(addressWelcome, apiKey)
-              .then((data: Response) => {
-                console.log(data);
-                return data.text();
-              })
-              .then((text: string) => {
-                setWelcome(text);
-                setOpen(true);
-                setMessage(text);
-              })
-              .catch((err) => {
-                console.log(err);
-                setOpen(true);
-                setMessage("Welcome information is not loaded");
-              });
-          }
-        }}
-        variant="outlined"
-      >
-        welcome test
-      </Button> */}
-      <Typography variant="h5">
-        Hello {getLocalStorage("PersonAIUsername", "")}! Welcome to personAI!
+    <ThemeProvider theme={theme}>
+      <Box sx={{ p: 3 }}>
+      <CssBaseline />
+      <Typography variant="h5" 
+      sx={{ fontWeight: 'bold', color: 'primary.light', fontSize: '2rem' }}>
+        Hello {getLocalStorage("PersonAIUsername", "")}! Welcome to personAI
       </Typography>
       <br />
       {<Logout loginInfo={loginInfo} />}
       <br />
       <Warning open={open} setOpen={setOpen} text={message} />
-    </div>
+      </Box>
+    </ThemeProvider>
   );
 }
