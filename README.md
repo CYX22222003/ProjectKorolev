@@ -222,3 +222,8 @@ Our team manages projects using GitHub Issues, pull requests, and GitHub Project
 
 ## Project Log
 [[https://docs.google.com/spreadsheets/d/1gZ-6_n4IHtcjVQOZL2AiwTfylYgo2e5X6lWn0AGaCjI/edit?usp=sharing]]
+
+## Contributors
+@CYX22222003: Frontend, Backend, DevOps
+
+@Golddirio: User Requirement Gathering, UI/UX
