@@ -83,5 +83,5 @@ tqdm==4.66.4
 typing_extensions==4.10.0
 uritemplate==4.1.1
 urllib3==2.2.1
-Werkzeug==3.0.1
+Werkzeug==3.0.6
 yarl==1.9.4
