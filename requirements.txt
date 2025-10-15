@@ -59,7 +59,7 @@ pydantic==2.7.3
 pydantic_core==2.18.4
 PyJWT==2.8.0
 pylint==3.2.2
-PyMySQL==1.1.0
+PyMySQL==1.1.1
 pyparsing==3.1.2
 python-docx==1.1.2
 python-dotenv==1.0.1
